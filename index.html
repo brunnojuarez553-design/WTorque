@@ -112,9 +112,9 @@ nav {
   position: relative;
   height: 100vh; min-height: 600px;
   display: flex; flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-start;
-  padding: 0 22px 60px;
+  padding: 80px 22px 40px;
   overflow: hidden;
 }
 
@@ -211,9 +211,15 @@ nav {
   max-width: 320px;
 }
 .hero-btns {
-  display: flex; flex-direction: column; gap: 12px;
+  display: flex; flex-direction: column; gap: 4px;
   margin-top: 28px;
   animation: fadeUp 0.9s 0.75s both;
+}
+.hero-btn-hint {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 3px; color: rgba(239,239,239,0.3);
+  text-transform: uppercase; padding-left: 4px;
+  margin-bottom: 10px;
 }
 .btn-primary {
   background: var(--red);
@@ -707,10 +713,9 @@ footer {
       <div class="hero-eyebrow-line"></div>
       <span class="hero-eyebrow-text">Caracas, Venezuela — Est. 2014</span>
     </div>
-    <h1 class="hero-title">
-      <span class="line1">WITCHER</span>
-      <span class="line2" data-text="TORQUE">TORQUE</span>
-    </h1>
+    <div class="hero-logo-img" style="animation: fadeUp 0.9s 0.2s both;">
+      <img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque" style="width: clamp(340px, 96vw, 640px); height: auto; display: block; filter: drop-shadow(0 0 32px rgba(200,0,0,0.45));">
+    </div>
     <div class="hero-divider">
       <div class="hero-divider-bar"></div>
       <div class="hero-divider-diamond"></div>
@@ -722,10 +727,12 @@ footer {
         <span>Agendar Reprogramación</span>
         <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
       </a>
+      <span class="hero-btn-hint">Ver más →</span>
       <a class="btn-outline" onclick="openServicios()">
         <span>Agendar Servicio</span>
         <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="rgba(239,239,239,0.6)" stroke-width="1.5" stroke-linecap="round"/></svg>
       </a>
+      <span class="hero-btn-hint">Ver más →</span>
     </div>
   </div>
 
