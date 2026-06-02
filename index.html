@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WitcherTorque — High Performance Engineering</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #060606;
+  --graphite: #0f0f0f;
+  --graphite-2: #171717;
+  --graphite-3: #222222;
+  --graphite-4: #2e2e2e;
+  --red: #c80000;
+  --red-bright: #ff1500;
+  --red-mid: #e01010;
+  --red-glow: rgba(200,0,0,0.4);
+  --red-glow-soft: rgba(200,0,0,0.15);
+  --white: #efefef;
+  --white-dim: rgba(239,239,239,0.5);
+  --white-faint: rgba(239,239,239,0.07);
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'Rajdhani', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE OVERLAY ─────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ─── SCROLLBAR ─────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: linear-gradient(to bottom, var(--red), var(--red-bright)); }
+
+/* ─── NAV ───────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px;
+  height: 60px;
+  background: rgba(6,6,6,0.92);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(200,0,0,0.15);
+}
+.nav-logo {
+  text-decoration: none;
+  display: flex; align-items: center;
+}
+.nav-logo img {
+  height: 52px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.nav-hamburger {
+  display: flex; flex-direction: column;
+  gap: 5px; background: none; border: none;
+  padding: 6px; cursor: pointer;
+}
+.nav-hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--white); transition: all 0.3s;
+}
+.nav-drawer {
+  display: none; list-style: none;
+  position: fixed; top: 60px; left: 0; right: 0;
+  background: rgba(6,6,6,0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(200,0,0,0.2);
+  flex-direction: column; z-index: 499;
+  padding: 16px 0;
+}
+.nav-drawer.open { display: flex; }
+.nav-drawer li a {
+  display: block; padding: 14px 24px;
+  font-family: var(--font-mono); font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--white-dim); text-decoration: none;
+  border-bottom: 1px solid rgba(239,239,239,0.04);
+  transition: color 0.2s, padding-left 0.2s;
+}
+.nav-drawer li a:hover { color: var(--red); padding-left: 32px; }
+.nav-drawer .drawer-cta {
+  color: var(--red) !important;
+  border: 1px solid rgba(200,0,0,0.3);
+  margin: 10px 20px 4px; padding: 12px 20px !important;
+}
+
+/* ─── HERO ──────────────────────────────────────── */
+.hero {
+  position: relative;
+  height: 100vh; min-height: 600px;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 0 22px 60px;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute; inset: 0; z-index: 0;
+  width: 100%; height: 100%; overflow: hidden;
+}
+.hero-video video {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 100%; min-height: 100%;
+  width: auto; height: auto;
+  object-fit: cover; pointer-events: none;
+}
+.hero-video::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(6,6,6,0.3) 0%,
+    rgba(6,6,6,0.2) 40%,
+    rgba(6,6,6,0.65) 75%,
+    rgba(6,6,6,0.92) 100%
+  );
+}
+.hero-video::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 2;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 4; width: 100%; }
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+  animation: fadeUp 0.9s 0.1s both;
+}
+.hero-eyebrow-line { width: 30px; height: 1px; background: var(--red); }
+.hero-eyebrow-text {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 4px;
+  color: var(--red); text-transform: uppercase;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(68px, 18vw, 110px);
+  line-height: 0.88;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: fadeUp 0.9s 0.2s both;
+}
+.hero-title .line1 { display: block; color: var(--white); }
+.hero-title .line2 {
+  display: block;
+  -webkit-text-stroke: 1.5px rgba(239,239,239,0.18);
+  color: transparent;
+  position: relative;
+}
+.hero-title .line2::after {
+  content: attr(data-text);
+  position: absolute; left: 0; top: 0;
+  color: var(--red);
+  clip-path: inset(0 100% 0 0);
+  animation: revealText 1.2s 0.9s cubic-bezier(0.77,0,0.18,1) forwards;
+}
+@keyframes revealText { to { clip-path: inset(0 0% 0 0); } }
+
+.hero-divider {
+  display: flex; align-items: center; gap: 14px;
+  margin: 18px 0 16px;
+  animation: fadeUp 0.9s 0.4s both;
+}
+.hero-divider-bar { width: 50px; height: 2px; background: var(--red); box-shadow: 0 0 8px var(--red-glow); }
+.hero-divider-diamond { width: 5px; height: 5px; background: var(--red); transform: rotate(45deg); }
+
+.hero-sub {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--white-dim); text-transform: uppercase;
+  animation: fadeUp 0.9s 0.5s both;
+}
+.hero-desc {
+  font-size: 15px; font-weight: 400;
+  color: rgba(239,239,239,0.6);
+  line-height: 1.7;
+  margin-top: 16px;
+  animation: fadeUp 0.9s 0.6s both;
+  border-left: 2px solid var(--red);
+  padding-left: 14px;
+  max-width: 320px;
+}
+.hero-btns {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 28px;
+  animation: fadeUp 0.9s 0.75s both;
+}
+.btn-primary {
+  background: var(--red);
+  color: var(--white); border: none;
+  padding: 15px 28px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 3px; text-transform: uppercase;
+  cursor: pointer; text-decoration: none;
+  position: relative; overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: box-shadow 0.3s, transform 0.2s;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+}
+.btn-primary:active { transform: scale(0.97); }
+.btn-outline {
+  background: transparent; color: var(--white);
+  border: 1px solid rgba(239,239,239,0.25);
+  padding: 14px 28px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 3px; text-transform: uppercase;
+  cursor: pointer; text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: border-color 0.3s, color 0.3s;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+}
+.btn-outline:active { opacity: 0.8; }
+
+/* ─── SCROLL INDICATOR ──────────────────────────── */
+.hero-scroll-indicator {
+  position: absolute; bottom: 18px; left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  animation: fadeUp 0.9s 1.4s both;
+}
+.scroll-dot {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--red), transparent);
+  animation: scrollPulse 2s infinite;
+}
+@keyframes scrollPulse { 0%,100%{opacity:1;transform:scaleY(1)} 50%{opacity:0.3;transform:scaleY(0.5)} }
+
+/* ─── SECTION CARDS (REPRO + AGENDAR) ──────────── */
+.home-sections {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 280px;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 22px 28px;
+  cursor: pointer;
+  text-decoration: none;
+  border-top: 1px solid rgba(200,0,0,0.12);
+  transition: background 0.4s;
+}
+.home-card:nth-child(1) { background: var(--graphite-2); }
+.home-card:nth-child(2) { background: var(--black); }
+.home-card:active { filter: brightness(1.1); }
+
+.home-card-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-size: cover; background-position: center;
+  transition: transform 0.6s ease, opacity 0.4s;
+  opacity: 0.12;
+}
+.home-card:hover .home-card-bg,
+.home-card:active .home-card-bg { transform: scale(1.04); opacity: 0.18; }
+
+/* Red vertical accent bar */
+.home-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, transparent, var(--red), transparent);
+  opacity: 0.5;
+  z-index: 1;
+  transition: opacity 0.3s;
+}
+.home-card:hover::before { opacity: 1; }
+
+/* Top corner bracket */
+.home-card::after {
+  content: '';
+  position: absolute; top: 20px; right: 20px;
+  width: 22px; height: 22px;
+  border-top: 1.5px solid rgba(200,0,0,0.4);
+  border-right: 1.5px solid rgba(200,0,0,0.4);
+  z-index: 2;
+  transition: width 0.3s, height 0.3s, border-color 0.3s;
+}
+.home-card:hover::after { width: 30px; height: 30px; border-color: var(--red); }
+
+.home-card-content { position: relative; z-index: 2; }
+
+.home-card-num {
+  font-family: var(--font-display);
+  font-size: 80px;
+  color: rgba(200,0,0,0.06);
+  line-height: 1;
+  position: absolute; top: 16px; left: 22px;
+  z-index: 1;
+  letter-spacing: 2px;
+  pointer-events: none;
+}
+
+.home-card-label {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 5px;
+  color: var(--red); text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.home-card-label::before {
+  content: '';
+  width: 20px; height: 1px; background: var(--red);
+}
+
+.home-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 9vw, 52px);
+  letter-spacing: 3px; line-height: 0.9;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 14px;
+}
+.home-card-title span { color: var(--red); }
+
+.home-card-desc {
+  font-size: 13px; font-weight: 400;
+  color: rgba(239,239,239,0.5);
+  line-height: 1.65;
+  margin-bottom: 22px;
+  max-width: 300px;
+}
+
+.home-card-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 24px;
+}
+.home-tag {
+  font-family: var(--font-mono); font-size: 8px;
+  letter-spacing: 2px; color: rgba(200,0,0,0.8);
+  border: 1px solid rgba(200,0,0,0.2);
+  padding: 3px 8px; text-transform: uppercase;
+  background: rgba(200,0,0,0.04);
+}
+
+.home-card-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--white);
+  background: var(--red);
+  padding: 13px 24px;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: box-shadow 0.3s;
+}
+.home-card:nth-child(2) .home-card-cta {
+  background: transparent;
+  border: 1px solid rgba(200,0,0,0.4);
+  color: var(--red);
+}
+.home-card-cta svg { flex-shrink: 0; }
+
+/* ─── ANIMATIONS ────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(22px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.reveal { opacity:0; transform:translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ─── FOOTER ────────────────────────────────────── */
+footer {
+  padding: 32px 22px 28px;
+  border-top: 1px solid rgba(200,0,0,0.12);
+  background: var(--graphite);
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 24px; letter-spacing: 4px;
+  color: var(--white); margin-bottom: 10px;
+}
+.footer-logo span { color: var(--red); }
+.footer-sub {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 3px; color: var(--white-dim);
+  text-transform: uppercase; margin-bottom: 22px;
+}
+.footer-links {
+  display: flex; gap: 20px; flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+.footer-links a {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 2px; color: var(--white-dim);
+  text-decoration: none; text-transform: uppercase;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--red); }
+.footer-bottom {
+  font-family: var(--font-mono); font-size: 9px;
+  color: rgba(239,239,239,0.2);
+  letter-spacing: 2px; border-top: 1px solid rgba(239,239,239,0.05);
+  padding-top: 18px;
+}
+.footer-bottom span { color: rgba(200,0,0,0.5); }
+
+/* ─── AI FLOAT ──────────────────────────────────── */
+.ai-float-btn {
+  position: fixed; bottom: 22px; right: 18px; z-index: 800;
+  width: 52px; height: 52px;
+  background: var(--red);
+  border-radius: 50%; border: none;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px var(--red-glow);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.6s 1.8s both;
+}
+.ai-float-btn:active { transform: scale(0.93); }
+.ai-float-btn svg { width: 26px; height: 26px; }
+
+.ai-popup {
+  position: fixed; bottom: 86px; right: 12px; z-index: 799;
+  width: calc(100vw - 24px); max-width: 340px;
+  background: var(--graphite-2);
+  border: 1px solid var(--graphite-3);
+  border-top: 2px solid var(--red);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+  display: none; flex-direction: column;
+  animation: fadeUp 0.25s ease;
+}
+.ai-popup.open { display: flex; }
+.ai-popup-hdr {
+  padding: 12px 14px; border-bottom: 1px solid var(--graphite-3);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.ai-popup-hdr-left { display: flex; align-items: center; gap: 8px; }
+.ai-popup-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: popupPulse 2s infinite; }
+@keyframes popupPulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.ai-popup-title { font-family: var(--font-mono); font-size: 9px; letter-spacing: 3px; color: var(--white-dim); text-transform: uppercase; }
+.ai-popup-close { background: none; border: none; color: var(--white-dim); font-size: 18px; cursor: pointer; padding: 0 2px; line-height: 1; }
+.ai-popup-msgs {
+  min-height: 160px; max-height: 220px; overflow-y: auto;
+  padding: 12px; display: flex; flex-direction: column; gap: 8px;
+}
+.ai-popup-msgs .msg { padding: 9px 12px; font-size: 13px; line-height: 1.5; max-width: 92%; }
+.ai-popup-msgs .msg-ai { background: var(--graphite); border: 1px solid var(--graphite-3); border-left: 2px solid var(--red); align-self: flex-start; }
+.ai-popup-msgs .msg-user { background: rgba(200,0,0,0.1); border: 1px solid rgba(200,0,0,0.2); align-self: flex-end; text-align: right; }
+.ai-popup-msgs .msg-label { font-family: var(--font-mono); font-size: 8px; letter-spacing: 3px; color: var(--red); text-transform: uppercase; margin-bottom: 3px; }
+.ai-popup-typing { padding: 6px 12px; font-family: var(--font-mono); font-size: 9px; color: var(--white-dim); display: none; }
+.ai-popup-input-wrap { display: flex; border-top: 1px solid var(--graphite-3); }
+.ai-popup-input { flex: 1; background: transparent; border: none; color: var(--white); padding: 11px 12px; font-family: var(--font-body); font-size: 14px; outline: none; }
+.ai-popup-input::placeholder { color: rgba(239,239,239,0.2); }
+.ai-popup-send { background: var(--red); color: white; border: none; padding: 11px 14px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque"></a>
+  <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<ul class="nav-drawer" id="navDrawer">
+  <li><a href="javascript:openRepro()" class="drawer-link">Reprogramación</a></li>
+  <li><a href="javascript:openServicios()" class="drawer-link">Servicios</a></li>
+  <li><a href="https://wa.me/584125856541" target="_blank" class="drawer-link drawer-cta">WhatsApp</a></li>
+</ul>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-video">
+    <video
+      src="https://res.cloudinary.com/dvvuwigmy/video/upload/v1780432463/insta_video_11278_pd0nla.mp4"
+      autoplay muted loop playsinline
+      preload="auto"
+    ></video>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span class="hero-eyebrow-text">Caracas, Venezuela — Est. 2014</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="line1">WITCHER</span>
+      <span class="line2" data-text="TORQUE">TORQUE</span>
+    </h1>
+    <div class="hero-divider">
+      <div class="hero-divider-bar"></div>
+      <div class="hero-divider-diamond"></div>
+    </div>
+    <p class="hero-sub">ECU Tuning &nbsp;·&nbsp; High Performance &nbsp;·&nbsp; Custom Builds</p>
+    <p class="hero-desc">Ingeniería automotriz de precisión. Llevamos tu vehículo al límite absoluto de su potencial.</p>
+    <div class="hero-btns">
+      <a class="btn-primary" onclick="openRepro()">
+        <span>Agendar Reprogramación</span>
+        <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+      <a class="btn-outline" onclick="openServicios()">
+        <span>Agendar Servicio</span>
+        <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="rgba(239,239,239,0.6)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll-indicator">
+    <div class="scroll-dot"></div>
+  </div>
+</section>
+
+<!-- SECTION: REPROGRAMACIÓN -->
+<div class="home-sections">
+  <a class="home-card reveal" onclick="openRepro()" href="javascript:void(0)">
+    <div class="home-card-bg" style="background-image:url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=70')"></div>
+    <div class="home-card-num">01</div>
+    <div class="home-card-content">
+      <div class="home-card-label">Servicio Principal</div>
+      <div class="home-card-title">REPRO<span>GRAMACIÓN</span><br>ECU</div>
+      <p class="home-card-desc">Stage 1, Stage 2, E85, Pops & Bangs, Flex Fuel y Dyno Tuning. Calibraciones personalizadas verificadas en dinamómetro.</p>
+      <div class="home-card-tags">
+        <span class="home-tag">Stage 1</span>
+        <span class="home-tag">Stage 2</span>
+        <span class="home-tag">Pops &amp; Bangs</span>
+        <span class="home-tag">E85</span>
+        <span class="home-tag">Flex Fuel</span>
+        <span class="home-tag">Dyno Tuning</span>
+      </div>
+      <div class="home-card-cta">
+        <span>Ver más</span>
+        <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- SECTION: AGENDAR SERVICIOS -->
+  <a class="home-card reveal" onclick="openServicios()" href="javascript:void(0)">
+    <div class="home-card-bg" style="background-image:url('https://images.unsplash.com/photo-1565689157206-0fddef7589a2?w=800&q=70')"></div>
+    <div class="home-card-num">02</div>
+    <div class="home-card-content">
+      <div class="home-card-label">Taller &amp; Mecánica</div>
+      <div class="home-card-title">AGENDAR<br><span>SERVICIOS</span></div>
+      <p class="home-card-desc">Suspensión performance, mecánica high performance, Stand Alone ECU, electrónica avanzada y construcciones custom.</p>
+      <div class="home-card-tags">
+        <span class="home-tag">Suspensión</span>
+        <span class="home-tag">Mecánica HP</span>
+        <span class="home-tag">Stand Alone</span>
+        <span class="home-tag">Diagnóstico</span>
+      </div>
+      <div class="home-card-cta">
+        <span>Agendar ahora</span>
+        <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="#c80000" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque" style="height:52px;width:auto;display:block;"></div>
+  <div class="footer-sub">Performance Engineering · Caracas, Venezuela · Est. 2014</div>
+  <div class="footer-links">
+    <a href="javascript:openRepro()">Reprogramación</a>
+    <a href="javascript:openServicios()">Servicios</a>
+    <a href="https://instagram.com/witchertorque" target="_blank">Instagram</a>
+    <a href="https://wa.me/584125856541" target="_blank">WhatsApp</a>
+  </div>
+  <div class="footer-bottom">© 2025 <span>WitcherTorque</span> — Todos los derechos reservados · Performance Engineering</div>
+</footer>
+
+<!-- AI FLOAT -->
+<button class="ai-float-btn" onclick="toggleAiPopup()" aria-label="Chat WT AI">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l4.93-1.37A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.5"/>
+    <path d="M8 10h8M8 14h5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+</button>
+
+<div class="ai-popup" id="aiPopup">
+  <div class="ai-popup-hdr">
+    <div class="ai-popup-hdr-left">
+      <div class="ai-popup-dot"></div>
+      <span class="ai-popup-title">WitcherTorque AI — En línea</span>
+    </div>
+    <button class="ai-popup-close" onclick="toggleAiPopup()">×</button>
+  </div>
+  <div class="ai-popup-msgs" id="aiPopupMsgs">
+    <div class="msg msg-ai"><div class="msg-label">WT AI</div>Hola 👋 Dime tu vehículo y te oriento sobre reprogramación o servicios.</div>
+  </div>
+  <div class="ai-popup-typing" id="aiPopupTyping">WT AI está escribiendo...</div>
+  <div class="ai-popup-input-wrap">
+    <input class="ai-popup-input" id="aiPopupInput" type="text" placeholder="Ej: Golf GTI MK7 Stage 1..." onkeydown="if(event.key==='Enter')sendPopupChat()">
+    <button class="ai-popup-send" onclick="sendPopupChat()">Enviar</button>
+  </div>
+</div>
+
+<script>
+// ─── HAMBURGER ────────────────────────────────────
+const hamburger = document.getElementById('navHamburger');
+const drawer = document.getElementById('navDrawer');
+hamburger.addEventListener('click', () => {
+  drawer.classList.toggle('open');
+  const open = drawer.classList.contains('open');
+  const spans = hamburger.querySelectorAll('span');
+  if(open) {
+    spans[0].style.transform='rotate(45deg) translate(4px,5px)';
+    spans[1].style.opacity='0';
+    spans[2].style.transform='rotate(-45deg) translate(4px,-5px)';
+  } else {
+    spans[0].style.transform=''; spans[1].style.opacity=''; spans[2].style.transform='';
+  }
+});
+
+// ─── REVEAL ON SCROLL ─────────────────────────────
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+const REPRO_SCRIPT = `
+const WT_SYS_R = "Eres WitcherTorque AI, el asesor técnico virtual oficial de WitcherTorque. Taller especializado en: Mecánica High Performance, Reprogramación ECU, Dyno Tuning, Motores Aspirados y Turbo, Suspensión Deportiva, Stand Alone ECU (Haltech, FuelTech, Link ECU, MaxxECU), Diagnóstico Electrónico, Construcciones Custom, Vehículos de Competición y Premium, Proyectos Street Performance. Personalidad: Profesional, Técnica, Precisa, Experta, Cordial, Orientada a la conversión. Nunca respondas como chatbot genérico. Tu objetivo: resolver consultas, detectar oportunidades, calificar clientes, obtener datos del vehículo (marca, modelo, año, motor, modificaciones), recomendar soluciones y agendar diagnósticos. Cuando pregunten por potencia: pide datos del vehículo y da estimaciones realistas sin prometer cifras exactas. Cuando mencionen fallas (humo, ruido, temperatura, consumo aceite): pregunta para orientar el diagnóstico, aclarando que se requiere inspección física. Para Stand Alone: pregunta potencia objetivo, combustible y uso. Para proyectos custom: pide objetivo, presupuesto y plazo. Cuando detectes interés real: invita a agendar diagnóstico. WhatsApp: +58 412-585-6541. NUNCA inventes datos, garantices resultados ni menciones que eres IA. Respuestas cortas, párrafos breves, lenguaje profesional. Siempre avanzá hacia la reserva de diagnóstico o servicio.";
+const rModels={volkswagen:["Golf GTI MK7 (230HP)","Golf GTI MK8 (245HP)","Golf R (320HP)","Tiguan R-Line (150HP)"],audi:["A3 S3 (310HP)","RS3 (400HP)","TT RS (400HP)","A4 B9 (190HP)"],bmw:["M240i (374HP)","M340i (374HP)","M2 (460HP)","320i (184HP)"],mercedes:["A45 AMG (421HP)","C43 AMG (390HP)","GLA 250 (224HP)"],ford:["Raptor (450HP)","Mustang GT (450HP)","Focus RS (350HP)"],chevrolet:["Camaro SS (455HP)","Corvette C7 (455HP)","Silverado (355HP)"],toyota:["Supra A90 (382HP)","GR Yaris (261HP)","Land Cruiser 300 (415HP)"],honda:["Civic Type R (315HP)","Civic Si (200HP)"],subaru:["WRX STI (310HP)","WRX (271HP)","BRZ (228HP)"],nissan:["GT-R (570HP)","Z (400HP)","Frontier (310HP)"]};
+const rHpData={"Golf GTI MK7 (230HP)":230,"Golf GTI MK8 (245HP)":245,"Golf R (320HP)":320,"Tiguan R-Line (150HP)":150,"A3 S3 (310HP)":310,"RS3 (400HP)":400,"TT RS (400HP)":400,"A4 B9 (190HP)":190,"M240i (374HP)":374,"M340i (374HP)":374,"M2 (460HP)":460,"320i (184HP)":184,"A45 AMG (421HP)":421,"C43 AMG (390HP)":390,"GLA 250 (224HP)":224,"Raptor (450HP)":450,"Mustang GT (450HP)":450,"Focus RS (350HP)":350,"Camaro SS (455HP)":455,"Corvette C7 (455HP)":455,"Silverado (355HP)":355,"Supra A90 (382HP)":382,"GR Yaris (261HP)":261,"Land Cruiser 300 (415HP)":415,"Civic Type R (315HP)":315,"Civic Si (200HP)":200,"WRX STI (310HP)":310,"WRX (271HP)":271,"BRZ (228HP)":228,"GT-R (570HP)":570,"Z (400HP)":400,"Frontier (310HP)":310};
+function updateCalcRepro(){const m=document.getElementById("calcMarca").value;const ms=document.getElementById("calcModelo");ms.innerHTML="<option value=''>- Seleccionar modelo -</option>";if(m&&rModels[m])rModels[m].forEach(x=>{const o=document.createElement("option");o.value=x;o.textContent=x;ms.appendChild(o);});}
+function calcHPRepro(){const m=document.getElementById("calcModelo").value;if(m&&rHpData[m])showCalcReproResult(rHpData[m]);}
+function showCalcReproResult(hp){if(!hp||hp<50)return;document.getElementById("calcResultBox").style.display="block";document.getElementById("calcOrigNum").textContent=hp+" HP";document.getElementById("calcS1").textContent=Math.round(hp*1.25)+" HP";document.getElementById("calcS2").textContent=Math.round(hp*1.38)+" HP";document.getElementById("calcS3").textContent=Math.round(hp*1.55)+" HP";}
+let rHistory=[];
+async function sendRChat(){
+  const inp=document.getElementById("rChatInput"),msg=inp.value.trim();
+  if(!msg)return;
+  const msgs=document.getElementById("rChatMsgs");
+  msgs.innerHTML+="<div class='msg msg-user'>"+msg+"</div>";
+  inp.value="";msgs.scrollTop=msgs.scrollHeight;
+  rHistory.push({role:"user",content:msg});
+  document.getElementById("rChatTyping").style.display="block";
+  try{
+    const res=await fetch("/api/chat",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({system:WT_SYS_R,messages:rHistory})
+    });
+    const data=await res.json();
+    const reply=data.reply||"Inconvenientes técnicos. Escribinos al WhatsApp +58 412-585-6541.";
+    rHistory.push({role:"assistant",content:reply});
+    document.getElementById("rChatTyping").style.display="none";
+    msgs.innerHTML+="<div class='msg msg-ai'><div class='msg-label'>WT AI</div>"+reply+"</div>";
+    msgs.scrollTop=msgs.scrollHeight;
+  }catch(e){
+    document.getElementById("rChatTyping").style.display="none";
+    msgs.innerHTML+="<div class='msg msg-ai'><div class='msg-label'>WT AI</div>Error de conexión. Escribinos al WhatsApp +58 412-585-6541</div>";
+    msgs.scrollTop=msgs.scrollHeight;
+  }
+}
+`;
+function openRepro() {
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Reprogramación ECU — WitcherTorque</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--black:#060606;--graphite:#0f0f0f;--graphite-2:#171717;--graphite-3:#222;--graphite-4:#2e2e2e;--red:#c80000;--red-bright:#ff1500;--red-glow:rgba(200,0,0,0.35);--white:#efefef;--white-dim:rgba(239,239,239,0.5);--font-display:'Bebas Neue',sans-serif;--font-body:'Rajdhani',sans-serif;--font-mono:'Share Tech Mono',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);font-size:16px;overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:var(--red);}
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(6,6,6,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,0,0,0.15);padding:0 18px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.topbar-logo{text-decoration:none;display:flex;align-items:center;}
+.topbar-logo img{height:46px;width:auto;display:block;}
+.back-btn{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);background:none;border:1px solid rgba(239,239,239,0.1);padding:7px 14px;cursor:pointer;text-transform:uppercase;transition:color 0.2s,border-color 0.2s;}
+.back-btn:hover{color:var(--red);border-color:rgba(200,0,0,0.3);}
+/* HERO */
+.page-hero{padding:48px 20px 36px;border-bottom:1px solid rgba(200,0,0,0.1);position:relative;overflow:hidden;}
+.page-hero::before{content:'ECU';position:absolute;right:-10px;top:-20px;font-family:var(--font-display);font-size:200px;color:rgba(200,0,0,0.03);line-height:1;pointer-events:none;}
+.page-label{font-family:var(--font-mono);font-size:10px;letter-spacing:5px;color:var(--red);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.page-label::before{content:'';width:24px;height:1px;background:var(--red);}
+.page-title{font-family:var(--font-display);font-size:clamp(50px,14vw,80px);line-height:0.88;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:16px;}
+.page-title span{color:var(--red);}
+.page-desc{font-size:15px;font-weight:400;color:var(--white-dim);line-height:1.7;border-left:2px solid var(--red);padding-left:14px;max-width:360px;}
+/* STAGES */
+.stages-section{padding:36px 20px;}
+.stages-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.stages-section h2 span{color:var(--red);}
+.stages-intro{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:24px;}
+.stage-card{background:var(--graphite-2);border:1px solid var(--graphite-3);border-left:3px solid var(--red);padding:22px 18px;margin-bottom:14px;position:relative;overflow:hidden;transition:border-color 0.3s,background 0.3s;}
+.stage-card:hover{background:var(--graphite);border-color:rgba(200,0,0,0.5);}
+.stage-num{font-family:var(--font-display);font-size:64px;color:rgba(200,0,0,0.04);position:absolute;right:12px;bottom:-8px;line-height:1;pointer-events:none;}
+.stage-name{font-family:var(--font-display);font-size:26px;letter-spacing:2px;color:var(--white);text-transform:uppercase;margin-bottom:6px;}
+.stage-gain{font-family:var(--font-display);font-size:20px;color:var(--red);margin-bottom:10px;}
+.stage-desc{font-size:14px;color:var(--white-dim);line-height:1.65;margin-bottom:12px;}
+.stage-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-family:var(--font-mono);font-size:8px;letter-spacing:2px;color:rgba(200,0,0,0.8);border:1px solid rgba(200,0,0,0.2);padding:2px 7px;text-transform:uppercase;background:rgba(200,0,0,0.04);}
+/* CALCULATOR */
+.calc-section{padding:36px 20px;background:var(--graphite);}
+.calc-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.calc-section h2 span{color:var(--red);}
+.calc-intro{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:24px;}
+.calc-field{margin-bottom:14px;}
+.calc-field label{font-family:var(--font-mono);font-size:9px;letter-spacing:4px;color:var(--white-dim);text-transform:uppercase;display:block;margin-bottom:7px;}
+.calc-field select,.calc-field input{width:100%;background:var(--black);border:1px solid var(--graphite-4);color:var(--white);padding:12px 14px;font-family:var(--font-body);font-size:15px;outline:none;appearance:none;-webkit-appearance:none;transition:border-color 0.25s;}
+.calc-field select:focus,.calc-field input:focus{border-color:var(--red);}
+.calc-field select option{background:#0f0f0f;}
+.calc-result-box{background:var(--black);border:1px solid var(--graphite-4);border-top:2px solid var(--red);padding:22px 18px;margin-top:18px;}
+.calc-original-label{font-family:var(--font-mono);font-size:9px;letter-spacing:4px;color:var(--white-dim);text-transform:uppercase;margin-bottom:4px;}
+.calc-original-num{font-family:var(--font-display);font-size:64px;color:var(--red);line-height:1;text-shadow:0 0 30px var(--red-glow);}
+.calc-stages{margin-top:18px;}
+.calc-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--graphite-3);}
+.calc-row-name{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;}
+.calc-row-hp{font-family:var(--font-display);font-size:24px;color:var(--red);}
+/* CASES */
+.cases-section{padding:36px 20px;}
+.cases-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.cases-section h2 span{color:var(--red);}
+.cases-intro{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:24px;}
+.case-card{background:var(--graphite-2);border:1px solid var(--graphite-3);padding:20px 18px;margin-bottom:12px;}
+.case-car{font-family:var(--font-display);font-size:22px;letter-spacing:2px;color:var(--white);text-transform:uppercase;margin-bottom:14px;}
+.case-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px;}
+.case-stat{text-align:center;padding:10px 0;border-bottom:1px solid var(--graphite-3);}
+.case-stat-num{font-family:var(--font-display);font-size:28px;color:var(--red);}
+.case-stat-label{font-family:var(--font-mono);font-size:8px;color:var(--white-dim);letter-spacing:2px;text-transform:uppercase;margin-top:3px;}
+.case-bar-wrap{background:var(--graphite-4);height:2px;overflow:hidden;}
+.case-bar{height:100%;background:linear-gradient(to right,var(--red),var(--red-bright));box-shadow:0 0 8px var(--red-glow);}
+/* CTA SECTION */
+.cta-section{padding:40px 20px;background:var(--graphite-2);border-top:1px solid rgba(200,0,0,0.15);text-align:center;}
+.cta-title{font-family:var(--font-display);font-size:clamp(32px,9vw,52px);letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:10px;}
+.cta-title span{color:var(--red);}
+.cta-desc{font-size:14px;color:var(--white-dim);margin-bottom:28px;max-width:280px;margin-left:auto;margin-right:auto;}
+.cta-btns{display:flex;flex-direction:column;gap:12px;align-items:center;}
+.btn-red{background:var(--red);color:var(--white);border:none;padding:15px 32px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));transition:box-shadow 0.3s;width:auto;}
+.btn-wa{background:#25D366;color:white;border:none;padding:15px 32px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:10px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));width:auto;}
+/* AI CHAT */
+.ai-section{padding:36px 20px;background:var(--black);}
+.ai-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.ai-section h2 span{color:var(--red);}
+.ai-intro{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:20px;}
+.chat-win{background:var(--graphite-2);border:1px solid var(--graphite-3);border-top:2px solid var(--red);}
+.chat-hdr{padding:12px 16px;border-bottom:1px solid var(--graphite-3);display:flex;align-items:center;gap:8px;}
+.chat-dot{width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.chat-hdr-txt{font-family:var(--font-mono);font-size:9px;letter-spacing:3px;color:var(--white-dim);text-transform:uppercase;}
+.chat-msgs{min-height:180px;max-height:260px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.msg{padding:10px 13px;font-size:13px;line-height:1.55;max-width:90%;}
+.msg-ai{background:var(--graphite);border:1px solid var(--graphite-3);border-left:2px solid var(--red);align-self:flex-start;}
+.msg-user{background:rgba(200,0,0,0.1);border:1px solid rgba(200,0,0,0.2);align-self:flex-end;text-align:right;}
+.msg-label{font-family:var(--font-mono);font-size:8px;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:4px;}
+.chat-typing{padding:8px 14px;font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--white-dim);display:none;}
+.chat-input-wrap{display:flex;border-top:1px solid var(--graphite-3);gap:0;}
+.chat-input{flex:1;background:transparent;border:none;color:var(--white);padding:12px 14px;font-family:var(--font-body);font-size:14px;outline:none;}
+.chat-input::placeholder{color:rgba(239,239,239,0.2);}
+.chat-send{background:var(--red);color:var(--white);border:none;padding:12px 16px;font-family:var(--font-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="topbar-logo" href="javascript:window.close()"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque"></a>
+  <button class="back-btn" onclick="window.close()">
+    <svg width="12" height="10" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M5 9L1 5L5 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Volver
+  </button>
+</div>
+
+<div class="page-hero">
+  <div class="page-label">Servicio Principal</div>
+  <h1 class="page-title">REPROGRA<br><span>MACIÓN ECU</span></h1>
+  <p class="page-desc">Extraemos todo el potencial de tu motor con calibraciones personalizadas y verificadas en dinamómetro DynoProHub. Más de 500 motores intervenidos.</p>
+</div>
+
+<div class="stages-section">
+  <h2>NIVELES DE <span>REPROGRAMACIÓN</span></h2>
+  <p class="stages-intro">Seleccioná el nivel según tus objetivos y preparación del motor</p>
+
+  <div class="stage-card">
+    <div class="stage-num">S1</div>
+    <div class="stage-name">Stage 1</div>
+    <div class="stage-gain">+20% a +30% HP</div>
+    <p class="stage-desc">Solo reprogramación de ECU de fábrica. Sin modificaciones de hardware necesarias. Ideal para motores stock que buscan mejorar respuesta y potencia con gasolina 91-95.</p>
+    <div class="stage-tags"><span class="tag">ECU Stock</span><span class="tag">Sin hardware</span><span class="tag">Gas 91-95</span><span class="tag">Torque mejorado</span><span class="tag">Throttle response</span></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-num">S2</div>
+    <div class="stage-name">Stage 2</div>
+    <div class="stage-gain">+30% a +40% HP</div>
+    <p class="stage-desc">Reprogramación + upgrade de hardware: downpipe, intercooler o catless. Mayor flujo de aire y combustible para exprimir el motor al máximo de manera confiable.</p>
+    <div class="stage-tags"><span class="tag">Downpipe</span><span class="tag">Intercooler</span><span class="tag">Catless</span><span class="tag">Mapa custom</span><span class="tag">Boost elevado</span></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-num">S2+</div>
+    <div class="stage-name">Stage 2+ E85</div>
+    <div class="stage-gain">+50% a +60% HP</div>
+    <p class="stage-desc">Preparación full con etanol E85 o Flex Fuel. El mayor incremento disponible en tu plataforma. Requiere inyectores y alimentación de combustible apropiados.</p>
+    <div class="stage-tags"><span class="tag">E85</span><span class="tag">Flex Fuel</span><span class="tag">Inyectores</span><span class="tag">High boost</span><span class="tag">Mapa etanol</span></div>
+  </div>
+
+  <div class="stage-card">
+    <div class="stage-num">PB</div>
+    <div class="stage-name">Pops &amp; Bangs</div>
+    <div class="stage-gain">Sonido brutal</div>
+    <p class="stage-desc">Mapas de deceleration y antilag para generar el característico sonido de backfire. Compatible con Stage 1 o Stage 2. 100% en software, sin riesgo mecánico.</p>
+    <div class="stage-tags"><span class="tag">Backfire map</span><span class="tag">Antilag</span><span class="tag">Decel pop</span><span class="tag">Lanzamiento</span></div>
+  </div>
+</div>
+
+<div class="calc-section">
+  <h2>CALCULADORA DE <span>POTENCIA</span></h2>
+  <p class="calc-intro">Calculá cuánto puede ganar tu vehículo</p>
+  <div class="calc-field">
+    <label>Marca del Vehículo</label>
+    <select id="calcMarca" onchange="updateCalcRepro()">
+      <option value="">— Seleccionar marca —</option>
+      <option value="volkswagen">Volkswagen</option>
+      <option value="audi">Audi</option>
+      <option value="bmw">BMW</option>
+      <option value="mercedes">Mercedes-Benz</option>
+      <option value="ford">Ford</option>
+      <option value="chevrolet">Chevrolet</option>
+      <option value="toyota">Toyota</option>
+      <option value="honda">Honda</option>
+      <option value="subaru">Subaru</option>
+      <option value="nissan">Nissan</option>
+    </select>
+  </div>
+  <div class="calc-field">
+    <label>Modelo</label>
+    <select id="calcModelo" onchange="calcHPRepro()">
+      <option value="">— Seleccionar modelo —</option>
+    </select>
+  </div>
+  <div class="calc-field">
+    <label>Potencia Stock (HP)</label>
+    <input type="number" id="calcHPInput" placeholder="O ingresá manualmente" oninput="showCalcReproResult(parseInt(this.value))">
+  </div>
+  <div class="calc-result-box" id="calcResultBox" style="display:none;">
+    <div class="calc-original-label">Potencia Original</div>
+    <div class="calc-original-num" id="calcOrigNum">—</div>
+    <div class="calc-stages">
+      <div class="calc-row"><span class="calc-row-name">Stage 1 (~+25%)</span><span class="calc-row-hp" id="calcS1">—</span></div>
+      <div class="calc-row"><span class="calc-row-name">Stage 2 (~+38%)</span><span class="calc-row-hp" id="calcS2">—</span></div>
+      <div class="calc-row"><span class="calc-row-name">Stage 2+ E85 (~+55%)</span><span class="calc-row-hp" id="calcS3">—</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="cases-section">
+  <h2>CASOS DE <span>ÉXITO</span></h2>
+  <p class="cases-intro">Resultados reales verificados en dinamómetro</p>
+  <div class="case-card">
+    <div class="case-car">Audi RS3 — Stage 2+</div>
+    <div class="case-stats">
+      <div class="case-stat"><div class="case-stat-num">400</div><div class="case-stat-label">HP Stock</div></div>
+      <div class="case-stat"><div class="case-stat-num">520</div><div class="case-stat-label">HP Final</div></div>
+      <div class="case-stat"><div class="case-stat-num">+120</div><div class="case-stat-label">HP Ganados</div></div>
+    </div>
+    <div class="case-bar-wrap"><div class="case-bar" style="width:77%"></div></div>
+  </div>
+  <div class="case-card">
+    <div class="case-car">Golf GTI MK7 — Stage 1</div>
+    <div class="case-stats">
+      <div class="case-stat"><div class="case-stat-num">230</div><div class="case-stat-label">HP Stock</div></div>
+      <div class="case-stat"><div class="case-stat-num">300</div><div class="case-stat-label">HP Final</div></div>
+      <div class="case-stat"><div class="case-stat-num">+70</div><div class="case-stat-label">HP Ganados</div></div>
+    </div>
+    <div class="case-bar-wrap"><div class="case-bar" style="width:70%"></div></div>
+  </div>
+  <div class="case-card">
+    <div class="case-car">BMW M340i — Stage 2</div>
+    <div class="case-stats">
+      <div class="case-stat"><div class="case-stat-num">374</div><div class="case-stat-label">HP Stock</div></div>
+      <div class="case-stat"><div class="case-stat-num">480</div><div class="case-stat-label">HP Final</div></div>
+      <div class="case-stat"><div class="case-stat-num">+106</div><div class="case-stat-label">HP Ganados</div></div>
+    </div>
+    <div class="case-bar-wrap"><div class="case-bar" style="width:78%"></div></div>
+  </div>
+  <div class="case-card">
+    <div class="case-car">Ford Raptor — Multimapa</div>
+    <div class="case-stats">
+      <div class="case-stat"><div class="case-stat-num">450</div><div class="case-stat-label">HP Stock</div></div>
+      <div class="case-stat"><div class="case-stat-num">525</div><div class="case-stat-label">HP Final</div></div>
+      <div class="case-stat"><div class="case-stat-num">-12%</div><div class="case-stat-label">Consumo</div></div>
+    </div>
+    <div class="case-bar-wrap"><div class="case-bar" style="width:86%"></div></div>
+  </div>
+</div>
+
+<div class="ai-section">
+  <h2>ASESOR <span>WT AI</span></h2>
+  <p class="ai-intro">Consultas técnicas 24/7 sobre tu vehículo</p>
+  <div class="chat-win">
+    <div class="chat-hdr">
+      <div class="chat-dot"></div>
+      <span class="chat-hdr-txt">WitcherTorque AI — En línea</span>
+    </div>
+    <div class="chat-msgs" id="rChatMsgs">
+      <div class="msg msg-ai"><div class="msg-label">WT AI</div>Hola 👋 Dime tu vehículo (marca, modelo y año) y te digo cuánto puede ganar con reprogramación.</div>
+    </div>
+    <div class="chat-typing" id="rChatTyping">WT AI está escribiendo...</div>
+    <div class="chat-input-wrap">
+      <input class="chat-input" id="rChatInput" type="text" placeholder="Ej: Golf GTI MK7, ¿cuánto sube con Stage 1?" onkeydown="if(event.key==='Enter')sendRChat()">
+      <button class="chat-send" onclick="sendRChat()">Enviar</button>
+    </div>
+  </div>
+</div>
+
+<div class="ai-section">
+  <h2>ASESOR <span>WT AI</span></h2>
+  <p class="ai-intro">Consultas técnicas 24/7 — Dime tu vehículo y te oriento</p>
+  <div class="chat-win">
+    <div class="chat-hdr">
+      <div class="chat-dot"></div>
+      <span class="chat-hdr-txt">WitcherTorque AI — En línea</span>
+    </div>
+    <div class="chat-msgs" id="rChatMsgs">
+      <div class="msg msg-ai"><div class="msg-label">WT AI</div>Hola 👋 Dime tu vehículo (marca, modelo y año) y te digo cuánto puede ganar con reprogramación.</div>
+    </div>
+    <div class="chat-typing" id="rChatTyping">WT AI está escribiendo...</div>
+    <div class="chat-input-wrap">
+      <input class="chat-input" id="rChatInput" type="text" placeholder="Ej: Golf GTI MK7, ¿cuánto sube con Stage 1?" onkeydown="if(event.key==='Enter')sendRChat()">
+      <button class="chat-send" onclick="sendRChat()">Enviar</button>
+    </div>
+  </div>
+</div>
+<script>` + REPRO_SCRIPT + `<\/script>\n</body>\n</html>`;
+  const blob = new Blob([html], {type: 'text/html'});
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+}
+
+// ─── OPEN SERVICIOS PAGE ──────────────────────────
+const SVC_SCRIPT = `
+function submitForm(){
+  const nombre=document.getElementById("fNombre").value.trim();
+  const vehiculo=document.getElementById("fVehiculo").value.trim();
+  const servicio=document.getElementById("fServicio").value;
+  const wa=document.getElementById("fWA").value.trim();
+  if(!nombre||!vehiculo||!servicio||!wa){alert("Por favor completá todos los campos obligatorios.");return;}
+  const ok=document.getElementById("submitOk");
+  ok.style.display="block";
+  document.querySelector(".btn-submit span").textContent="Solicitud Enviada";
+  document.querySelector(".btn-submit").style.background="#1a6b1a";
+  setTimeout(()=>{
+    const msg=encodeURIComponent("Hola WitcherTorque! Quiero agendar un servicio. Nombre: "+nombre+" Vehiculo: "+vehiculo+" Servicio: "+servicio+" WA: "+wa);
+    window.open("https://wa.me/584125856541?text="+msg,"_blank");
+  },800);
+}
+`;
+
+function openServicios() {
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Servicios — WitcherTorque</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--black:#060606;--graphite:#0f0f0f;--graphite-2:#171717;--graphite-3:#222;--graphite-4:#2e2e2e;--red:#c80000;--red-bright:#ff1500;--red-glow:rgba(200,0,0,0.35);--white:#efefef;--white-dim:rgba(239,239,239,0.5);--font-display:'Bebas Neue',sans-serif;--font-body:'Rajdhani',sans-serif;--font-mono:'Share Tech Mono',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);font-size:16px;overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:var(--red);}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(6,6,6,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,0,0,0.15);padding:0 18px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.topbar-logo{text-decoration:none;display:flex;align-items:center;}
+.topbar-logo img{height:46px;width:auto;display:block;}
+.back-btn{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);background:none;border:1px solid rgba(239,239,239,0.1);padding:7px 14px;cursor:pointer;text-transform:uppercase;transition:color 0.2s,border-color 0.2s;}
+.back-btn:hover{color:var(--red);border-color:rgba(200,0,0,0.3);}
+.page-hero{padding:48px 20px 36px;border-bottom:1px solid rgba(200,0,0,0.1);position:relative;overflow:hidden;}
+.page-hero::before{content:'SVC';position:absolute;right:-10px;top:-20px;font-family:var(--font-display);font-size:200px;color:rgba(200,0,0,0.03);line-height:1;pointer-events:none;}
+.page-label{font-family:var(--font-mono);font-size:10px;letter-spacing:5px;color:var(--red);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.page-label::before{content:'';width:24px;height:1px;background:var(--red);}
+.page-title{font-family:var(--font-display);font-size:clamp(50px,14vw,80px);line-height:0.88;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:16px;}
+.page-title span{color:var(--red);}
+.page-desc{font-size:15px;font-weight:400;color:var(--white-dim);line-height:1.7;border-left:2px solid var(--red);padding-left:14px;max-width:360px;}
+/* FORM */
+.form-section{padding:36px 20px;background:var(--graphite);}
+.form-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.form-section h2 span{color:var(--red);}
+.form-intro{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:24px;}
+.form-field{margin-bottom:16px;}
+.form-field label{font-family:var(--font-mono);font-size:9px;letter-spacing:4px;color:var(--white-dim);text-transform:uppercase;display:block;margin-bottom:7px;}
+.form-field input,.form-field select,.form-field textarea{width:100%;background:var(--black);border:1px solid var(--graphite-4);color:var(--white);padding:12px 14px;font-family:var(--font-body);font-size:15px;outline:none;appearance:none;-webkit-appearance:none;transition:border-color 0.25s;}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--red);}
+.form-field select option{background:#0f0f0f;}
+.form-field textarea{resize:vertical;min-height:90px;font-family:var(--font-body);}
+.btn-submit{background:var(--red);color:var(--white);border:none;padding:16px 28px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;width:100%;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:box-shadow 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px;}
+.btn-submit:active{filter:brightness(1.1);}
+.submit-ok{display:none;background:rgba(0,180,0,0.1);border:1px solid rgba(0,200,0,0.3);border-left:3px solid #00c853;padding:14px 16px;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:#00c853;text-transform:uppercase;margin-top:14px;}
+/* SERVICES */
+.services-section{padding:36px 20px;}
+.services-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.services-section h2 span{color:var(--red);}
+.services-intro{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:24px;}
+.svc-card{background:var(--graphite-2);border:1px solid var(--graphite-3);border-left:3px solid rgba(200,0,0,0.3);padding:20px 18px;margin-bottom:12px;position:relative;overflow:hidden;transition:border-color 0.3s;}
+.svc-card:hover{border-left-color:var(--red);}
+.svc-icon{font-size:22px;margin-bottom:10px;}
+.svc-name{font-family:var(--font-display);font-size:22px;letter-spacing:2px;color:var(--white);text-transform:uppercase;margin-bottom:6px;}
+.svc-desc{font-size:14px;color:var(--white-dim);line-height:1.65;margin-bottom:12px;}
+.svc-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-family:var(--font-mono);font-size:8px;letter-spacing:2px;color:rgba(200,0,0,0.8);border:1px solid rgba(200,0,0,0.2);padding:2px 7px;text-transform:uppercase;background:rgba(200,0,0,0.04);}
+.svc-num{font-family:var(--font-display);font-size:64px;color:rgba(200,0,0,0.04);position:absolute;right:10px;bottom:-8px;line-height:1;pointer-events:none;}
+/* CONTACT INFO */
+.contact-section{padding:36px 20px;background:var(--graphite-2);}
+.contact-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:24px;}
+.contact-section h2 span{color:var(--red);}
+.contact-item{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--graphite);border:1px solid var(--graphite-3);margin-bottom:10px;}
+.contact-icon{font-size:20px;flex-shrink:0;}
+.contact-label{font-family:var(--font-mono);font-size:8px;letter-spacing:3px;color:var(--white-dim);text-transform:uppercase;margin-bottom:3px;}
+.contact-val{font-size:15px;font-weight:600;color:var(--white);}
+.btn-wa-full{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:white;border:none;padding:16px 28px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none;margin-top:20px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="topbar-logo" href="javascript:window.close()"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque"></a>
+  <button class="back-btn" onclick="window.close()">
+    <svg width="12" height="10" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M5 9L1 5L5 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Volver
+  </button>
+</div>
+
+<div class="page-hero">
+  <div class="page-label">Taller &amp; Mecánica</div>
+  <h1 class="page-title">AGENDAR<br><span>SERVICIOS</span></h1>
+  <p class="page-desc">Taller equipado con dinamómetro DynoProHub y más de 10 años de experiencia. Completá el formulario o contactanos por WhatsApp.</p>
+</div>
+
+<div class="form-section">
+  <h2>SOLICITAR <span>TURNO</span></h2>
+  <p class="form-intro">Completá tus datos y te contactamos a la brevedad</p>
+  <div class="form-field"><label>Nombre completo</label><input type="text" id="fNombre" placeholder="Tu nombre" required></div>
+  <div class="form-field"><label>Vehículo</label><input type="text" id="fVehiculo" placeholder="Marca, modelo y año" required></div>
+  <div class="form-field">
+    <label>Servicio requerido</label>
+    <select id="fServicio" required>
+      <option value="">— Seleccionar servicio —</option>
+      <option>Reprogramación ECU Stage 1</option>
+      <option>Reprogramación ECU Stage 2</option>
+      <option>Pops &amp; Bangs</option>
+      <option>Stand Alone ECU (Haltech / FuelTech)</option>
+      <option>Mecánica High Performance</option>
+      <option>Suspensión / Coilovers</option>
+      <option>Electricidad &amp; CAN Bus</option>
+      <option>Diagnóstico Avanzado</option>
+      <option>Construcción Custom</option>
+      <option>Otro servicio</option>
+    </select>
+  </div>
+  <div class="form-field"><label>WhatsApp</label><input type="tel" id="fWA" placeholder="+58 412-000-0000" required></div>
+  <div class="form-field"><label>Descripción (opcional)</label><textarea id="fDesc" placeholder="Contanos más sobre tu proyecto o síntomas del vehículo..."></textarea></div>
+  <button class="btn-submit" onclick="submitForm()">
+    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>Enviar Solicitud</span>
+  </button>
+  <div class="submit-ok" id="submitOk">✓ Solicitud enviada — Te contactamos pronto por WhatsApp</div>
+</div>
+
+<div class="services-section">
+  <h2>NUESTROS <span>SERVICIOS</span></h2>
+  <p class="services-intro">Todo lo que hacemos en el taller</p>
+
+  <div class="svc-card">
+    <div class="svc-num">01</div>
+    <div class="svc-icon">⚡</div>
+    <div class="svc-name">Reprogramación ECU</div>
+    <p class="svc-desc">Calibraciones personalizadas Stage 1, Stage 2 y E85. Verificadas en dinamómetro. Más de 500 vehículos intervenidos.</p>
+    <div class="svc-tags"><span class="tag">Stage 1</span><span class="tag">Stage 2</span><span class="tag">E85</span><span class="tag">Pops &amp; Bangs</span><span class="tag">Dyno</span></div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-num">02</div>
+    <div class="svc-icon">🔧</div>
+    <div class="svc-name">Mecánica High Performance</div>
+    <p class="svc-desc">Preparaciones de pista, motores turbo y aspirados ejecutados con precisión milimétrica. Track prep y diagnóstico avanzado.</p>
+    <div class="svc-tags"><span class="tag">Motores Turbo</span><span class="tag">Aspirados</span><span class="tag">Track Prep</span><span class="tag">Diagnóstico</span></div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-num">03</div>
+    <div class="svc-icon">🏎️</div>
+    <div class="svc-name">Suspensión Performance</div>
+    <p class="svc-desc">Setup y afinación de suspensión para máximo rendimiento. Coilovers, geometría y alineación para calle y competición.</p>
+    <div class="svc-tags"><span class="tag">Coilovers</span><span class="tag">Track Day Setup</span><span class="tag">Geometría</span><span class="tag">Alineación</span></div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-num">04</div>
+    <div class="svc-icon">💻</div>
+    <div class="svc-name">Stand Alone ECU</div>
+    <p class="svc-desc">Instalación y calibración de centralitas de competición. Ideal para proyectos que superan los límites de la ECU de fábrica.</p>
+    <div class="svc-tags"><span class="tag">Haltech</span><span class="tag">FuelTech</span><span class="tag">Link ECU</span><span class="tag">MaxxECU</span></div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-num">05</div>
+    <div class="svc-icon">⚙️</div>
+    <div class="svc-name">Electricidad &amp; Electrónica</div>
+    <p class="svc-desc">Diagnóstico computarizado, módulos CAN Bus y sistemas eléctricos complejos con soluciones definitivas.</p>
+    <div class="svc-tags"><span class="tag">Diagnóstico</span><span class="tag">CAN Bus</span><span class="tag">Módulos</span><span class="tag">Eléctrica Avanzada</span></div>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-num">06</div>
+    <div class="svc-icon">🏆</div>
+    <div class="svc-name">Construcciones Custom</div>
+    <p class="svc-desc">Proyectos integrales desde cero. Restomod, street performance y autos de competición hechos a medida.</p>
+    <div class="svc-tags"><span class="tag">Restomod</span><span class="tag">Competición</span><span class="tag">Street Perf</span><span class="tag">Proyectos Custom</span></div>
+  </div>
+</div>
+
+<div class="contact-section">
+  <h2>CONTACTO <span>DIRECTO</span></h2>
+  <div class="contact-item"><span class="contact-icon">📍</span><div><div class="contact-label">Ubicación</div><div class="contact-val">Caracas, Venezuela</div></div></div>
+  <div class="contact-item"><span class="contact-icon">📱</span><div><div class="contact-label">WhatsApp</div><div class="contact-val">+58 412-585-6541</div></div></div>
+  <div class="contact-item"><span class="contact-icon">📸</span><div><div class="contact-label">Instagram</div><div class="contact-val">@witchertorque</div></div></div>
+  <div class="contact-item"><span class="contact-icon">🕐</span><div><div class="contact-label">Horario</div><div class="contact-val">Lun – Sáb: 9:00 – 19:00</div></div></div>
+  <a class="btn-wa-full" href="https://wa.me/584125856541" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Hablar por WhatsApp
+  </a>
+</div>
+
+<script>` + SVC_SCRIPT + `<\/script>\n</body>\n</html>`;
+  const blob = new Blob([html], {type: 'text/html'});
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+}
+
+// ─── AI POPUP CHAT (ANTHROPIC) ───────────────────────
+const WT_SYSTEM = `Eres WitcherTorque AI, el asesor técnico virtual oficial de WitcherTorque.
+WitcherTorque es un taller especializado en: Mecánica High Performance, Mecánica General, Reprogramación ECU, Dyno Tuning, Motores Aspirados y Turbo, Suspensión Deportiva, Stand Alone ECU (Haltech, FuelTech, Link ECU, MaxxECU), Diagnóstico Electrónico, Construcciones Custom, Vehículos de Competición, Vehículos Premium, Proyectos Street Performance.
+Tu personalidad es: Profesional, Técnica, Precisa, Experta, Cordial, Orientada a la conversión.
+Nunca respondas como un chatbot genérico. Habla como un asesor técnico de un taller líder en performance automotriz. Debes generar confianza y autoridad.
+
+OBJETIVO PRINCIPAL: Resolver consultas, detectar oportunidades comerciales, calificar clientes, obtener información del vehículo, recomendar soluciones, agendar diagnósticos, generar leads calificados.
+
+FLUJO: Siempre intenta obtener nombre, teléfono, vehículo (marca, modelo, año, motor), modificaciones actuales y servicio solicitado. Hazlo de forma natural. Nunca pidas toda la información de golpe.
+
+ESCENARIO 1 - REPROGRAMACIÓN: Si preguntan por potencia, pide marca/modelo/año/motor. Da estimaciones realistas sin prometer cifras exactas.
+ESCENARIO 2 - MOTOR: Si mencionan humo, consumo de aceite, falla, ruido o temperatura, actúa como asesor técnico. Realiza preguntas de diagnóstico. No diagnostiques con certeza. Siempre aclara que se requiere inspección física.
+ESCENARIO 3 - SUSPENSIÓN: Identifica si busca confort, estética, track day o competición.
+ESCENARIO 4 - STAND ALONE ECU: Pregunta potencia objetivo, combustible y uso del vehículo.
+ESCENARIO 5 - PROYECTO CUSTOM: Obtén objetivo, presupuesto estimado y plazo deseado.
+
+AGENDAMIENTO: Cuando detectes interés real, invita a reservar un diagnóstico con el equipo de WitcherTorque. WhatsApp: +58 412-585-6541.
+
+REGLAS: Nunca inventes datos. Nunca prometas ganancias exactas. Nunca garantices resultados. Nunca diagnostiques con certeza absoluta. Nunca menciones que eres una IA. Actúa siempre como un asesor técnico especializado de WitcherTorque.
+
+RESPUESTAS: Párrafos cortos, formato claro, lenguaje profesional. Evita respuestas largas. Siempre intenta avanzar hacia la reserva de un diagnóstico o servicio.`;
+
+let popupHistory = [];
+
+function toggleAiPopup() {
+  const popup = document.getElementById('aiPopup');
+  popup.classList.toggle('open');
+}
+
+async function sendPopupChat() {
+  const inp = document.getElementById('aiPopupInput');
+  const msg = inp.value.trim();
+  if (!msg) return;
+  const msgs = document.getElementById('aiPopupMsgs');
+  msgs.innerHTML += `<div class="msg msg-user">${msg}</div>`;
+  inp.value = '';
+  msgs.scrollTop = msgs.scrollHeight;
+  popupHistory.push({ role: 'user', content: msg });
+  document.getElementById('aiPopupTyping').style.display = 'block';
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ system: WT_SYSTEM, messages: popupHistory })
+    });
+    const data = await res.json();
+    const reply = data.reply || 'Un momento, estamos teniendo inconvenientes. Escribinos al WhatsApp +58 412-585-6541.';
+    popupHistory.push({ role: 'assistant', content: reply });
+    document.getElementById('aiPopupTyping').style.display = 'none';
+    msgs.innerHTML += `<div class="msg msg-ai"><div class="msg-label">WT AI</div>${reply}</div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  } catch(e) {
+    document.getElementById('aiPopupTyping').style.display = 'none';
+    msgs.innerHTML += `<div class="msg msg-ai"><div class="msg-label">WT AI</div>Hubo un error de conexión. Escribinos directamente al WhatsApp +58 412-585-6541 🔴</div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+}
+</script>
+</body>
+</html>
