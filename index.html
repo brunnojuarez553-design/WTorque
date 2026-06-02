@@ -392,6 +392,173 @@ nav {
 .reveal { opacity:0; transform:translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
 
+
+/* ─── NOSOTROS ──────────────────────────────────── */
+.nosotros-section {
+  padding: 56px 22px 48px;
+  background: var(--graphite-2);
+  border-top: 1px solid rgba(200,0,0,0.12);
+  position: relative; overflow: hidden;
+}
+.nosotros-section .nosotros-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: url('https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437622/IMG_7209_qbsmu7_3cc10b.png') center center / cover no-repeat;
+  opacity: 0.07;
+  pointer-events: none;
+}
+.nosotros-section > *:not(.nosotros-bg) { position: relative; z-index: 1; }
+.nosotros-photo-wrap {
+  margin-bottom: 32px;
+  position: relative;
+}
+.nosotros-photo-wrap::before {
+  content: '';
+  position: absolute; top: 10px; left: 10px; right: -10px; bottom: -10px;
+  border: 1px solid rgba(200,0,0,0.25);
+  z-index: 0;
+}
+.nosotros-photo-wrap::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  border: 2px solid rgba(200,0,0,0.5);
+  z-index: 2; pointer-events: none;
+}
+.nosotros-photo {
+  width: 100%; display: block;
+  position: relative; z-index: 1;
+  filter: grayscale(20%) contrast(1.05);
+}
+.nosotros-section::before {
+  content: '2014';
+  position: absolute; right: -10px; top: -10px;
+  font-family: var(--font-display); font-size: 160px;
+  color: rgba(200,0,0,0.03); line-height: 1; pointer-events: none;
+}
+.section-eyebrow {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 5px; color: var(--red);
+  text-transform: uppercase; margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--red); }
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 11vw, 72px);
+  letter-spacing: 3px; line-height: 0.88;
+  text-transform: uppercase; color: var(--white);
+  margin-bottom: 24px;
+}
+.section-title span { color: var(--red); }
+.nosotros-story {
+  font-size: 15px; font-weight: 400;
+  color: rgba(239,239,239,0.65);
+  line-height: 1.8; margin-bottom: 32px;
+  border-left: 2px solid var(--red);
+  padding-left: 16px;
+}
+.nosotros-story strong { color: var(--white); font-weight: 600; }
+.nosotros-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 2px; margin-bottom: 32px;
+}
+.nosotros-stat {
+  background: var(--graphite);
+  border: 1px solid var(--graphite-3);
+  padding: 18px 16px;
+  position: relative; overflow: hidden;
+}
+.nosotros-stat::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--red), transparent);
+}
+.nosotros-stat-num {
+  font-family: var(--font-display);
+  font-size: 40px; color: var(--red); line-height: 1;
+  text-shadow: 0 0 20px var(--red-glow);
+}
+.nosotros-stat-label {
+  font-family: var(--font-mono); font-size: 8px;
+  letter-spacing: 3px; color: var(--white-dim);
+  text-transform: uppercase; margin-top: 4px;
+}
+.nosotros-skills {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.skill-row { }
+.skill-name {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 3px; color: var(--white-dim);
+  text-transform: uppercase; margin-bottom: 6px;
+  display: flex; justify-content: space-between;
+}
+.skill-name span { color: var(--red); }
+.skill-bar-wrap { background: var(--graphite-4); height: 2px; }
+.skill-bar {
+  height: 100%;
+  background: linear-gradient(to right, var(--red), var(--red-bright));
+  box-shadow: 0 0 8px var(--red-glow);
+  width: 0; transition: width 1.2s ease;
+}
+.skill-row.animated .skill-bar { width: var(--w); }
+
+/* ─── TESTIMONIOS ───────────────────────────────── */
+.testimonios-section {
+  padding: 56px 22px 48px;
+  background: var(--black);
+  border-top: 1px solid rgba(200,0,0,0.12);
+}
+.testimonios-grid {
+  display: flex; flex-direction: column; gap: 14px;
+  margin-top: 32px;
+}
+.testimonio-card {
+  background: var(--graphite-2);
+  border: 1px solid var(--graphite-3);
+  border-left: 3px solid var(--red);
+  padding: 22px 18px;
+  position: relative; overflow: hidden;
+}
+.testimonio-card::after {
+  content: '"';
+  position: absolute; right: 12px; bottom: -10px;
+  font-family: var(--font-display); font-size: 100px;
+  color: rgba(200,0,0,0.04); line-height: 1;
+  pointer-events: none;
+}
+.testimonio-stars {
+  display: flex; gap: 3px; margin-bottom: 10px;
+}
+.testimonio-stars span {
+  color: var(--red); font-size: 12px;
+}
+.testimonio-text {
+  font-size: 14px; color: rgba(239,239,239,0.7);
+  line-height: 1.7; margin-bottom: 16px;
+  font-style: italic;
+}
+.testimonio-author {
+  display: flex; align-items: center; gap: 10px;
+}
+.testimonio-avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--graphite-4);
+  border: 1px solid rgba(200,0,0,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 16px;
+  color: var(--red); flex-shrink: 0;
+}
+.testimonio-name {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 2px; color: var(--white);
+  text-transform: uppercase;
+}
+.testimonio-car {
+  font-family: var(--font-mono); font-size: 8px;
+  letter-spacing: 2px; color: var(--red);
+  text-transform: uppercase; margin-top: 2px;
+}
+
 /* ─── FOOTER ────────────────────────────────────── */
 footer {
   padding: 32px 22px 28px;
@@ -443,11 +610,39 @@ footer {
 .ai-float-btn:active { transform: scale(0.93); }
 .ai-float-btn svg { width: 26px; height: 26px; }
 
-.ai-popup {
-  position: fixed; bottom: 86px; right: 12px; z-index: 799;
-  width: calc(100vw - 24px); max-width: 340px;
+/* ─── AI TOOLTIP ─────────────────────────────────── */
+.ai-tooltip {
+  position: fixed; bottom: 84px; right: 14px; z-index: 801;
   background: var(--graphite-2);
   border: 1px solid var(--graphite-3);
+  border-left: 2px solid var(--red);
+  padding: 10px 14px;
+  max-width: 220px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+  display: none;
+  animation: fadeUp 0.3s ease;
+}
+.ai-tooltip.show { display: block; }
+.ai-tooltip-text {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 2px; color: var(--white-dim);
+  text-transform: uppercase; line-height: 1.6;
+}
+.ai-tooltip-text span { color: var(--red); }
+.ai-tooltip::after {
+  content: '';
+  position: absolute; bottom: -6px; right: 22px;
+  width: 10px; height: 10px;
+  background: var(--graphite-2);
+  border-right: 1px solid var(--graphite-3);
+  border-bottom: 1px solid var(--graphite-3);
+  transform: rotate(45deg);
+}
+
+/* ─── AI POPUP (fullscreen mobile) ──────────────── */
+.ai-popup {
+  position: fixed; inset: 0; z-index: 799;
+  background: var(--graphite-2);
   border-top: 2px solid var(--red);
   box-shadow: 0 16px 48px rgba(0,0,0,0.7);
   display: none; flex-direction: column;
@@ -455,27 +650,29 @@ footer {
 }
 .ai-popup.open { display: flex; }
 .ai-popup-hdr {
-  padding: 12px 14px; border-bottom: 1px solid var(--graphite-3);
+  padding: 14px 16px; border-bottom: 1px solid var(--graphite-3);
   display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
 }
 .ai-popup-hdr-left { display: flex; align-items: center; gap: 8px; }
 .ai-popup-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); animation: popupPulse 2s infinite; }
 @keyframes popupPulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
 .ai-popup-title { font-family: var(--font-mono); font-size: 9px; letter-spacing: 3px; color: var(--white-dim); text-transform: uppercase; }
-.ai-popup-close { background: none; border: none; color: var(--white-dim); font-size: 18px; cursor: pointer; padding: 0 2px; line-height: 1; }
+.ai-popup-close { background: none; border: none; color: var(--white-dim); font-size: 22px; cursor: pointer; padding: 4px 8px; line-height: 1; }
 .ai-popup-msgs {
-  min-height: 160px; max-height: 220px; overflow-y: auto;
-  padding: 12px; display: flex; flex-direction: column; gap: 8px;
+  flex: 1; overflow-y: auto;
+  padding: 16px; display: flex; flex-direction: column; gap: 10px;
 }
-.ai-popup-msgs .msg { padding: 9px 12px; font-size: 13px; line-height: 1.5; max-width: 92%; }
+.ai-popup-msgs .msg { padding: 10px 14px; font-size: 14px; line-height: 1.55; max-width: 88%; }
 .ai-popup-msgs .msg-ai { background: var(--graphite); border: 1px solid var(--graphite-3); border-left: 2px solid var(--red); align-self: flex-start; }
 .ai-popup-msgs .msg-user { background: rgba(200,0,0,0.1); border: 1px solid rgba(200,0,0,0.2); align-self: flex-end; text-align: right; }
 .ai-popup-msgs .msg-label { font-family: var(--font-mono); font-size: 8px; letter-spacing: 3px; color: var(--red); text-transform: uppercase; margin-bottom: 3px; }
-.ai-popup-typing { padding: 6px 12px; font-family: var(--font-mono); font-size: 9px; color: var(--white-dim); display: none; }
-.ai-popup-input-wrap { display: flex; border-top: 1px solid var(--graphite-3); }
-.ai-popup-input { flex: 1; background: transparent; border: none; color: var(--white); padding: 11px 12px; font-family: var(--font-body); font-size: 14px; outline: none; }
+.ai-popup-typing { padding: 6px 16px; font-family: var(--font-mono); font-size: 9px; color: var(--white-dim); display: none; flex-shrink: 0; }
+.ai-popup-input-wrap { display: flex; border-top: 1px solid var(--graphite-3); flex-shrink: 0; }
+/* font-size 16px evita zoom en iOS al hacer foco en el input */
+.ai-popup-input { flex: 1; background: transparent; border: none; color: var(--white); padding: 14px 16px; font-family: var(--font-body); font-size: 16px; outline: none; }
 .ai-popup-input::placeholder { color: rgba(239,239,239,0.2); }
-.ai-popup-send { background: var(--red); color: white; border: none; padding: 11px 14px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
+.ai-popup-send { background: var(--red); color: white; border: none; padding: 14px 18px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -488,6 +685,8 @@ footer {
   </button>
 </nav>
 <ul class="nav-drawer" id="navDrawer">
+  <li><a href="#nosotros" class="drawer-link" onclick="drawer.classList.remove('open')">Nosotros</a></li>
+  <li><a href="#testimonios" class="drawer-link" onclick="drawer.classList.remove('open')">Testimonios</a></li>
   <li><a href="javascript:openRepro()" class="drawer-link">Reprogramación</a></li>
   <li><a href="javascript:openServicios()" class="drawer-link">Servicios</a></li>
   <li><a href="https://wa.me/584125856541" target="_blank" class="drawer-link drawer-cta">WhatsApp</a></li>
@@ -535,51 +734,117 @@ footer {
   </div>
 </section>
 
-<!-- SECTION: REPROGRAMACIÓN -->
-<div class="home-sections">
-  <a class="home-card reveal" onclick="openRepro()" href="javascript:void(0)">
-    <div class="home-card-bg" style="background-image:url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=70')"></div>
-    <div class="home-card-num">01</div>
-    <div class="home-card-content">
-      <div class="home-card-label">Servicio Principal</div>
-      <div class="home-card-title">REPRO<span>GRAMACIÓN</span><br>ECU</div>
-      <p class="home-card-desc">Stage 1, Stage 2, E85, Pops & Bangs, Flex Fuel y Dyno Tuning. Calibraciones personalizadas verificadas en dinamómetro.</p>
-      <div class="home-card-tags">
-        <span class="home-tag">Stage 1</span>
-        <span class="home-tag">Stage 2</span>
-        <span class="home-tag">Pops &amp; Bangs</span>
-        <span class="home-tag">E85</span>
-        <span class="home-tag">Flex Fuel</span>
-        <span class="home-tag">Dyno Tuning</span>
-      </div>
-      <div class="home-card-cta">
-        <span>Ver más</span>
-        <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-    </div>
-  </a>
+<!-- NOSOTROS -->
+<section class="nosotros-section reveal" id="nosotros">
+  <div class="nosotros-bg"></div>
+  <div class="nosotros-photo-wrap">
+    <img class="nosotros-photo" src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437595/IMG_7208_m0ajhp_3cc10b.png" alt="WitcherTorque Taller">
+  </div>
+  <div class="section-eyebrow">Quiénes Somos</div>
+  <h2 class="section-title">NUESTRO<br><span>LEGADO</span></h2>
+  <p class="nosotros-story">
+    WitcherTorque nació en <strong>2014 en Caracas</strong> con una obsesión simple: exprimir cada caballo de fuerza que un motor puede dar. Lo que empezó como pasión de taller se convirtió en el referente de <strong>performance automotriz de Venezuela</strong>.<br><br>
+    Más de una década después, somos el taller de confianza de pilotos de competición, entusiastas del track day y dueños de vehículos premium que no aceptan mediocridad. Cada calibración que hacemos lleva nuestra firma y está <strong>verificada en dinamómetro</strong>.
+  </p>
 
-  <!-- SECTION: AGENDAR SERVICIOS -->
-  <a class="home-card reveal" onclick="openServicios()" href="javascript:void(0)">
-    <div class="home-card-bg" style="background-image:url('https://images.unsplash.com/photo-1565689157206-0fddef7589a2?w=800&q=70')"></div>
-    <div class="home-card-num">02</div>
-    <div class="home-card-content">
-      <div class="home-card-label">Taller &amp; Mecánica</div>
-      <div class="home-card-title">AGENDAR<br><span>SERVICIOS</span></div>
-      <p class="home-card-desc">Suspensión performance, mecánica high performance, Stand Alone ECU, electrónica avanzada y construcciones custom.</p>
-      <div class="home-card-tags">
-        <span class="home-tag">Suspensión</span>
-        <span class="home-tag">Mecánica HP</span>
-        <span class="home-tag">Stand Alone</span>
-        <span class="home-tag">Diagnóstico</span>
-      </div>
-      <div class="home-card-cta">
-        <span>Agendar ahora</span>
-        <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="#c80000" stroke-width="1.5" stroke-linecap="round"/></svg>
+  <div class="nosotros-stats">
+    <div class="nosotros-stat">
+      <div class="nosotros-stat-num">500+</div>
+      <div class="nosotros-stat-label">Motores intervenidos</div>
+    </div>
+    <div class="nosotros-stat">
+      <div class="nosotros-stat-num">10+</div>
+      <div class="nosotros-stat-label">Años de experiencia</div>
+    </div>
+    <div class="nosotros-stat">
+      <div class="nosotros-stat-num">98%</div>
+      <div class="nosotros-stat-label">Clientes satisfechos</div>
+    </div>
+    <div class="nosotros-stat">
+      <div class="nosotros-stat-num">1°</div>
+      <div class="nosotros-stat-label">Taller con dinamómetro</div>
+    </div>
+  </div>
+
+  <div class="nosotros-skills">
+    <div class="skill-row reveal-skill" data-w="97">
+      <div class="skill-name">Reprogramación ECU <span>97%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="--w:97%"></div></div>
+    </div>
+    <div class="skill-row reveal-skill" data-w="94">
+      <div class="skill-name">Mecánica High Performance <span>94%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="--w:94%"></div></div>
+    </div>
+    <div class="skill-row reveal-skill" data-w="90">
+      <div class="skill-name">Stand Alone ECU <span>90%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="--w:90%"></div></div>
+    </div>
+    <div class="skill-row reveal-skill" data-w="88">
+      <div class="skill-name">Suspensión &amp; Setup <span>88%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="--w:88%"></div></div>
+    </div>
+    <div class="skill-row reveal-skill" data-w="92">
+      <div class="skill-name">Diagnóstico Electrónico <span>92%</span></div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="--w:92%"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonios-section" id="testimonios">
+  <div class="section-eyebrow">Lo que dicen</div>
+  <h2 class="section-title">TESTIMO<span>NIOS</span></h2>
+
+  <div class="testimonios-grid">
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testimonio-text">"Le hice el Stage 2 a mi Golf GTI MK7 y el resultado superó todas mis expectativas. De 230HP pasé a 310HP verificados en dyno. El auto es otro. WitcherTorque tiene un nivel técnico que no encontré en ningún otro taller."</p>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">A</div>
+        <div>
+          <div class="testimonio-name">Alejandro M.</div>
+          <div class="testimonio-car">Golf GTI MK7 — Stage 2</div>
+        </div>
       </div>
     </div>
-  </a>
-</div>
+
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testimonio-text">"Llevé mi RS3 para una calibración E85 completa. El equipo conoce el motor como nadie. Explicaron cada paso del proceso y los números en pista hablan solos. 520HP reales, cero fallas en 6 meses."</p>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">C</div>
+        <div>
+          <div class="testimonio-name">Carlos V.</div>
+          <div class="testimonio-car">Audi RS3 — Stage 2+ E85</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testimonio-text">"Mi M340i con Stage 1 y Pops &amp; Bangs es un auto completamente diferente. La atención es impecable, te explican todo y los resultados están verificados. El único taller al que voy a volver."</p>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">R</div>
+        <div>
+          <div class="testimonio-name">Ricardo P.</div>
+          <div class="testimonio-car">BMW M340i — Stage 1 + P&amp;B</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio-card reveal">
+      <div class="testimonio-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <p class="testimonio-text">"Confié en WitcherTorque para instalar una Haltech en mi proyecto de competición. El nivel de detalle en la calibración es brutal. Ganamos dos fechas seguidas después de la intervención."</p>
+      <div class="testimonio-author">
+        <div class="testimonio-avatar">L</div>
+        <div>
+          <div class="testimonio-name">Luis F.</div>
+          <div class="testimonio-car">Proyecto Competición — Haltech</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
@@ -594,8 +859,13 @@ footer {
   <div class="footer-bottom">© 2025 <span>WitcherTorque</span> — Todos los derechos reservados · Performance Engineering</div>
 </footer>
 
+<!-- AI TOOLTIP -->
+<div class="ai-tooltip" id="aiTooltip">
+  <div class="ai-tooltip-text"><span>WT AI</span> — Estoy aquí para asesorarte sobre tu vehículo 🔴</div>
+</div>
+
 <!-- AI FLOAT -->
-<button class="ai-float-btn" onclick="toggleAiPopup()" aria-label="Chat WT AI">
+<button class="ai-float-btn" id="aiFloatBtn" onclick="toggleAiPopup()" aria-label="Chat WT AI">
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l4.93-1.37A9.94 9.94 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2z" fill="rgba(255,255,255,0.15)" stroke="white" stroke-width="1.5"/>
     <path d="M8 10h8M8 14h5" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
@@ -642,6 +912,26 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Animar barras de habilidades al hacer scroll
+const skillObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      e.target.classList.add('animated');
+      skillObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.reveal-skill').forEach(el => skillObs.observe(el));
+
+// Cerrar drawer al hacer click en links de ancla
+document.querySelectorAll('.drawer-link[href^="#"]').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navDrawer').classList.remove('open');
+    const spans = document.getElementById('navHamburger').querySelectorAll('span');
+    spans[0].style.transform=''; spans[1].style.opacity=''; spans[2].style.transform='';
+  });
+});
 
 const REPRO_SCRIPT = `
 const WT_SYS_R = "Eres WitcherTorque AI, el asesor técnico virtual oficial de WitcherTorque. Taller especializado en: Mecánica High Performance, Reprogramación ECU, Dyno Tuning, Motores Aspirados y Turbo, Suspensión Deportiva, Stand Alone ECU (Haltech, FuelTech, Link ECU, MaxxECU), Diagnóstico Electrónico, Construcciones Custom, Vehículos de Competición y Premium, Proyectos Street Performance. Personalidad: Profesional, Técnica, Precisa, Experta, Cordial, Orientada a la conversión. Nunca respondas como chatbot genérico. Tu objetivo: resolver consultas, detectar oportunidades, calificar clientes, obtener datos del vehículo (marca, modelo, año, motor, modificaciones), recomendar soluciones y agendar diagnósticos. Cuando pregunten por potencia: pide datos del vehículo y da estimaciones realistas sin prometer cifras exactas. Cuando mencionen fallas (humo, ruido, temperatura, consumo aceite): pregunta para orientar el diagnóstico, aclarando que se requiere inspección física. Para Stand Alone: pregunta potencia objetivo, combustible y uso. Para proyectos custom: pide objetivo, presupuesto y plazo. Cuando detectes interés real: invita a agendar diagnóstico. WhatsApp: +58 412-585-6541. NUNCA inventes datos, garantices resultados ni menciones que eres IA. Respuestas cortas, párrafos breves, lenguaje profesional. Siempre avanzá hacia la reserva de diagnóstico o servicio.";
@@ -1178,8 +1468,27 @@ let popupHistory = [];
 
 function toggleAiPopup() {
   const popup = document.getElementById('aiPopup');
+  const floatBtn = document.getElementById('aiFloatBtn');
+  document.getElementById('aiTooltip').classList.remove('show');
   popup.classList.toggle('open');
+  const isOpen = popup.classList.contains('open');
+  // Ocultar el botón flotante mientras el chat está abierto
+  floatBtn.style.display = isOpen ? 'none' : 'flex';
+  if (isOpen) {
+    setTimeout(() => document.getElementById('aiPopupInput').focus(), 300);
+  }
 }
+
+// ─── TOOLTIP: aparece a los 30s, desaparece a los 45s ────
+setTimeout(() => {
+  const tooltip = document.getElementById('aiTooltip');
+  const popup = document.getElementById('aiPopup');
+  // Solo mostrar si el chat no está abierto
+  if (!popup.classList.contains('open')) {
+    tooltip.classList.add('show');
+    setTimeout(() => tooltip.classList.remove('show'), 15000);
+  }
+}, 30000);
 
 async function sendPopupChat() {
   const inp = document.getElementById('aiPopupInput');
