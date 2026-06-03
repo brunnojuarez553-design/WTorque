@@ -235,15 +235,18 @@ nav {
 }
 .btn-primary:active { transform: scale(0.97); }
 .btn-outline {
-  background: transparent; color: var(--white);
-  border: 1px solid rgba(239,239,239,0.25);
+  background: rgba(255, 80, 60, 0.18);
+  color: #ff7a6a;
+  border: 1px solid rgba(255, 80, 60, 0.45);
   padding: 14px 28px;
   font-family: var(--font-mono); font-size: 10px;
   letter-spacing: 3px; text-transform: uppercase;
   cursor: pointer; text-decoration: none;
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
-  transition: border-color 0.3s, color 0.3s;
+  transition: border-color 0.3s, color 0.3s, background 0.3s;
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 .btn-outline:active { opacity: 0.8; }
 
@@ -271,10 +274,10 @@ nav {
 .home-card {
   position: relative;
   overflow: hidden;
-  min-height: 280px;
+  min-height: 180px;
   display: flex; flex-direction: column;
   justify-content: flex-end;
-  padding: 32px 22px 28px;
+  padding: 20px 18px 18px;
   cursor: pointer;
   text-decoration: none;
   border-top: 1px solid rgba(200,0,0,0.12);
@@ -321,10 +324,10 @@ nav {
 
 .home-card-num {
   font-family: var(--font-display);
-  font-size: 80px;
+  font-size: 56px;
   color: rgba(200,0,0,0.06);
   line-height: 1;
-  position: absolute; top: 16px; left: 22px;
+  position: absolute; top: 12px; left: 18px;
   z-index: 1;
   letter-spacing: 2px;
   pointer-events: none;
@@ -334,7 +337,7 @@ nav {
   font-family: var(--font-mono);
   font-size: 9px; letter-spacing: 5px;
   color: var(--red); text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
   display: flex; align-items: center; gap: 10px;
 }
 .home-card-label::before {
@@ -344,25 +347,25 @@ nav {
 
 .home-card-title {
   font-family: var(--font-display);
-  font-size: clamp(36px, 9vw, 52px);
+  font-size: clamp(26px, 7vw, 38px);
   letter-spacing: 3px; line-height: 0.9;
   text-transform: uppercase;
   color: var(--white);
-  margin-bottom: 14px;
+  margin-bottom: 8px;
 }
 .home-card-title span { color: var(--red); }
 
 .home-card-desc {
-  font-size: 13px; font-weight: 400;
+  font-size: 12px; font-weight: 400;
   color: rgba(239,239,239,0.5);
-  line-height: 1.65;
-  margin-bottom: 22px;
+  line-height: 1.55;
+  margin-bottom: 12px;
   max-width: 300px;
 }
 
 .home-card-tags {
-  display: flex; flex-wrap: wrap; gap: 6px;
-  margin-bottom: 24px;
+  display: flex; flex-wrap: wrap; gap: 5px;
+  margin-bottom: 14px;
 }
 .home-tag {
   font-family: var(--font-mono); font-size: 8px;
@@ -378,7 +381,7 @@ nav {
   letter-spacing: 3px; text-transform: uppercase;
   color: var(--white);
   background: var(--red);
-  padding: 13px 24px;
+  padding: 10px 18px;
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
   transition: box-shadow 0.3s;
 }
@@ -389,7 +392,95 @@ nav {
 }
 .home-card-cta svg { flex-shrink: 0; }
 
-/* ─── ANIMATIONS ────────────────────────────────── */
+/* ─── REPUESTOS ─────────────────────────────────── */
+.repuestos-section {
+  padding: 56px 22px 48px;
+  background: var(--graphite-2);
+  border-top: 1px solid rgba(200,0,0,0.12);
+  position: relative; overflow: hidden;
+}
+.repuestos-section::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background: url('https://res.cloudinary.com/dvvuwigmy/image/upload/v1780446778/IMG_7239_e7s7l7.jpg') center center / cover no-repeat;
+  opacity: 0.07;
+  pointer-events: none;
+}
+.repuestos-section > * { position: relative; z-index: 1; }
+.repuestos-section::before {
+  content: 'PARTS';
+  position: absolute; right: -10px; bottom: -20px;
+  font-family: var(--font-display); font-size: 120px;
+  color: rgba(200,0,0,0.03); line-height: 1; pointer-events: none;
+  letter-spacing: 4px;
+}
+.repuestos-intro {
+  font-size: 14px; color: rgba(239,239,239,0.55);
+  line-height: 1.75; margin-bottom: 28px;
+  border-left: 2px solid var(--red); padding-left: 14px;
+}
+.repuestos-cats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; margin-bottom: 32px;
+}
+.rcat {
+  background: var(--graphite);
+  border: 1px solid var(--graphite-3);
+  border-left: 2px solid rgba(200,0,0,0.35);
+  padding: 12px 14px;
+  display: flex; align-items: center; gap: 10px;
+  transition: border-left-color 0.2s;
+}
+.rcat:hover { border-left-color: var(--red); }
+.rcat-icon { font-size: 18px; flex-shrink: 0; }
+.rcat-name {
+  font-family: var(--font-mono); font-size: 8px;
+  letter-spacing: 2px; color: var(--white-dim);
+  text-transform: uppercase; line-height: 1.3;
+}
+.repuestos-form-wrap {
+  background: var(--graphite);
+  border: 1px solid var(--graphite-3);
+  border-top: 2px solid var(--red);
+  padding: 20px 16px 24px;
+}
+.repuestos-form-label {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 4px; color: var(--red);
+  text-transform: uppercase; margin-bottom: 18px;
+}
+.repuestos-form {
+  display: flex; flex-direction: column; gap: 14px;
+}
+.rform-field {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.rform-field label {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 3px; color: var(--white-dim);
+  text-transform: uppercase;
+}
+.rform-field input,
+.rform-field select,
+.rform-field textarea {
+  background: var(--graphite-2);
+  border: 1px solid var(--graphite-4);
+  border-bottom: 1px solid rgba(200,0,0,0.3);
+  color: var(--white);
+  font-family: var(--font-body); font-size: 14px;
+  padding: 10px 12px;
+  outline: none; width: 100%;
+  transition: border-color 0.2s;
+  -webkit-appearance: none; appearance: none;
+}
+.rform-field input:focus,
+.rform-field select:focus,
+.rform-field textarea:focus { border-color: var(--red); }
+.rform-field textarea { min-height: 90px; resize: vertical; }
+.rform-field select { cursor: pointer; }
+.rform-field option { background: var(--graphite-2); }
+
+
 @keyframes fadeUp {
   from { opacity:0; transform:translateY(22px); }
   to { opacity:1; transform:translateY(0); }
@@ -433,6 +524,9 @@ nav {
   width: 100%; display: block;
   position: relative; z-index: 1;
   filter: grayscale(20%) contrast(1.05);
+  max-height: 280px;
+  object-fit: cover;
+  object-position: center;
 }
 .nosotros-section::before {
   content: '2014';
@@ -508,6 +602,62 @@ nav {
 }
 .skill-row.animated .skill-bar { width: var(--w); }
 
+/* ─── POR QUÉ ELEGIRNOS ─────────────────────────── */
+.porque-section {
+  padding: 56px 22px 48px;
+  background: var(--black);
+  border-top: 1px solid rgba(200,0,0,0.12);
+  position: relative; overflow: hidden;
+}
+.porque-section::before {
+  content: 'WT';
+  position: absolute; right: -20px; top: -20px;
+  font-family: var(--font-display); font-size: 200px;
+  color: rgba(200,0,0,0.025); line-height: 1; pointer-events: none;
+}
+.porque-intro {
+  font-size: 15px; font-weight: 400;
+  color: rgba(239,239,239,0.55);
+  line-height: 1.75; margin-bottom: 36px;
+  border-left: 2px solid var(--red);
+  padding-left: 16px;
+  max-width: 420px;
+}
+.porque-grid {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.porque-item {
+  background: var(--graphite-2);
+  border: 1px solid var(--graphite-3);
+  border-left: 3px solid rgba(200,0,0,0.35);
+  padding: 22px 20px;
+  position: relative; overflow: hidden;
+  transition: border-left-color 0.3s;
+}
+.porque-item:hover { border-left-color: var(--red); }
+.porque-item::after {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(200,0,0,0.08), transparent);
+}
+.porque-icon {
+  font-size: 14px; color: var(--red);
+  margin-bottom: 10px; line-height: 1;
+  text-shadow: 0 0 10px var(--red-glow);
+}
+.porque-item-title {
+  font-family: var(--font-mono);
+  font-size: 10px; letter-spacing: 2px;
+  color: var(--white); text-transform: uppercase;
+  margin-bottom: 8px; line-height: 1.4;
+}
+.porque-item-desc {
+  font-size: 13px; font-weight: 400;
+  color: rgba(239,239,239,0.5);
+  line-height: 1.65;
+}
+
 /* ─── TESTIMONIOS ───────────────────────────────── */
 .testimonios-section {
   padding: 56px 22px 48px;
@@ -563,6 +713,156 @@ nav {
   font-family: var(--font-mono); font-size: 8px;
   letter-spacing: 2px; color: var(--red);
   text-transform: uppercase; margin-top: 2px;
+}
+
+/* ─── GALERÍA ────────────────────────────────────── */
+.galeria-section {
+  padding: 56px 22px 48px;
+  background: var(--graphite);
+  border-top: 1px solid rgba(200,0,0,0.12);
+}
+.galeria-cards {
+  display: flex; flex-direction: column;
+  gap: 14px; margin-top: 24px;
+}
+.gmodel-card {
+  background: var(--graphite-2);
+  border: 1px solid var(--graphite-3);
+  border-top: 2px solid var(--red);
+  overflow: hidden;
+}
+.gmodel-carousel {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 2;
+  background: var(--graphite-3);
+  touch-action: pan-y;
+}
+.gmodel-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+  will-change: transform;
+}
+.gslide {
+  flex: 0 0 100%; height: 100%;
+}
+.gslide img {
+  width: 100%; height: 100%;
+  object-fit: cover; display: block;
+  pointer-events: none;
+  filter: grayscale(10%) contrast(1.05);
+}
+.gmodel-dots {
+  position: absolute; bottom: 10px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 5px; z-index: 2;
+}
+.gdot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(239,239,239,0.3);
+  transition: background 0.2s, transform 0.2s;
+  cursor: pointer;
+}
+.gdot.active {
+  background: var(--red);
+  transform: scale(1.3);
+}
+.gmodel-info {
+  padding: 8px 14px 10px;
+  border-top: 1px solid var(--graphite-3);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.gmodel-name {
+  font-family: var(--font-display);
+  font-size: 15px; letter-spacing: 2px;
+  color: var(--white); text-transform: uppercase; line-height: 1;
+}
+.gmodel-service {
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 3px; color: var(--red);
+  text-transform: uppercase;
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 900;
+  background: rgba(6,6,6,0.97);
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.lightbox.open { display: flex; }
+.lightbox-img {
+  max-width: 100%; max-height: 90vh;
+  object-fit: contain;
+  border: 1px solid rgba(200,0,0,0.2);
+}
+.lightbox-close {
+  position: absolute; top: 16px; right: 16px;
+  background: none; border: 1px solid rgba(239,239,239,0.15);
+  color: var(--white); font-size: 24px;
+  width: 40px; height: 40px;
+  cursor: pointer; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* ─── FAQ ───────────────────────────────────────── */
+.faq-section {
+  padding: 56px 22px 48px;
+  background: var(--graphite-2);
+  border-top: 1px solid rgba(200,0,0,0.12);
+  position: relative; overflow: hidden;
+}
+.faq-section::before {
+  content: '?';
+  position: absolute; right: -10px; top: -30px;
+  font-family: var(--font-display); font-size: 260px;
+  color: rgba(200,0,0,0.025); line-height: 1; pointer-events: none;
+}
+.faq-list {
+  display: flex; flex-direction: column;
+  gap: 2px; margin-top: 32px;
+}
+.faq-item {
+  border: 1px solid var(--graphite-3);
+  overflow: hidden;
+  background: var(--graphite);
+}
+.faq-q {
+  width: 100%; background: none; border: none;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px;
+  padding: 18px 18px;
+  cursor: pointer; text-align: left;
+  border-left: 3px solid rgba(200,0,0,0.3);
+  transition: border-left-color 0.25s, background 0.25s;
+}
+.faq-q:hover { background: rgba(200,0,0,0.04); border-left-color: var(--red); }
+.faq-q.open { border-left-color: var(--red); background: rgba(200,0,0,0.06); }
+.faq-q span {
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 1.5px; color: var(--white);
+  text-transform: uppercase; line-height: 1.5;
+}
+.faq-arrow {
+  font-size: 20px; color: var(--red);
+  flex-shrink: 0; line-height: 1;
+  transition: transform 0.3s;
+  font-family: var(--font-mono);
+}
+.faq-q.open .faq-arrow { transform: rotate(45deg); }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  font-size: 14px; color: rgba(239,239,239,0.55);
+  line-height: 1.75;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 18px;
+  border-left: 3px solid var(--red);
+}
+.faq-a.open {
+  max-height: 300px;
+  padding: 14px 18px 18px;
 }
 
 /* ─── FOOTER ────────────────────────────────────── */
@@ -679,6 +979,103 @@ footer {
 .ai-popup-input { flex: 1; background: transparent; border: none; color: var(--white); padding: 14px 16px; font-family: var(--font-body); font-size: 16px; outline: none; }
 .ai-popup-input::placeholder { color: rgba(239,239,239,0.2); }
 .ai-popup-send { background: var(--red); color: white; border: none; padding: 14px 18px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
+
+/* ─── MOBILE OPTIMIZATIONS (≤480px) ─────────────── */
+@media (max-width: 480px) {
+
+  /* NAV */
+  nav { height: 54px; padding: 0 16px; }
+  .nav-logo img { height: 44px; }
+  .nav-hamburger { padding: 8px; }
+  .nav-drawer { top: 54px; }
+  .nav-drawer li a { padding: 15px 20px; font-size: 12px; letter-spacing: 2px; min-height: 50px; display: flex; align-items: center; }
+  .nav-drawer .drawer-cta { margin: 10px 16px 4px; }
+
+  /* HERO */
+  .hero { padding: 68px 18px 36px; min-height: 100svh; }
+  .hero-eyebrow-text { font-size: 9px; letter-spacing: 3px; }
+  .hero-desc { font-size: 14px; max-width: 100%; }
+  .hero-btns { margin-top: 22px; gap: 6px; }
+  .btn-primary, .btn-outline { width: 100%; padding: 16px 20px; font-size: 11px; justify-content: center; min-height: 52px; }
+  .hero-btn-hint { display: none; }
+
+  /* HOME CARDS */
+  .home-card { min-height: 230px; padding: 22px 18px 20px; }
+  .home-card-title { font-size: clamp(30px, 9vw, 42px); }
+  .home-card-desc { font-size: 13px; max-width: 100%; margin-bottom: 18px; }
+  .home-card-cta { padding: 12px 18px; font-size: 10px; }
+  .home-card-num { font-size: 56px; }
+
+  /* SECTIONS GENERAL */
+  .nosotros-section,
+  .porque-section,
+  .galeria-section,
+  .testimonios-section,
+  .faq-section { padding: 44px 18px 40px; }
+  .section-title { font-size: clamp(36px, 10vw, 54px); margin-bottom: 20px; }
+  .section-eyebrow { font-size: 9px; letter-spacing: 4px; }
+
+  /* NOSOTROS */
+  .nosotros-photo-wrap { margin-bottom: 24px; }
+  .nosotros-story { font-size: 14px; line-height: 1.75; padding-left: 14px; }
+  .nosotros-stats { gap: 2px; margin-bottom: 24px; }
+  .nosotros-stat { padding: 14px 12px; }
+  .nosotros-stat-num { font-size: 32px; }
+  .nosotros-stat-label { font-size: 7px; letter-spacing: 2px; }
+  .nosotros-skills { gap: 12px; }
+  .skill-name { font-size: 8px; }
+
+  /* POR QUÉ ELEGIRNOS */
+  .porque-intro { font-size: 14px; padding-left: 14px; max-width: 100%; margin-bottom: 28px; }
+  .porque-item { padding: 16px 14px; }
+  .porque-item-title { font-size: 9px; }
+  .porque-item-desc { font-size: 13px; }
+
+  /* GALERÍA */
+  .galeria-cards { gap: 14px; margin-top: 24px; }
+  .gmodel-carousel { aspect-ratio: 4 / 3; }
+  .gmodel-info { padding: 10px 14px 12px; }
+  .gmodel-name { font-size: 16px; }
+  .gdot { width: 6px; height: 6px; }
+  .lightbox { padding: 12px; }
+  .lightbox-close { width: 44px; height: 44px; font-size: 26px; top: 10px; right: 10px; }
+
+  /* TESTIMONIOS */
+  .testimonios-grid { margin-top: 24px; gap: 12px; }
+  .testimonio-card { padding: 16px 14px; }
+  .testimonio-text { font-size: 13px; line-height: 1.65; }
+  .testimonio-name { font-size: 9px; }
+
+  /* FAQ */
+  .faq-list { margin-top: 24px; }
+  .faq-q { padding: 16px 14px; }
+  .faq-q span { font-size: 9px; letter-spacing: 1px; }
+  .faq-arrow { font-size: 18px; }
+  .faq-a { font-size: 13px; padding: 0 14px; }
+  .faq-a.open { padding: 12px 14px 16px; }
+
+  /* FOOTER */
+  footer { padding: 28px 18px 32px; }
+  .footer-sub { font-size: 8px; margin-bottom: 16px; }
+  .footer-links { gap: 12px; }
+  .footer-links a { font-size: 9px; }
+  .footer-bottom { font-size: 8px; padding-top: 14px; }
+
+  /* AI FLOAT + POPUP */
+  .ai-float-btn { bottom: 18px; right: 14px; width: 50px; height: 50px; }
+  .ai-float-btn svg { width: 24px; height: 24px; }
+  .ai-popup-msgs .msg { font-size: 14px; max-width: 94%; }
+  .ai-popup-input { padding: 16px 14px; }
+  .ai-popup-send { padding: 16px 14px; }
+
+  /* NOSOTROS CTAs */
+  .nosotros-section a[style] { max-width: 100% !important; }
+
+  /* TOUCH TARGETS — todos los botones y links táctiles ≥ 44px */
+  .btn-primary, .btn-outline, .home-card-cta,
+  .nav-hamburger, .faq-q, .gtab,
+  .ai-float-btn { min-height: 44px; }
+}
 </style>
 </head>
 <body>
@@ -691,10 +1088,13 @@ footer {
   </button>
 </nav>
 <ul class="nav-drawer" id="navDrawer">
-  <li><a href="#nosotros" class="drawer-link" onclick="drawer.classList.remove('open')">Nosotros</a></li>
-  <li><a href="#testimonios" class="drawer-link" onclick="drawer.classList.remove('open')">Testimonios</a></li>
   <li><a href="javascript:openRepro()" class="drawer-link">Reprogramación</a></li>
   <li><a href="javascript:openServicios()" class="drawer-link">Servicios</a></li>
+  <li><a href="#nosotros" class="drawer-link" onclick="drawer.classList.remove('open')">Nosotros</a></li>
+  <li><a href="#galeria" class="drawer-link" onclick="drawer.classList.remove('open')">Galería</a></li>
+  <li><a href="#repuestos" class="drawer-link" onclick="drawer.classList.remove('open')">Repuestos</a></li>
+  <li><a href="#testimonios" class="drawer-link" onclick="drawer.classList.remove('open')">Testimonios</a></li>
+  <li><a href="#faq" class="drawer-link" onclick="drawer.classList.remove('open')">Preguntas Frecuentes</a></li>
   <li><a href="https://wa.me/584125856541" target="_blank" class="drawer-link drawer-cta">WhatsApp</a></li>
 </ul>
 
@@ -702,6 +1102,7 @@ footer {
 <section class="hero" id="inicio">
   <div class="hero-video">
     <video
+      id="heroVideo"
       src="https://res.cloudinary.com/dvvuwigmy/video/upload/v1780432463/insta_video_11278_pd0nla.mp4"
       autoplay muted loop playsinline
       preload="auto"
@@ -730,7 +1131,7 @@ footer {
       <span class="hero-btn-hint">Ver más →</span>
       <a class="btn-outline" onclick="openServicios()">
         <span>Agendar Servicio</span>
-        <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="rgba(239,239,239,0.6)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="#ff7a6a" stroke-width="1.5" stroke-linecap="round"/></svg>
       </a>
       <span class="hero-btn-hint">Ver más →</span>
     </div>
@@ -750,8 +1151,12 @@ footer {
   <div class="section-eyebrow">Quiénes Somos</div>
   <h2 class="section-title">NUESTRO<br><span>LEGADO</span></h2>
   <p class="nosotros-story">
-    WitcherTorque nació en <strong>2014 en Caracas</strong> con una obsesión simple: exprimir cada caballo de fuerza que un motor puede dar. Lo que empezó como pasión de taller se convirtió en el referente de <strong>performance automotriz de Venezuela</strong>.<br><br>
-    Más de una década después, somos el taller de confianza de pilotos de competición, entusiastas del track day y dueños de vehículos premium que no aceptan mediocridad. Cada calibración que hacemos lleva nuestra firma y está <strong>verificada en dinamómetro</strong>.
+    Bienvenido al lugar donde la potencia se hace realidad. En <strong>WitcherTorque</strong>, no solo reparamos vehículos; redefinimos sus límites. Somos la casa de la <strong>ingeniería de precisión</strong> y la pasión por la velocidad. Desde mecánica general hasta los proyectos más radicales del país, en el corazón de <strong>Caracas</strong>, hemos construido un ecosistema diseñado para la velocidad.<br><br>
+    <strong>Performance Real:</strong> Contamos con el único <strong>Mainline Dyno de Venezuela</strong>. No adivinamos, medimos cada HP.<br><br>
+    <strong>Custom Fabrication:</strong> Arte puro en Acero Inoxidable, Aluminio y Titanio. Downpipes, headers y escapes con calidad de exportación.<br><br>
+    <strong>Electrónica de Avanzada:</strong> Único <strong>Master Tuner Ecutek</strong> en el país, dealers oficiales de HPTuners y especialistas en Remote Tuning y Stand Alone ECUs.<br><br>
+    <strong>Ingeniería 360°:</strong> Construcción de motores, suspensión de competencia, impresión 3D para prototipado y electricidad avanzada.<br><br>
+    Ya sea en la calle, en la pista o en dos ruedas con nuestro servicio para motos, nos une una misma pasión: <strong>hacer los carros más rápidos</strong>. El taller de alto desempeño más completo de Venezuela.
   </p>
 
   <div class="nosotros-stats">
@@ -795,7 +1200,143 @@ footer {
       <div class="skill-bar-wrap"><div class="skill-bar" style="--w:92%"></div></div>
     </div>
   </div>
+
+  <div style="margin-top:32px; display:flex; flex-direction:column; gap:12px;">
+    <a href="https://wa.me/584125856541" target="_blank" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--white);background:var(--red);padding:14px 24px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));text-decoration:none;max-width:280px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Contáctanos
+    </a>
+    <a href="https://www.youtube.com/@witchertorque" target="_blank" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);background:transparent;border:1px solid rgba(200,0,0,0.35);padding:13px 24px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));text-decoration:none;max-width:280px;">
+      <svg width="14" height="10" viewBox="0 0 24 17" fill="none"><path d="M23.5 2.5s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.6 0 12 0 12 0S7.4 0 4.7.4c-.6.1-1.9.1-3 1.3C.8 2.5.5 4.5.5 4.5S.2 6.8.2 9.1v2.1c0 2.3.3 4.6.3 4.6s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7 20 12 20 12 20s4.6 0 7.3-.4c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.3.3-4.6V9.1c0-2.3-.3-4.6-.3-4.6zM9.7 13V5.8l8 3.6-8 3.6z" fill="currentColor"/></svg>
+      Ver nuestros builds en YouTube
+    </a>
+    <p style="font-family:var(--font-mono);font-size:9px;letter-spacing:3px;color:rgba(239,239,239,0.3);text-transform:uppercase;margin-top:4px;">📍 Caracas, Venezuela</p>
+  </div>
 </section>
+
+<!-- POR QUÉ ELEGIRNOS -->
+<section class="porque-section reveal" id="porque">
+  <div class="section-eyebrow">La diferencia</div>
+  <h2 class="section-title">¿POR QUÉ<br><span>ELEGIRNOS?</span></h2>
+  <p class="porque-intro">No somos un taller más. Somos el único lugar en Venezuela donde la ingeniería de competición, la tecnología de punta y la obsesión por los números conviven bajo el mismo techo.</p>
+
+  <div class="porque-grid">
+
+    <div class="porque-item reveal">
+      <div class="porque-icon">◈</div>
+      <div class="porque-item-title">Único Mainline Dyno en Venezuela</div>
+      <p class="porque-item-desc">Cada intervención se mide, no se adivina. Verificamos los HP reales en dinamómetro antes y después de cada trabajo.</p>
+    </div>
+
+    <div class="porque-item reveal">
+      <div class="porque-icon">◈</div>
+      <div class="porque-item-title">Master Tuner Ecutek — Único en el país</div>
+      <p class="porque-item-desc">Calibraciones certificadas al más alto nivel. También dealers oficiales de HPTuners y especialistas en Stand Alone ECUs.</p>
+    </div>
+
+    <div class="porque-item reveal">
+      <div class="porque-icon">◈</div>
+      <div class="porque-item-title">Fabricación Custom de exportación</div>
+      <p class="porque-item-desc">Downpipes, headers y escapes en Acero Inoxidable, Aluminio y Titanio. Piezas únicas hechas a medida con calidad internacional.</p>
+    </div>
+
+    <div class="porque-item reveal">
+      <div class="porque-icon">◈</div>
+      <div class="porque-item-title">Ingeniería 360° en un solo lugar</div>
+      <p class="porque-item-desc">Motor, suspensión, electrónica, carrocería, motos y prototipado 3D. No necesitás ir a otro lado para cerrar tu proyecto.</p>
+    </div>
+
+    <div class="porque-item reveal">
+      <div class="porque-icon">◈</div>
+      <div class="porque-item-title">+500 vehículos intervenidos</div>
+      <p class="porque-item-desc">Más de 10 años de trayectoria con pilotos de competición, track day y vehículos premium. El historial habla por sí solo.</p>
+    </div>
+
+    <div class="porque-item reveal">
+      <div class="porque-icon">◈</div>
+      <div class="porque-item-title">Calle, pista y dos ruedas</div>
+      <p class="porque-item-desc">Preparamos autos para el uso diario, para el circuito y también motos. Si tiene motor, lo hacemos más rápido.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERÍA -->
+<section class="galeria-section" id="galeria">
+  <div class="section-eyebrow">Nuestro trabajo</div>
+  <h2 class="section-title">GALE<span>RÍA</span></h2>
+
+  <div class="galeria-cards">
+
+    <!-- CARD 1: 4Runner -->
+    <div class="gmodel-card">
+      <div class="gmodel-carousel" id="car-4runner">
+        <div class="gmodel-track" id="track-4runner">
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437525/IMG_7198_wtr9ql_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437567/IMG_7199_cm2le8_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437583/IMG_7200_gophdl_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437547/IMG_7201_fankxt_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437561/IMG_7202_rnh7gn_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437577/IMG_7203_tmpdfx_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437572/IMG_7204_mjmpag_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437605/IMG_7205_kgfdif_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437601/IMG_7207_tsj5cv_3cc10b.png" loading="lazy" alt=""></div>
+        </div>
+        <div class="gmodel-dots" id="dots-4runner"></div>
+      </div>
+      <div class="gmodel-info">
+        <div class="gmodel-name">Toyota 4Runner TRD PRO 2026</div>
+        <div class="gmodel-service">Reprogramación Multimapas</div>
+      </div>
+    </div>
+
+    <!-- CARD 2: Raptor -->
+    <div class="gmodel-card">
+      <div class="gmodel-carousel" id="car-raptor">
+        <div class="gmodel-track" id="track-raptor">
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437628/IMG_7212_fwm42m_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437618/IMG_7213_jhgjyh_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437461/IMG_7214_x39foj_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437468/IMG_7215_ztbqlv_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437454/IMG_7216_sadi2r_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437486/IMG_7217_xbv8tl_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437481/IMG_7218_f3gypo_3cc10b.png" loading="lazy" alt=""></div>
+        </div>
+        <div class="gmodel-dots" id="dots-raptor"></div>
+      </div>
+      <div class="gmodel-info">
+        <div class="gmodel-name">Ford Ranger Raptor</div>
+        <div class="gmodel-service">Stage 2</div>
+      </div>
+    </div>
+
+    <!-- CARD 3: Golf R -->
+    <div class="gmodel-card">
+      <div class="gmodel-carousel" id="car-golf">
+        <div class="gmodel-track" id="track-golf">
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437640/IMG_7233_mxwvdf_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437552/IMG_7226_chj2bw_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437589/IMG_7228_vcelzq_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437531/IMG_7229_b2psf3_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437542/IMG_7230_zq44uh_3cc10b.png" loading="lazy" alt=""></div>
+          <div class="gslide"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437536/IMG_7231_qkp4xm_3cc10b.png" loading="lazy" alt=""></div>
+        </div>
+        <div class="gmodel-dots" id="dots-golf"></div>
+      </div>
+      <div class="gmodel-info">
+        <div class="gmodel-name">VW Golf R Mk8</div>
+        <div class="gmodel-service">Exhaust Custom</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+</div>
 
 <!-- TESTIMONIOS -->
 <section class="testimonios-section" id="testimonios">
@@ -853,6 +1394,65 @@ footer {
   </div>
 </section>
 
+<!-- REPUESTOS -->
+<section class="repuestos-section reveal" id="repuestos">
+  <div class="section-eyebrow">Tienda WitcherTorque</div>
+  <h2 class="section-title">COTIZÁ TU<br><span>REPUESTO</span></h2>
+  <p class="repuestos-intro">Trabajamos con proveedores de confianza para conseguirte las piezas que necesitás. Aceites, intakes, escapes custom, butacas y mucho más.</p>
+
+  <div class="repuestos-cats">
+    <div class="rcat"><div class="rcat-icon">🛢️</div><div class="rcat-name">Aceites & Lubricantes</div></div>
+    <div class="rcat"><div class="rcat-icon">🌬️</div><div class="rcat-name">Intakes & Filtros</div></div>
+    <div class="rcat"><div class="rcat-icon">💨</div><div class="rcat-name">Escapes Custom</div></div>
+    <div class="rcat"><div class="rcat-icon">🪑</div><div class="rcat-name">Butacas & Arneses</div></div>
+    <div class="rcat"><div class="rcat-icon">🔩</div><div class="rcat-name">Suspensión & Frenos</div></div>
+    <div class="rcat"><div class="rcat-icon">⚡</div><div class="rcat-name">Electrónica & Sensores</div></div>
+  </div>
+
+  <div class="repuestos-form-wrap">
+    <div class="repuestos-form-label">— Formulario de cotización</div>
+
+    <div class="repuestos-form">
+      <div class="rform-field">
+        <label>Nombre</label>
+        <input type="text" id="rNombre" placeholder="Tu nombre" />
+      </div>
+      <div class="rform-field">
+        <label>WhatsApp</label>
+        <input type="tel" id="rWA" placeholder="+58 412-000-0000" />
+      </div>
+      <div class="rform-field">
+        <label>Vehículo</label>
+        <input type="text" id="rVehiculo" placeholder="Marca, modelo y año" />
+      </div>
+      <div class="rform-field">
+        <label>Categoría</label>
+        <select id="rCategoria">
+          <option value="" disabled selected>Seleccioná una categoría</option>
+          <option>Aceites & Lubricantes</option>
+          <option>Intakes & Filtros</option>
+          <option>Escapes Custom</option>
+          <option>Butacas & Arneses</option>
+          <option>Suspensión & Frenos</option>
+          <option>Electrónica & Sensores</option>
+          <option>Otro repuesto</option>
+        </select>
+      </div>
+      <div class="rform-field rform-full">
+        <label>Descripción del repuesto</label>
+        <textarea id="rDesc" placeholder="Contanos qué necesitás. Marca preferida, especificaciones, cantidad..."></textarea>
+      </div>
+      <div class="rform-full">
+        <button class="btn-submit" onclick="submitRepuesto()">
+          <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span>Enviar Cotización</span>
+        </button>
+        <div class="submit-ok" id="rSubmitOk" style="display:none">✓ Cotización enviada — Te contactamos pronto por WhatsApp</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque" style="height:52px;width:auto;display:block;"></div>
@@ -898,6 +1498,108 @@ footer {
 </div>
 
 <script>
+// ─── VIDEO IMMEDIATE PLAY ─────────────────────────
+(function(){
+  const v = document.getElementById('heroVideo');
+  if(v){
+    v.load();
+    const tryPlay = () => v.play().catch(()=>{});
+    if(document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tryPlay);
+    } else {
+      tryPlay();
+    }
+  }
+})();
+
+// ─── GALERÍA CAROUSELS ────────────────────────────
+(function(){
+  const carousels = [
+    { track: 'track-4runner', dots: 'dots-4runner', total: 9 },
+    { track: 'track-raptor',  dots: 'dots-raptor',  total: 7 },
+    { track: 'track-golf',    dots: 'dots-golf',    total: 6 },
+  ];
+
+  carousels.forEach(({ track, dots, total }) => {
+    const trackEl = document.getElementById(track);
+    const dotsEl  = document.getElementById(dots);
+    let current = 0;
+
+    // build dots
+    for (let i = 0; i < total; i++) {
+      const d = document.createElement('div');
+      d.className = 'gdot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goTo(i);
+      dotsEl.appendChild(d);
+    }
+
+    function goTo(n) {
+      current = (n + total) % total;
+      trackEl.style.transform = `translateX(-${current * 100}%)`;
+      dotsEl.querySelectorAll('.gdot').forEach((d, i) => d.classList.toggle('active', i === current));
+    }
+
+    // touch / swipe
+    let startX = 0, startY = 0, dragging = false, moved = false;
+    const wrap = trackEl.parentElement;
+
+    wrap.addEventListener('touchstart', e => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      dragging = true; moved = false;
+    }, { passive: true });
+
+    wrap.addEventListener('touchmove', e => {
+      if (!dragging) return;
+      const dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+      if (!moved && Math.abs(dx) > Math.abs(dy)) moved = true;
+    }, { passive: true });
+
+    wrap.addEventListener('touchend', e => {
+      if (!dragging) return;
+      dragging = false;
+      if (!moved) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) goTo(dx < 0 ? current + 1 : current - 1);
+    });
+
+    // tap to open lightbox
+    wrap.addEventListener('click', () => {
+      if (moved) return;
+      const img = trackEl.querySelectorAll('.gslide img')[current];
+      if (img) openLightbox(img);
+    });
+  });
+})();
+
+// ─── LIGHTBOX ─────────────────────────────────────
+function openLightbox(img) {
+  document.getElementById('lightboxImg').src = img.src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+
+// ─── FAQ TOGGLE ───────────────────────────────────
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  // close all
+  document.querySelectorAll('.faq-q.open').forEach(b => {
+    b.classList.remove('open');
+    b.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    btn.classList.add('open');
+    answer.classList.add('open');
+  }
+}
+
 // ─── HAMBURGER ────────────────────────────────────
 const hamburger = document.getElementById('navHamburger');
 const drawer = document.getElementById('navDrawer');
@@ -1084,10 +1786,14 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   </button>
 </div>
 
-<div class="page-hero">
-  <div class="page-label">Servicio Principal</div>
-  <h1 class="page-title">REPROGRA<br><span>MACIÓN ECU</span></h1>
-  <p class="page-desc">Extraemos todo el potencial de tu motor con calibraciones personalizadas y verificadas en dinamómetro DynoProHub. Más de 500 motores intervenidos.</p>
+<div class="page-hero" style="padding:0;min-height:260px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;">
+  <div style="position:absolute;inset:0;z-index:0;background:url('https://res.cloudinary.com/dvvuwigmy/image/upload/v1780446777/IMG_7237_kstuux.jpg') center center/cover no-repeat;"></div>
+  <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,6,6,0.25) 0%,rgba(6,6,6,0.55) 55%,rgba(6,6,6,0.96) 100%);"></div>
+  <div style="position:relative;z-index:2;padding:36px 20px 32px;border-bottom:1px solid rgba(200,0,0,0.1);">
+    <div class="page-label">Servicio Principal</div>
+    <h1 class="page-title">REPROGRA<br><span>MACIÓN ECU</span></h1>
+    <p class="page-desc">Extraemos todo el potencial de tu motor con calibraciones personalizadas y verificadas en dinamómetro DynoProHub. Más de 500 motores intervenidos.</p>
+  </div>
 </div>
 
 <div class="stages-section">
@@ -1227,24 +1933,6 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   </div>
 </div>
 
-<div class="ai-section">
-  <h2>ASESOR <span>WT AI</span></h2>
-  <p class="ai-intro">Consultas técnicas 24/7 — Dime tu vehículo y te oriento</p>
-  <div class="chat-win">
-    <div class="chat-hdr">
-      <div class="chat-dot"></div>
-      <span class="chat-hdr-txt">WitcherTorque AI — En línea</span>
-    </div>
-    <div class="chat-msgs" id="rChatMsgs">
-      <div class="msg msg-ai"><div class="msg-label">WT AI</div>Hola 👋 Dime tu vehículo (marca, modelo y año) y te digo cuánto puede ganar con reprogramación.</div>
-    </div>
-    <div class="chat-typing" id="rChatTyping">WT AI está escribiendo...</div>
-    <div class="chat-input-wrap">
-      <input class="chat-input" id="rChatInput" type="text" placeholder="Ej: Golf GTI MK7, ¿cuánto sube con Stage 1?" onkeydown="if(event.key==='Enter')sendRChat()">
-      <button class="chat-send" onclick="sendRChat()">Enviar</button>
-    </div>
-  </div>
-</div>
 <script>` + REPRO_SCRIPT + `<\/script>\n</body>\n</html>`;
   const blob = new Blob([html], {type: 'text/html'});
   const url = URL.createObjectURL(blob);
@@ -1306,8 +1994,9 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--red);}
 .form-field select option{background:#0f0f0f;}
 .form-field textarea{resize:vertical;min-height:90px;font-family:var(--font-body);}
-.btn-submit{background:var(--red);color:var(--white);border:none;padding:16px 28px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;width:100%;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:box-shadow 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px;}
-.btn-submit:active{filter:brightness(1.1);}
+.btn-submit{background:var(--red);color:var(--white);border:none;padding:18px 32px;font-family:var(--font-mono);font-size:11px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;width:100%;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:box-shadow 0.3s, filter 0.2s;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:8px;box-shadow:0 4px 24px rgba(200,0,0,0.25);}
+.btn-submit:hover{box-shadow:0 6px 32px rgba(200,0,0,0.45);filter:brightness(1.12);}
+.btn-submit:active{filter:brightness(0.95);transform:scale(0.98);}
 .submit-ok{display:none;background:rgba(0,180,0,0.1);border:1px solid rgba(0,200,0,0.3);border-left:3px solid #00c853;padding:14px 16px;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:#00c853;text-transform:uppercase;margin-top:14px;}
 /* SERVICES */
 .services-section{padding:36px 20px;}
@@ -1342,10 +2031,14 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   </button>
 </div>
 
-<div class="page-hero">
-  <div class="page-label">Taller &amp; Mecánica</div>
-  <h1 class="page-title">AGENDAR<br><span>SERVICIOS</span></h1>
-  <p class="page-desc">Taller equipado con dinamómetro DynoProHub y más de 10 años de experiencia. Completá el formulario o contactanos por WhatsApp.</p>
+<div class="page-hero" style="padding:0;min-height:260px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;">
+  <div style="position:absolute;inset:0;z-index:0;background:url('https://res.cloudinary.com/dvvuwigmy/image/upload/v1780446778/IMG_7238_uxqr4m.jpg') center center/cover no-repeat;"></div>
+  <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,6,6,0.25) 0%,rgba(6,6,6,0.55) 55%,rgba(6,6,6,0.96) 100%);"></div>
+  <div style="position:relative;z-index:2;padding:36px 20px 32px;border-bottom:1px solid rgba(200,0,0,0.1);">
+    <div class="page-label">Taller &amp; Mecánica</div>
+    <h1 class="page-title">AGENDAR<br><span>SERVICIOS</span></h1>
+    <p class="page-desc">Taller equipado con dinamómetro DynoProHub y más de 10 años de experiencia. Completá el formulario o contactanos por WhatsApp.</p>
+  </div>
 </div>
 
 <div class="form-section">
@@ -1472,6 +2165,24 @@ REGLAS: Nunca inventes datos. Nunca prometas ganancias exactas. Nunca garantices
 RESPUESTAS: Párrafos cortos, formato claro, lenguaje profesional. Evita respuestas largas. Siempre intenta avanzar hacia la reserva de un diagnóstico o servicio.`;
 
 let popupHistory = [];
+
+function submitRepuesto() {
+  const nombre = document.getElementById('rNombre').value.trim();
+  const wa = document.getElementById('rWA').value.trim();
+  const vehiculo = document.getElementById('rVehiculo').value.trim();
+  const categoria = document.getElementById('rCategoria').value;
+  const desc = document.getElementById('rDesc').value.trim();
+  if (!nombre || !wa || !vehiculo || !categoria) { alert('Por favor completá los campos obligatorios.'); return; }
+  const msg = `🔩 *Cotización de Repuesto — WitcherTorque*\n\n👤 Nombre: ${nombre}\n📱 WhatsApp: ${wa}\n🚗 Vehículo: ${vehiculo}\n📦 Categoría: ${categoria}\n📝 Descripción: ${desc || 'No especificada'}`;
+  const url = `https://wa.me/584125856541?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+  document.getElementById('rSubmitOk').style.display = 'block';
+  document.getElementById('rNombre').value = '';
+  document.getElementById('rWA').value = '';
+  document.getElementById('rVehiculo').value = '';
+  document.getElementById('rCategoria').selectedIndex = 0;
+  document.getElementById('rDesc').value = '';
+}
 
 function toggleAiPopup() {
   const popup = document.getElementById('aiPopup');
