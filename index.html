@@ -1989,6 +1989,8 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 .back-btn:hover{color:var(--red);border-color:rgba(200,0,0,0.3);}
 /* HERO */
 .page-hero{padding:48px 20px 36px;border-bottom:1px solid rgba(200,0,0,0.1);position:relative;overflow:hidden;}
+.page-hero-bg{position:absolute;inset:0;background-image:url('https://res.cloudinary.com/dvvuwigmy/image/upload/v1780446778/IMG_7241_u3bbto.jpg');background-size:cover;background-position:center;opacity:0.22;z-index:0;}
+.page-hero-content{position:relative;z-index:1;}
 .page-hero::before{content:'CONTACT';position:absolute;right:-10px;top:-20px;font-family:var(--font-display);font-size:130px;color:rgba(200,0,0,0.03);line-height:1;pointer-events:none;letter-spacing:4px;}
 .page-label{font-family:var(--font-mono);font-size:10px;letter-spacing:5px;color:var(--red);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
 .page-label::before{content:'';width:24px;height:1px;background:var(--red);}
@@ -2038,9 +2040,12 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 </div>
 
 <div class="page-hero">
-  <div class="page-label">WitcherTorque</div>
-  <div class="page-title">CON<span>TACTO</span></div>
-  <p class="page-desc">Estamos en Caracas. Escribinos, llamanos o pasate por el taller — te atendemos en el momento.</p>
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <div class="page-label">WitcherTorque</div>
+    <div class="page-title">CON<span>TACTO</span></div>
+    <p class="page-desc">Estamos en Caracas. Escribinos, llamanos o pasate por el taller — te atendemos en el momento.</p>
+  </div>
 </div>
 
 <div class="info-section">
@@ -2124,6 +2129,8 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 .back-btn{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);background:none;border:1px solid rgba(239,239,239,0.1);padding:7px 14px;cursor:pointer;text-transform:uppercase;transition:color 0.2s,border-color 0.2s;}
 .back-btn:hover{color:var(--red);border-color:rgba(200,0,0,0.3);}
 .page-hero{padding:48px 20px 36px;border-bottom:1px solid rgba(200,0,0,0.1);position:relative;overflow:hidden;}
+.page-hero-bg{position:absolute;inset:0;background-image:url('https://res.cloudinary.com/dvvuwigmy/image/upload/v1780446778/IMG_7238_uxqr4m.jpg');background-size:cover;background-position:center;opacity:0.22;z-index:0;}
+.page-hero-content{position:relative;z-index:1;}
 .page-hero::before{content:'FAQ';position:absolute;right:-10px;top:-20px;font-family:var(--font-display);font-size:200px;color:rgba(200,0,0,0.03);line-height:1;pointer-events:none;}
 .page-label{font-family:var(--font-mono);font-size:10px;letter-spacing:5px;color:var(--red);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
 .page-label::before{content:'';width:24px;height:1px;background:var(--red);}
@@ -2163,9 +2170,12 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 </div>
 
 <div class="page-hero">
-  <div class="page-label">WitcherTorque</div>
-  <div class="page-title">PREGUNTAS<br><span>FRECUENTES</span></div>
-  <p class="page-desc">Todo lo que necesitás saber antes de llevar tu vehículo al taller.</p>
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-content">
+    <div class="page-label">WitcherTorque</div>
+    <div class="page-title">PREGUNTAS<br><span>FRECUENTES</span></div>
+    <p class="page-desc">Todo lo que necesitás saber antes de llevar tu vehículo al taller.</p>
+  </div>
 </div>
 
 <div class="faq-section">
@@ -2445,44 +2455,57 @@ REGLAS: Nunca inventes datos. Nunca prometas ganancias exactas. Nunca garantices
 
 RESPUESTAS: Párrafos cortos, formato claro, lenguaje profesional. Evita respuestas largas. Siempre intenta avanzar hacia la reserva de un diagnóstico o servicio.`;
 
-const WT_EXTRACTOR = "Analiza esta conversacion y extrae los datos del cliente. Responde SOLO con JSON valido, sin texto extra. Formato: {\"nombre\":\"\",\"telefono\":\"\",\"vehiculo\":\"\",\"servicio\":\"\",\"modificaciones\":\"\",\"detalle\":\"\",\"listo\":false}. listo=true solo si hay nombre+vehiculo+servicio. detalle: resumen breve en 1 linea. Campos no mencionados quedan vacios.";
-
+// Lead data collected from conversation
 let popupHistory = [];
-let leadData = { nombre:"", telefono:"", vehiculo:"", servicio:"", modificaciones:"", detalle:"", listo:false };
+let leadData = { nombre:"", telefono:"", vehiculo:"", servicio:"", modificaciones:"", detalle:"" };
 
-async function extractLeadData() {
-  try {
-    var lines = popupHistory.map(function(m) {
-      return (m.role === "user" ? "Cliente" : "Asesor") + ": " + m.content;
-    });
-    var conversationText = lines.join("\n");
-    var res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 300,
-        system: WT_EXTRACTOR,
-        messages: [{ role: "user", content: conversationText }]
-      })
-    });
-    var data = await res.json();
-    var text = (data.content && data.content[0] && data.content[0].text) || "{}";
-    var clean = text.replace(/```json|```/g, "").trim();
-    var parsed = JSON.parse(clean);
-    leadData = Object.assign({}, leadData, parsed);
-    if (leadData.listo) showWhatsAppButton();
-  } catch(e) { /* silencioso */ }
+// Parse plain text to extract fields heuristically (no extra API call needed)
+function parseLeadFromHistory() {
+  var fullText = popupHistory.map(function(m) {
+    return (m.role === "user" ? "CLIENTE: " : "ASESOR: ") + m.content;
+  }).join(" | ");
+
+  // nombre: look for "me llamo X", "soy X", "mi nombre es X"
+  var mNombre = fullText.match(/(?:me llamo|soy|mi nombre es|nombre[: ]+)([A-Z][a-zA-ZáéíóúÁÉÍÓÚñÑ ]{2,25})(?=[,. |]|$)/i);
+  if (mNombre) leadData.nombre = mNombre[1].trim();
+
+  // telefono: look for phone-like numbers
+  var mTel = fullText.match(/(?:tel[eé]fono[: ]+|n[uú]mero[: ]+|whatsapp[: ]+|cel[ular]*[: ]+|al |es )([+0-9][0-9 \-]{6,18})/i);
+  if (mTel) leadData.telefono = mTel[1].trim();
+
+  // vehiculo: look for brand/model patterns
+  var mVeh = fullText.match(/(?:tengo (?:un |una )?|mi (?:auto|carro|coche|vehículo) es (?:un |una )?|mi |es (?:un |una )?)([A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z0-9]+){0,4}(?:(?: \d{4})?))(?=[,. |])/i);
+  // Also try user messages that just mention the car
+  var userMsgs = popupHistory.filter(function(m){ return m.role==="user"; }).map(function(m){ return m.content; }).join(" ");
+  var mVeh2 = userMsgs.match(/(Toyota|Honda|Chevrolet|Ford|Volkswagen|VW|Mazda|Mitsubishi|Nissan|Subaru|BMW|Mercedes|Audi|Hyundai|Kia|Dodge|Jeep|RAM|Tesla|Porsche|Ferrari|Lamborghini|Maserati|Alfa|Fiat|Peugeot|Renault|Citroën|Seat|Skoda|Volvo|Land Rover|Range Rover|Lexus|Infiniti|Acura|Cadillac|Buick|Lincoln|GMC|Chrysler|Mini|Smart|Dacia|Lada)[^,.|]{0,40}/i);
+  if (mVeh2) leadData.vehiculo = mVeh2[0].trim();
+  else if (mVeh) leadData.vehiculo = mVeh[1].trim();
+
+  // Extract vehicle info from asesor summaries (more reliable)
+  var asorTexts = popupHistory.filter(function(m){ return m.role==="assistant"; }).map(function(m){ return m.content; }).join(" ");
+  var mVehAsesor = asorTexts.match(/(?:tu |el |con (?:un |una )?)([A-Z][a-zA-Z]+(?: [A-Z][a-zA-Z0-9]+){1,4}(?:(?: \d{4})))/);
+  if (!leadData.vehiculo && mVehAsesor) leadData.vehiculo = mVehAsesor[1].trim();
+
+  // servicio: look in asesor closing message
+  var mSvc = asorTexts.match(/coordinar tu ([^.!]+?)(?:\.|!)/i);
+  if (mSvc) leadData.servicio = mSvc[1].trim();
+
+  // detalle: take first user message
+  if (popupHistory.length > 0) {
+    var firstUser = popupHistory.find(function(m){ return m.role==="user"; });
+    if (firstUser) leadData.detalle = firstUser.content.substring(0, 120);
+  }
 }
 
 function buildWhatsAppMessage() {
+  parseLeadFromHistory();
   var msg = "\uD83D\uDD27 *Consulta desde WitcherTorque AI*\n\n";
   if (leadData.nombre)         msg += "\uD83D\uDC64 *Nombre:* "              + leadData.nombre         + "\n";
-  if (leadData.telefono)       msg += "\uD83D\uDCF1 *Teléfono:* "            + leadData.telefono       + "\n";
-  if (leadData.vehiculo)       msg += "\uD83D\uDE97 *Vehículo:* "            + leadData.vehiculo       + "\n";
-  if (leadData.servicio)       msg += "\u2699\uFE0F *Servicio solicitado:* " + leadData.servicio       + "\n";
+  if (leadData.telefono)       msg += "\uD83D\uDCF1 *Tel\u00e9fono:* "      + leadData.telefono       + "\n";
+  if (leadData.vehiculo)       msg += "\uD83D\uDE97 *Veh\u00edculo:* "      + leadData.vehiculo       + "\n";
+  if (leadData.servicio)       msg += "\u2699\uFE0F *Servicio:* "            + leadData.servicio       + "\n";
   if (leadData.modificaciones) msg += "\uD83D\uDD29 *Modificaciones:* "      + leadData.modificaciones + "\n";
-  if (leadData.detalle)        msg += "\uD83D\uDCCB *Detalle:* "             + leadData.detalle        + "\n";
+  if (leadData.detalle)        msg += "\uD83D\uDCCB *Consulta original:* "   + leadData.detalle        + "\n";
   msg += "\n_Lead generado por WitcherTorque AI_";
   return msg;
 }
@@ -2492,15 +2515,27 @@ function showWhatsAppButton() {
   var msgs = document.getElementById("aiPopupMsgs");
   var waMsg = buildWhatsAppMessage();
   var waUrl = "https://wa.me/584125856541?text=" + encodeURIComponent(waMsg);
+  var wrap = document.createElement("div");
+  wrap.style.cssText = "padding:4px 0 8px;";
   var btn = document.createElement("a");
   btn.id = "wtWaBtn";
   btn.href = waUrl;
   btn.target = "_blank";
   btn.className = "wt-wa-derive-btn";
   btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Continuar por WhatsApp';
-  msgs.appendChild(btn);
+  wrap.appendChild(btn);
+  msgs.appendChild(wrap);
   msgs.scrollTop = msgs.scrollHeight;
 }
+
+// Detect closing phrase in AI reply and show WA button
+function checkForClosure(reply) {
+  var closing = /voy a derivarte|ya tengo todo|un momento.*🔧|derivarte con nuestro equipo/i;
+  if (closing.test(reply)) {
+    setTimeout(showWhatsAppButton, 600);
+  }
+}
+
 function submitRepuesto() {
   const nombre = document.getElementById('rNombre').value.trim();
   const wa = document.getElementById('rWA').value.trim();
@@ -2560,12 +2595,12 @@ async function sendPopupChat() {
       body: JSON.stringify({ system: WT_SYSTEM, messages: popupHistory })
     });
     var data = await res.json();
-    var reply = data.reply || "Un momento, estamos teniendo inconvenientes. Escribinos al WhatsApp +58 412-585-6541.";
+    var reply = data.reply || "Un momento, estamos teniendo inconvenientes. Escrib\u00ednos al WhatsApp +58 412-585-6541.";
     popupHistory.push({ role: "assistant", content: reply });
     document.getElementById("aiPopupTyping").style.display = "none";
     msgs.innerHTML += "<div class=\"msg msg-ai\"><div class=\"msg-label\">WT AI</div>" + reply + "</div>";
     msgs.scrollTop = msgs.scrollHeight;
-    extractLeadData();
+    checkForClosure(reply);
   } catch(e) {
     document.getElementById("aiPopupTyping").style.display = "none";
     msgs.innerHTML += "<div class=\"msg msg-ai\"><div class=\"msg-label\">WT AI</div>Hubo un error de conexi\u00f3n. Escrib\u00ednos directamente al WhatsApp +58 412-585-6541 \uD83D\uDD34</div>";
