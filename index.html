@@ -1114,10 +1114,11 @@ footer {
   <div class="hero-video">
     <video
       id="heroVideo"
-      src="https://res.cloudinary.com/dvvuwigmy/video/upload/v1780432463/insta_video_11278_pd0nla.mp4"
       autoplay muted loop playsinline
       preload="auto"
-    ></video>
+    >
+      <source src="https://res.cloudinary.com/dvvuwigmy/video/upload/q_auto,f_auto,vc_auto/v1780432463/insta_video_11278_pd0nla.mp4" type="video/mp4">
+    </video>
   </div>
 
   <div class="hero-content">
@@ -2454,6 +2455,41 @@ Luego NO respondas más. Solo ese mensaje de cierre.
 REGLAS: Nunca inventes datos. Nunca prometas ganancias exactas. Nunca garantices resultados. Nunca diagnostiques con certeza absoluta. Nunca menciones que eres una IA. Actúa siempre como un asesor técnico especializado de WitcherTorque.
 
 RESPUESTAS: Párrafos cortos, formato claro, lenguaje profesional. Evita respuestas largas. Siempre intenta avanzar hacia la reserva de un diagnóstico o servicio.`;
+
+// ─── HERO VIDEO: reproducción instantánea ────────────────────────────────────
+(function() {
+  var v = document.getElementById('heroVideo');
+  if (!v) return;
+  // Intentar play tan pronto como sea posible
+  var playVideo = function() {
+    v.muted = true;
+    var p = v.play();
+    if (p !== undefined) {
+      p.catch(function() {
+        // Fallback: reintentar en el primer evento de interacción del usuario
+        var retry = function() {
+          v.play().catch(function(){});
+          document.removeEventListener('touchstart', retry);
+          document.removeEventListener('click', retry);
+          document.removeEventListener('scroll', retry);
+        };
+        document.addEventListener('touchstart', retry, { once: true });
+        document.addEventListener('click', retry, { once: true });
+        document.addEventListener('scroll', retry, { once: true });
+      });
+    }
+  };
+  // Iniciar lo antes posible
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', playVideo);
+  } else {
+    playVideo();
+  }
+  // También en canplay por si el buffer llega después
+  v.addEventListener('canplay', function() {
+    if (v.paused) v.play().catch(function(){});
+  }, { once: true });
+})();
 
 // Lead data collected from conversation
 let popupHistory = [];
