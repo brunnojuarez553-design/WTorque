@@ -107,6 +107,32 @@ nav {
   margin: 10px 20px 4px; padding: 12px 20px !important;
 }
 
+/* ─── NAV LINKS DESKTOP ─────────────────────────── */
+.nav-links { display: none; list-style: none; }
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex; align-items: center; gap: 2px;
+  }
+  .nav-links li a {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 3px; text-transform: uppercase;
+    color: var(--white-dim); text-decoration: none;
+    padding: 8px 14px;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .nav-links li a::after {
+    content: '';
+    position: absolute; bottom: 4px; left: 14px; right: 14px;
+    height: 1px; background: var(--red);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .nav-links li a:hover { color: var(--white); }
+  .nav-links li a:hover::after { transform: scaleX(1); }
+  .nav-links .nav-link-hof::after { display: block; }
+}
+
 /* ─── HERO ──────────────────────────────────────── */
 .hero {
   position: relative;
@@ -997,12 +1023,20 @@ footer {
   border-top: 1px solid rgba(200,0,0,0.12);
   position: relative; overflow: hidden;
 }
+.hof-section::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background: url('https://res.cloudinary.com/dpiavcukm/image/upload/v1781501107/IMG_5862_utapwm.heic') center center / cover no-repeat;
+  opacity: 0.09;
+  pointer-events: none;
+}
+.hof-section > * { position: relative; z-index: 1; }
 .hof-section::before {
   content: 'HOF';
   position: absolute; right: -10px; bottom: -20px;
   font-family: var(--font-display); font-size: 160px;
   color: rgba(200,0,0,0.025); line-height: 1; pointer-events: none;
-  letter-spacing: 4px;
+  letter-spacing: 4px; z-index: 2;
 }
 .hof-trophy-row {
   display: flex; align-items: center; gap: 10px;
@@ -1215,6 +1249,11 @@ footer {
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque"></a>
+  <ul class="nav-links">
+    <li><a href="javascript:openRepro()">Reprogramación</a></li>
+    <li><a href="javascript:openServicios()">Servicios</a></li>
+    <li><a href="javascript:openHallOfFame()" class="nav-link-hof">Hall of Fame</a></li>
+  </ul>
   <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
     <span></span><span></span><span></span>
   </button>
