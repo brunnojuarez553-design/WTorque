@@ -526,7 +526,7 @@ nav {
   filter: grayscale(20%) contrast(1.05);
   max-height: 280px;
   object-fit: cover;
-  object-position: center;
+  object-position: center 70%;
 }
 .nosotros-section::before {
   content: '2014';
@@ -990,6 +990,108 @@ footer {
 .wt-wa-derive-btn:active { transform: scale(0.98); }
 .ai-popup-send { background: var(--red); color: white; border: none; padding: 14px 18px; font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
 
+/* ─── HALL OF FAME PREVIEW ──────────────────────── */
+.hof-section {
+  padding: 56px 22px 48px;
+  background: var(--black);
+  border-top: 1px solid rgba(200,0,0,0.12);
+  position: relative; overflow: hidden;
+}
+.hof-section::before {
+  content: 'HOF';
+  position: absolute; right: -10px; bottom: -20px;
+  font-family: var(--font-display); font-size: 160px;
+  color: rgba(200,0,0,0.025); line-height: 1; pointer-events: none;
+  letter-spacing: 4px;
+}
+.hof-trophy-row {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 24px;
+}
+.hof-trophy-icon {
+  font-size: 28px; line-height: 1;
+  filter: drop-shadow(0 0 10px rgba(200,0,0,0.5));
+}
+.hof-stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px; margin-bottom: 28px;
+}
+.hof-stat-box {
+  background: var(--graphite-2);
+  border: 1px solid var(--graphite-3);
+  padding: 16px 12px;
+  position: relative; overflow: hidden;
+  text-align: center;
+}
+.hof-stat-box::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(to right, transparent, var(--red), transparent);
+}
+.hof-stat-num {
+  font-family: var(--font-display);
+  font-size: 32px; color: var(--red); line-height: 1;
+  text-shadow: 0 0 18px var(--red-glow);
+}
+.hof-stat-label {
+  font-family: var(--font-mono); font-size: 7px;
+  letter-spacing: 2px; color: var(--white-dim);
+  text-transform: uppercase; margin-top: 4px;
+  line-height: 1.3;
+}
+.hof-projects {
+  display: flex; flex-direction: column;
+  gap: 2px; margin-bottom: 28px;
+}
+.hof-project-card {
+  background: var(--graphite-2);
+  border: 1px solid var(--graphite-3);
+  border-left: 3px solid rgba(200,0,0,0.35);
+  padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px;
+  transition: border-left-color 0.25s, background 0.25s;
+}
+.hof-project-card:hover { border-left-color: var(--red); background: rgba(200,0,0,0.03); }
+.hof-project-left { display: flex; align-items: center; gap: 12px; }
+.hof-project-rank {
+  font-family: var(--font-display); font-size: 28px;
+  color: rgba(200,0,0,0.18); line-height: 1; flex-shrink: 0;
+  min-width: 28px;
+}
+.hof-project-name {
+  font-family: var(--font-display); font-size: 18px;
+  letter-spacing: 1.5px; color: var(--white);
+  text-transform: uppercase; line-height: 1;
+}
+.hof-project-detail {
+  font-family: var(--font-mono); font-size: 8px;
+  letter-spacing: 2px; color: var(--red);
+  text-transform: uppercase; margin-top: 3px;
+}
+.hof-project-hp {
+  font-family: var(--font-display); font-size: 24px;
+  color: var(--red); flex-shrink: 0;
+  text-shadow: 0 0 12px var(--red-glow);
+}
+.hof-cta-btn {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  width: 100%;
+  background: transparent;
+  border: 1px solid rgba(200,0,0,0.4);
+  color: var(--red);
+  padding: 16px 24px;
+  font-family: var(--font-mono); font-size: 10px;
+  letter-spacing: 3px; text-transform: uppercase;
+  cursor: pointer; text-decoration: none;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+.hof-cta-btn:hover {
+  background: rgba(200,0,0,0.08);
+  border-color: var(--red);
+}
+
 /* ─── MOBILE OPTIMIZATIONS (≤480px) ─────────────── */
 @media (max-width: 480px) {
 
@@ -1085,7 +1187,27 @@ footer {
   .btn-primary, .btn-outline, .home-card-cta,
   .nav-hamburger, .faq-q, .gtab,
   .ai-float-btn { min-height: 44px; }
+
+  /* HOF PREVIEW SECTION */
+  .hof-section { padding: 44px 16px 40px; }
+  .hof-trophy-row { margin-bottom: 18px; gap: 8px; }
+  .hof-trophy-icon { font-size: 22px; }
+  .hof-stats-row { gap: 2px; margin-bottom: 22px; }
+  .hof-stat-box { padding: 12px 8px; }
+  .hof-stat-num { font-size: 26px; }
+  .hof-stat-label { font-size: 6px; letter-spacing: 1.5px; }
+  .hof-projects { gap: 2px; margin-bottom: 22px; }
+  .hof-project-card { padding: 12px 12px; gap: 8px; flex-wrap: nowrap; }
+  .hof-project-left { gap: 10px; min-width: 0; flex: 1; }
+  .hof-project-rank { font-size: 22px; min-width: 22px; }
+  .hof-project-name { font-size: 14px; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .hof-project-detail { font-size: 7px; letter-spacing: 1px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+  .hof-project-hp { font-size: 18px; flex-shrink: 0; }
+  .hof-cta-btn { padding: 14px 18px; font-size: 9px; letter-spacing: 2px; min-height: 48px; }
 }
+
+/* ─── MOBILE OPTIMIZATIONS HOF MODAL (≤520px) ─── */
+/* Inyectadas vía variable CSS en el modal inline */
 </style>
 </head>
 <body>
@@ -1104,6 +1226,7 @@ footer {
   <li><a href="#galeria" class="drawer-link" onclick="drawer.classList.remove('open')">Galería</a></li>
   <li><a href="#repuestos" class="drawer-link" onclick="drawer.classList.remove('open')">Repuestos</a></li>
   <li><a href="#testimonios" class="drawer-link" onclick="drawer.classList.remove('open')">Testimonios</a></li>
+  <li><a href="#hall-of-fame" class="drawer-link" onclick="drawer.classList.remove('open')">Hall of Fame</a></li>
   <li><a href="javascript:openFaq()" class="drawer-link" onclick="drawer.classList.remove('open')">Preguntas Frecuentes</a></li>
   <li><a href="javascript:openContacto()" class="drawer-link" onclick="drawer.classList.remove('open')">Contacto</a></li>
   <li><a href="https://wa.me/584125856541" target="_blank" class="drawer-link drawer-cta">WhatsApp</a></li>
@@ -1271,6 +1394,148 @@ footer {
     </div>
 
   </div>
+</section>
+
+<!-- HALL OF FAME PREVIEW -->
+<section class="hof-section reveal" id="hall-of-fame">
+  <div class="hof-trophy-row">
+    <span class="hof-trophy-icon">🏆</span>
+    <div class="section-eyebrow" style="margin-bottom:0;">Récords y Proyectos Destacados</div>
+  </div>
+  <h2 class="section-title">HALL OF<br><span>FAME</span></h2>
+
+  <div class="hof-stats-row">
+    <div class="hof-stat-box">
+      <div class="hof-stat-num">12</div>
+      <div class="hof-stat-label">Récords Nacionales</div>
+    </div>
+    <div class="hof-stat-box">
+      <div class="hof-stat-num">+50</div>
+      <div class="hof-stat-label">Builds de Alto Desempeño</div>
+    </div>
+    <div class="hof-stat-box">
+      <div class="hof-stat-num">+3K</div>
+      <div class="hof-stat-label">HP Desarrollados</div>
+    </div>
+  </div>
+
+  <div class="hof-projects">
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">01</div>
+        <div>
+          <div class="hof-project-name">Corvette C8</div>
+          <div class="hof-project-detail">Más rápido de Venezuela · Drag &amp; Circuito</div>
+        </div>
+      </div>
+      <div class="hof-project-hp">628HP</div>
+    </div>
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">02</div>
+        <div>
+          <div class="hof-project-name">GSX-R 1000</div>
+          <div class="hof-project-detail">Moto más rápida de Venezuela · 8.74s</div>
+        </div>
+      </div>
+      <div class="hof-project-hp" style="font-size:14px;letter-spacing:1px;">8.74s</div>
+    </div>
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">03</div>
+        <div>
+          <div class="hof-project-name">Ranger Raptor</div>
+          <div class="hof-project-detail">Paquete completo · Blindados Aquilino</div>
+        </div>
+      </div>
+      <div class="hof-project-hp">579HP</div>
+    </div>
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">04</div>
+        <div>
+          <div class="hof-project-name">Nissan GTR R35</div>
+          <div class="hof-project-detail">El GTR más rápido de Venezuela · 9.30s</div>
+        </div>
+      </div>
+      <div class="hof-project-hp">1000HP</div>
+    </div>
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">05</div>
+        <div>
+          <div class="hof-project-name">Evo 5RS</div>
+          <div class="hof-project-detail">4-cil más rápido de Venezuela · Drag</div>
+        </div>
+      </div>
+      <div class="hof-project-hp">1018HP</div>
+    </div>
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">06</div>
+        <div>
+          <div class="hof-project-name">VW Golf R Mk7.5</div>
+          <div class="hof-project-detail">El VAG más rápido de Venezuela · 9.67s · Proyecto personal</div>
+        </div>
+      </div>
+      <div class="hof-project-hp" style="font-size:13px;letter-spacing:1px;">CONF.</div>
+    </div>
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">07</div>
+        <div>
+          <div class="hof-project-name">Honda Civic #90</div>
+          <div class="hof-project-detail">Campeón Nacional Easy Civic Pro 2025 · 222 pts</div>
+        </div>
+      </div>
+      <div class="hof-project-hp" style="font-size:12px;letter-spacing:1px;">🏆 2025</div>
+    </div>
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">08</div>
+        <div>
+          <div class="hof-project-name">Toyota Supra Mk4</div>
+          <div class="hof-project-detail">Premier Edition 1/1 · Venezuela → Miami · Esteem Custom</div>
+        </div>
+      </div>
+      <div class="hof-project-hp">965HP</div>
+    </div>
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">09</div>
+        <div>
+          <div class="hof-project-name">Ferrari 458 Challenge Evo</div>
+          <div class="hof-project-detail">GT Challenge Américas 2025 · Meval Racing · +90HP remoto</div>
+        </div>
+      </div>
+      <div class="hof-project-hp" style="font-size:13px;letter-spacing:1px;">CONF.</div>
+    </div>
+    <div class="hof-project-card">
+      <div class="hof-project-left">
+        <div class="hof-project-rank">10</div>
+        <div>
+          <div class="hof-project-name">BMW M3 Competition G80</div>
+          <div class="hof-project-detail">Big Turbo · FL2K Semi-finalista · 8.5s · Esteem Custom</div>
+        </div>
+      </div>
+      <div class="hof-project-hp">+1300HP</div>
+    </div>
+    <div class="hof-project-card" style="opacity:0.45;border-left-color:rgba(200,0,0,0.15);">
+      <div class="hof-project-left">
+        <div class="hof-project-rank" style="color:rgba(200,0,0,0.08);">11</div>
+        <div>
+          <div class="hof-project-name" style="color:rgba(239,239,239,0.3);">Próximamente</div>
+          <div class="hof-project-detail">Tu proyecto puede estar aquí</div>
+        </div>
+      </div>
+      <div class="hof-project-hp" style="font-size:14px;color:rgba(200,0,0,0.4);">???</div>
+    </div>
+  </div>
+
+  <a class="hof-cta-btn" href="javascript:openHallOfFame()">
+    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    VER HALL OF FAME →
+  </a>
 </section>
 
 <!-- GALERÍA -->
@@ -1472,6 +1737,7 @@ footer {
   <div class="footer-links">
     <a href="javascript:openRepro()">Reprogramación</a>
     <a href="javascript:openServicios()">Servicios</a>
+    <a href="#hall-of-fame">Hall of Fame</a>
     <a href="https://instagram.com/witchertorque" target="_blank">Instagram</a>
     <a href="https://wa.me/584125856541" target="_blank">WhatsApp</a>
   </div>
@@ -2427,6 +2693,1072 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 </div>
 
 <script>` + SVC_SCRIPT + `<\/script>\n</body>\n</html>`;
+  const blob = new Blob([html], {type: 'text/html'});
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+}
+
+// ─── OPEN HALL OF FAME PAGE ──────────────────────────
+function openHallOfFame() {
+  const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Hall of Fame — WitcherTorque</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root{--black:#060606;--graphite:#0f0f0f;--graphite-2:#171717;--graphite-3:#222222;--graphite-4:#2e2e2e;--red:#c80000;--red-bright:#ff1500;--red-glow:rgba(200,0,0,0.4);--red-glow-soft:rgba(200,0,0,0.15);--white:#efefef;--white-dim:rgba(239,239,239,0.5);--font-display:'Bebas Neue',sans-serif;--font-body:'Rajdhani',sans-serif;--font-mono:'Share Tech Mono',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);font-size:16px;overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--black);}::-webkit-scrollbar-thumb{background:linear-gradient(to bottom,var(--red),var(--red-bright));}
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(6,6,6,0.96);backdrop-filter:blur(20px);border-bottom:1px solid rgba(200,0,0,0.15);padding:0 18px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.topbar-logo{text-decoration:none;display:flex;align-items:center;}
+.topbar-logo img{height:46px;width:auto;display:block;}
+.back-btn{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);background:none;border:1px solid rgba(239,239,239,0.1);padding:7px 14px;cursor:pointer;text-transform:uppercase;transition:color 0.2s,border-color 0.2s;}
+.back-btn:hover{color:var(--red);border-color:rgba(200,0,0,0.3);}
+/* HERO */
+.page-hero{position:relative;min-height:160px;display:flex;flex-direction:column;justify-content:flex-end;padding:0;overflow:hidden;}
+.page-hero-bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;opacity:0.18;}
+.page-hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,6,6,0.2) 0%,rgba(6,6,6,0.6) 55%,rgba(6,6,6,0.98) 100%);}
+.page-hero-content{position:relative;z-index:2;padding:20px 20px 16px;border-bottom:1px solid rgba(200,0,0,0.1);}
+.page-hero::before{content:'HOF';position:absolute;right:-10px;bottom:-20px;font-family:var(--font-display);font-size:160px;color:rgba(200,0,0,0.04);line-height:1;pointer-events:none;letter-spacing:4px;z-index:3;}
+.page-label{font-family:var(--font-mono);font-size:10px;letter-spacing:5px;color:var(--red);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.page-label::before{content:'';width:24px;height:1px;background:var(--red);}
+.page-title{font-family:var(--font-display);font-size:clamp(38px,12vw,60px);line-height:0.88;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:10px;}
+.page-title span{color:var(--red);}
+.page-desc{font-size:14px;font-weight:400;color:var(--white-dim);line-height:1.7;border-left:2px solid var(--red);padding-left:14px;max-width:380px;}
+/* STATS */
+.hof-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2px;padding:14px 20px 0;}
+.hof-stat-box{background:var(--graphite-2);border:1px solid var(--graphite-3);padding:10px 8px;position:relative;overflow:hidden;text-align:center;}
+.hof-stat-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(to right,transparent,var(--red),transparent);}
+.hof-stat-num{font-family:var(--font-display);font-size:24px;color:var(--red);line-height:1;text-shadow:0 0 14px var(--red-glow);}
+.hof-stat-label{font-family:var(--font-mono);font-size:6px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-top:3px;line-height:1.3;}
+/* PROJECT CARDS */
+.hof-projects-wrap{padding:16px 20px 32px;display:flex;flex-direction:column;gap:0;}
+.hof-section-label{font-family:var(--font-mono);font-size:9px;letter-spacing:5px;color:var(--red);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.hof-section-label::before{content:'';width:24px;height:1px;background:var(--red);}
+/* PROJECT CARD */
+.hof-project{background:var(--graphite-2);border:1px solid var(--graphite-3);border-top:2px solid var(--red);margin-bottom:16px;overflow:hidden;position:relative;}
+.hof-project::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--red),transparent);z-index:1;}
+/* RANK BADGE */
+.hof-rank-badge{position:absolute;top:14px;right:14px;z-index:2;font-family:var(--font-display);font-size:48px;color:rgba(200,0,0,0.12);line-height:1;letter-spacing:2px;}
+/* PHOTO GRID */
+.hof-photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--graphite-4);}
+.hof-photo-grid .hof-photo-hero{grid-column:1/-1;}
+.hof-photo-grid>div{overflow:hidden;position:relative;}
+.hof-photo-grid>div img{width:100%;aspect-ratio:3/2;object-fit:cover;display:block;cursor:pointer;filter:grayscale(10%) contrast(1.05);transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94),filter 0.3s;}
+.hof-photo-grid .hof-photo-hero img{aspect-ratio:16/7;}
+.hof-photo-grid>div:hover img{transform:scale(1.07);filter:grayscale(0%) contrast(1.1);}
+/* VIDEOS HOF */
+/* .hof-videos merged into photo-grid */
+.hof-video-thumb{position:relative;overflow:hidden;cursor:pointer;aspect-ratio:3/2;background:var(--graphite-3);background-size:cover;background-position:center;display:block;}
+.hof-photo-grid .hof-video-thumb{aspect-ratio:3/2;}
+.hof-video-thumb-overlay{position:absolute;inset:0;background:rgba(6,6,6,0.45);transition:background 0.25s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.hof-video-thumb:hover .hof-video-thumb-overlay{background:rgba(6,6,6,0.25);}
+.hof-video-play{width:48px;height:48px;border-radius:50%;background:rgba(200,0,0,0.9);border:2px solid rgba(255,255,255,0.35);display:flex;align-items:center;justify-content:center;transition:transform 0.2s,background 0.2s;box-shadow:0 0 24px rgba(200,0,0,0.6);}
+.hof-video-thumb:hover .hof-video-play{transform:scale(1.12);background:var(--red);}
+.hof-video-play svg{margin-left:4px;}
+.hof-video-label{font-family:var(--font-mono);font-size:7px;letter-spacing:1.5px;color:rgba(239,239,239,0.8);text-transform:uppercase;text-align:center;padding:0 8px;}
+/* INFO */
+.hof-info{padding:10px 14px 10px;border-top:1px solid var(--graphite-3);}
+.hof-car-name{font-family:var(--font-display);font-size:clamp(20px,6vw,28px);letter-spacing:2px;color:var(--white);text-transform:uppercase;line-height:1;margin-bottom:2px;}
+.hof-car-subtitle{font-family:var(--font-mono);font-size:8px;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px;line-height:1.4;}
+.hof-hp-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;}
+.hof-hp-badge{font-family:var(--font-display);font-size:30px;color:var(--red);text-shadow:0 0 16px var(--red-glow);line-height:1;}
+.hof-hp-sub{font-family:var(--font-mono);font-size:7px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;line-height:1.5;}
+.hof-record-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
+.hof-tag{font-family:var(--font-mono);font-size:7px;letter-spacing:1px;color:rgba(200,0,0,0.85);border:1px solid rgba(200,0,0,0.2);padding:2px 7px;text-transform:uppercase;background:rgba(200,0,0,0.04);}
+/* SPEC TABLE */
+.hof-specs{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:10px;}
+.hof-spec{background:var(--graphite);border:1px solid var(--graphite-3);padding:7px 10px;border-left:2px solid rgba(200,0,0,0.3);}
+.hof-spec-label{font-family:var(--font-mono);font-size:7px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:2px;}
+.hof-spec-val{font-family:var(--font-display);font-size:13px;color:var(--white);letter-spacing:1px;}
+/* MODS LIST */
+.hof-mods-title{font-family:var(--font-mono);font-size:8px;letter-spacing:4px;color:var(--red);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.hof-mods-title::before{content:'';width:16px;height:1px;background:var(--red);}
+.hof-mods{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
+.hof-mod{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:rgba(239,239,239,0.6);line-height:1.4;}
+.hof-mod::before{content:'◈';color:var(--red);font-size:9px;flex-shrink:0;margin-top:2px;}
+/* PILOT */
+.hof-pilot{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--graphite);border:1px solid var(--graphite-3);border-left:3px solid var(--red);margin-bottom:6px;}
+.hof-pilot-icon{font-size:16px;flex-shrink:0;}
+.hof-pilot-label{font-family:var(--font-mono);font-size:7px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:1px;}
+.hof-pilot-val{font-size:12px;font-weight:600;color:var(--white);}
+/* VENUE */
+.hof-venue{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--graphite);border:1px solid var(--graphite-3);border-left:3px solid rgba(200,0,0,0.25);}
+.hof-venue-icon{font-size:16px;flex-shrink:0;}
+/* DIVIDER */
+.hof-divider{width:100%;height:1px;background:linear-gradient(to right,var(--red),transparent);margin:14px 0;}
+/* UPCOMING */
+.hof-upcoming{background:var(--graphite-2);border:1px solid var(--graphite-3);border-left:3px solid rgba(200,0,0,0.12);padding:20px 18px;opacity:0.45;}
+.hof-upcoming-num{font-family:var(--font-display);font-size:28px;color:rgba(200,0,0,0.15);line-height:1;margin-bottom:6px;}
+.hof-upcoming-name{font-family:var(--font-display);font-size:22px;color:rgba(239,239,239,0.25);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
+.hof-upcoming-detail{font-family:var(--font-mono);font-size:8px;letter-spacing:2px;color:rgba(200,0,0,0.3);text-transform:uppercase;}
+/* CTA BOTTOM */
+.hof-cta{padding:32px 20px 48px;text-align:center;border-top:1px solid rgba(200,0,0,0.1);}
+.hof-cta-title{font-family:var(--font-display);font-size:clamp(30px,9vw,48px);letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:10px;}
+.hof-cta-title span{color:var(--red);}
+.hof-cta-desc{font-size:14px;color:var(--white-dim);margin-bottom:24px;line-height:1.65;}
+.btn-wa{background:#25D366;color:white;border:none;padding:16px 28px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:10px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));box-shadow:0 4px 20px rgba(37,211,102,0.2);transition:box-shadow 0.3s;}
+/* LIGHTBOX */
+.hof-lightbox{display:none;position:fixed;inset:0;z-index:900;background:rgba(6,6,6,0.97);align-items:center;justify-content:center;padding:20px;}
+.hof-lightbox.open{display:flex;}
+.hof-lightbox-media{max-width:92vw;max-height:88vh;object-fit:contain;border:1px solid rgba(200,0,0,0.2);display:block;}
+.hof-lightbox-close{position:absolute;top:14px;right:14px;background:none;border:1px solid rgba(239,239,239,0.15);color:var(--white);font-size:24px;width:42px;height:42px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+/* ── MOBILE ─────────────────────────────────────────────── */
+@media(max-width:520px){
+  /* TOPBAR */
+  .topbar{height:50px;padding:0 14px;}
+  .topbar-logo img{height:40px;}
+  .back-btn{padding:6px 12px;font-size:9px;letter-spacing:1px;min-height:40px;}
+  /* HERO */
+  .page-hero{min-height:130px;}
+  .page-hero-content{padding:16px 16px 14px;}
+  .page-label{font-size:9px;letter-spacing:3px;margin-bottom:8px;}
+  .page-title{font-size:clamp(32px,11vw,46px);margin-bottom:8px;}
+  .page-desc{font-size:13px;line-height:1.6;padding-left:12px;}
+  /* STATS */
+  .hof-stats{padding:10px 14px 0;gap:2px;}
+  .hof-stat-box{padding:10px 6px;}
+  .hof-stat-num{font-size:22px;}
+  .hof-stat-label{font-size:6px;letter-spacing:1px;}
+  /* PROJECTS WRAP */
+  .hof-projects-wrap{padding:14px 14px 28px;}
+  .hof-section-label{font-size:8px;letter-spacing:3px;margin-bottom:12px;}
+  /* PROJECT CARD */
+  .hof-project{margin-bottom:14px;}
+  .hof-rank-badge{font-size:36px;top:10px;right:10px;}
+  /* PHOTO GRID — 2 cols on mobile, hero still full-width */
+  .hof-photo-grid{grid-template-columns:repeat(2,1fr);}
+  .hof-photo-grid .hof-photo-hero{grid-column:1/-1;}
+  .hof-photo-grid>div img{aspect-ratio:4/3;}
+  .hof-photo-grid .hof-photo-hero img{aspect-ratio:16/8;}
+  /* VIDEO THUMB */
+  .hof-video-thumb{aspect-ratio:4/3;}
+  .hof-photo-grid .hof-video-thumb{aspect-ratio:4/3;}
+  .hof-video-play{width:40px;height:40px;}
+  .hof-video-label{font-size:6px;}
+  /* INFO BLOCK */
+  .hof-info{padding:10px 12px 12px;}
+  .hof-car-name{font-size:clamp(18px,6vw,24px);letter-spacing:1px;}
+  .hof-car-subtitle{font-size:7px;letter-spacing:1.5px;margin-bottom:8px;}
+  /* HP ROW */
+  .hof-hp-row{gap:10px;margin-bottom:8px;}
+  .hof-hp-badge{font-size:26px;}
+  .hof-hp-sub{font-size:7px;letter-spacing:1px;}
+  /* TAGS */
+  .hof-record-tags{gap:4px;margin-bottom:8px;}
+  .hof-tag{font-size:7px;letter-spacing:0.5px;padding:3px 6px;}
+  /* SPECS */
+  .hof-specs{gap:2px;margin-bottom:8px;}
+  .hof-spec{padding:7px 8px;}
+  .hof-spec-label{font-size:6px;letter-spacing:1px;}
+  .hof-spec-val{font-size:13px;}
+  /* MODS */
+  .hof-mods-title{font-size:7px;letter-spacing:2px;margin-bottom:6px;}
+  .hof-mods{gap:5px;margin-bottom:8px;}
+  .hof-mod{font-size:12px;line-height:1.5;gap:6px;}
+  /* PILOT / VENUE */
+  .hof-pilot,.hof-venue{padding:8px 10px;gap:8px;}
+  .hof-pilot-icon,.hof-venue-icon{font-size:14px;}
+  .hof-pilot-label{font-size:6px;letter-spacing:1px;}
+  .hof-pilot-val{font-size:12px;}
+  /* DIVIDER */
+  .hof-divider{margin:12px 0;}
+  /* UPCOMING */
+  .hof-upcoming{padding:16px 14px;}
+  .hof-upcoming-num{font-size:24px;}
+  .hof-upcoming-name{font-size:18px;}
+  .hof-upcoming-detail{font-size:7px;}
+  /* CTA BOTTOM */
+  .hof-cta{padding:24px 16px 40px;}
+  .hof-cta-title{font-size:clamp(26px,9vw,40px);letter-spacing:2px;margin-bottom:8px;}
+  .hof-cta-desc{font-size:13px;margin-bottom:20px;line-height:1.6;}
+  .btn-wa{padding:14px 20px;font-size:9px;letter-spacing:2px;width:100%;justify-content:center;}
+  /* LIGHTBOX */
+  .hof-lightbox{padding:10px;}
+  .hof-lightbox-close{top:8px;right:8px;width:40px;height:40px;font-size:22px;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a class="topbar-logo" href="javascript:window.close()">
+    <img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque">
+  </a>
+  <button class="back-btn" onclick="window.close()">
+    <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M13 5H1M5 9L1 5L5 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    Volver
+  </button>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image:url('https://res.cloudinary.com/dpiavcukm/image/upload/v1781500891/9d3fbf89-916b-4bb0-96d3-5d5019b454be.JPG_l6m8lg.jpg');"></div>
+  <div class="page-hero-overlay"></div>
+  <div class="page-hero-content">
+    <div class="page-label">Récords y Proyectos Destacados</div>
+    <div class="page-title">HALL OF<br><span>FAME</span></div>
+    <p class="page-desc">Los builds más radicales que han pasado por WitcherTorque. Récords nacionales, potencias extremas, pilotos de élite.</p>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="hof-stats">
+  <div class="hof-stat-box"><div class="hof-stat-num">12</div><div class="hof-stat-label">Récords Nacionales</div></div>
+  <div class="hof-stat-box"><div class="hof-stat-num">+50</div><div class="hof-stat-label">Builds High Perf</div></div>
+  <div class="hof-stat-box"><div class="hof-stat-num">+3K</div><div class="hof-stat-label">HP Desarrollados</div></div>
+</div>
+
+<!-- PROJECTS -->
+<div class="hof-projects-wrap">
+  <div class="hof-section-label">Proyectos Hall of Fame</div>
+
+  <!-- ── PROYECTO 01: CORVETTE C8 ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">01</div>
+
+    <!-- PHOTO GRID -->
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500891/9d3fbf89-916b-4bb0-96d3-5d5019b454be.JPG_l6m8lg.jpg" loading="lazy" alt="Corvette C8" onclick="hofLightbox(this)" style="object-position:center 75%;"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500891/6942b519-f935-4f4a-a788-493ac2c46538.JPG_n4wgvn.jpg" loading="lazy" alt="Corvette C8" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500892/e587de09-26f6-4e9b-8139-6bfd7661d7d2.JPG_ylgiu0.jpg" loading="lazy" alt="Corvette C8" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500915/b8024c72-0103-4222-bf20-ee658de0c31f.JPG_gkxkjf.jpg" loading="lazy" alt="Corvette C8" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500904/IMG_5785.jpg_qlxk8n.jpg" loading="lazy" alt="Corvette C8" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500893/9f124631-559f-416c-8f0a-613fc7342f86.JPG_sufkc6.jpg" loading="lazy" alt="Corvette C8" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div class="hof-video-thumb" style="background-image:url('https://res.cloudinary.com/dpiavcukm/video/upload/so_0,f_jpg,w_600/v1781567267/IMG_9880_n62tcz.jpg')" onclick="hofVideoLightbox('https://res.cloudinary.com/dpiavcukm/video/upload/f_mp4,vc_auto/v1781567267/IMG_9880_n62tcz.mp4')">
+        <div class="hof-video-thumb-overlay">
+          <div class="hof-video-play"><svg width="16" height="18" viewBox="0 0 16 18" fill="white"><polygon points="2,1 15,9 2,17"/></svg></div>
+          <div class="hof-video-label">Circuito Turagua</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Corvette C8 Stingray</div>
+      <div class="hof-car-subtitle">El C8 más rápido de Venezuela · Drag &amp; Circuito</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">628HP</div>
+        <div class="hof-hp-sub">A las ruedas<br>Motor interno stock</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">🏆 #1 Venezuela Drag</span>
+        <span class="hof-tag">🏆 #1 Venezuela Circuito</span>
+        <span class="hof-tag">Categoría 10s</span>
+        <span class="hof-tag">1/4 mi: 1:10:45</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Tiempo 1/4 milla</div><div class="hof-spec-val">1:10:45</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Circuito</div><div class="hof-spec-val">Cat. 10s</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Potencia rueda</div><div class="hof-spec-val">628 HP</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Motor</div><div class="hof-spec-val">Stock LT2</div></div>
+      </div>
+
+      <div class="hof-mods-title">Modificaciones</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Sistema completo de óxido nitroso doble</div>
+        <div class="hof-mod">Sistema de admisión Eventuri en fibra de carbono</div>
+        <div class="hof-mod">Colector de admisión Performance Throttle Response (Carbón pTR)</div>
+        <div class="hof-mod">Cuerpo de aceleración</div>
+        <div class="hof-mod">Sistema de combustible de metanol auxiliar</div>
+        <div class="hof-mod">Reprogramación de ECU</div>
+        <div class="hof-mod" style="color:rgba(200,0,0,0.75);font-style:italic;">Próximamente: motor forjado + Twin Turbo → objetivo 1400 HP</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏎️</span>
+        <div><div class="hof-pilot-label">Pilotos</div><div class="hof-pilot-val">Enzo Notta &amp; Yury Slibe — Notta Motor</div></div>
+      </div>
+      <div class="hof-venue">
+        <span class="hof-venue-icon">📍</span>
+        <div><div class="hof-pilot-label">Circuito</div><div class="hof-pilot-val">Autódromo Internacional de Turagua — Pancho Pepe Croquer</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 02: SUZUKI GSX-R 1000 ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">02</div>
+
+    <!-- PHOTO GRID -->
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500929/IMG_9320.jpg_mjmriz.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500921/IMG_9317_zc58zh.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500901/IMG_9339_vvgsky.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500913/IMG_9358_onky7o.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500929/IMG_9356_snlcwd.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500938/IMG_9462_n16nb8.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500938/IMG_9389_syqjrv.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500947/IMG_9318_bs3x1i.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500939/IMG_9472_k17khp.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500961/09e965b7-c8d4-499f-a060-80fd5ff9be55.JPG_d3ab4d.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500959/IMG_9474_bww3qt.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500960/IMG_9477.jpg_fqdpxe.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500965/0863f861-ff02-4c29-8c43-f7c5a39b6247.JPG_p1tu0y.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500969/IMG_6255_kymbix.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781500979/IMG_6259_tovpjq.jpg" loading="lazy" alt="GSX-R 1000" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div class="hof-video-thumb" style="background-image:url('https://res.cloudinary.com/dpiavcukm/video/upload/so_0,f_jpg,w_600/v1781500942/58746365-facb-4efb-99b0-e1dca8d7360d_euwguv.jpg')" onclick="hofVideoLightbox('https://res.cloudinary.com/dpiavcukm/video/upload/f_mp4,vc_auto/v1781500942/58746365-facb-4efb-99b0-e1dca8d7360d_euwguv.mp4')">
+        <div class="hof-video-thumb-overlay">
+          <div class="hof-video-play"><svg width="16" height="18" viewBox="0 0 16 18" fill="white"><polygon points="2,1 15,9 2,17"/></svg></div>
+          <div class="hof-video-label">The Valley Dragway</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Suzuki GSX-R 1000</div>
+      <div class="hof-car-subtitle">La moto más rápida de Venezuela · Récord Nacional</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">8.74s</div>
+        <div class="hof-hp-sub">1/4 de milla<br>Sin nitro · HP confidencial</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">🏆 Récord Nacional Venezuela</span>
+        <span class="hof-tag">Moto más rápida</span>
+        <span class="hof-tag">8.74s sin nitro</span>
+        <span class="hof-tag">Motor stock</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Tiempo 1/4 milla</div><div class="hof-spec-val">8.74 s</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Nitro en pasada</div><div class="hof-spec-val">No usado</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">HP</div><div class="hof-spec-val">Confidencial</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Motor</div><div class="hof-spec-val">Stock</div></div>
+      </div>
+
+      <div class="hof-mods-title">Modificaciones</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Instalación y adaptación de MaxxEcu Race (1 EGT por cilindro, wideband, etc.)</div>
+        <div class="hof-mod">Bomba de combustible Brushless</div>
+        <div class="hof-mod">Inyectores de alto flujo</div>
+        <div class="hof-mod">Nitro progresivo</div>
+        <div class="hof-mod">Cambio rápido por CO₂ (solenoide que mueve la palanca)</div>
+        <div class="hof-mod">Launch control</div>
+        <div class="hof-mod">Electrónica de competición avanzada</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏍️</span>
+        <div><div class="hof-pilot-label">Piloto</div><div class="hof-pilot-val">Alberto Yepez — Mechi Racing</div></div>
+      </div>
+      <div class="hof-venue">
+        <span class="hof-venue-icon">📍</span>
+        <div><div class="hof-pilot-label">Pista</div><div class="hof-pilot-val">The Valley Dragway — Ciudad Ojeda</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 03: FORD RANGER RAPTOR ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">03</div>
+
+    <!-- PHOTO GRID -->
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508206/IMG_7667_tarzt5.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508204/IMG_7670_n5z0zs.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508209/IMG_7678_wyqoct.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508208/IMG_7664_qmut59.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508208/IMG_7677_edacp1.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508203/IMG_7680_k3ztma.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508202/IMG_7673_jat9kg.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508201/IMG_7683_yzmkd7.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508200/IMG_7679_zcijvt.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781508200/IMG_7676_ajvneu.jpg" loading="lazy" alt="Ranger Raptor" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div class="hof-video-thumb" style="background-image:url('https://res.cloudinary.com/dpiavcukm/video/upload/so_0,f_jpg,w_600/v1781501305/IMG_9165_uuaaxk.jpg')" onclick="hofVideoLightbox('https://res.cloudinary.com/dpiavcukm/video/upload/f_mp4,vc_auto/v1781501305/IMG_9165_uuaaxk.mp4')">
+        <div class="hof-video-thumb-overlay">
+          <div class="hof-video-play"><svg width="16" height="18" viewBox="0 0 16 18" fill="white"><polygon points="2,1 15,9 2,17"/></svg></div>
+          <div class="hof-video-label">Ranger Raptor</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Ford Ranger Raptor</div>
+      <div class="hof-car-subtitle">Paquete Completo · En conjunto con Blindados Aquilino</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">579HP</div>
+        <div class="hof-hp-sub">A las ruedas<br>Motor interno stock</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">579 HP rueda</span>
+        <span class="hof-tag">Motor stock</span>
+        <span class="hof-tag">Stage 2</span>
+        <span class="hof-tag">Blindados Aquilino</span>
+        <span class="hof-tag">RotoraBrakeVe</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Potencia rueda</div><div class="hof-spec-val">579 HP</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Motor</div><div class="hof-spec-val">Stock</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Turbos</div><div class="hof-spec-val">Garrett Stage 2</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Transmisión</div><div class="hof-spec-val">10R60 Stage 3</div></div>
+      </div>
+
+      <div class="hof-mods-title">Modificaciones</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Piping HKS</div>
+        <div class="hof-mod">Process West Stage 2 Intercooler</div>
+        <div class="hof-mod">UPR Oil Catch Can</div>
+        <div class="hof-mod">Eibach Pro Lift Kit (front)</div>
+        <div class="hof-mod">Downpipe custom made in WitcherTorque</div>
+        <div class="hof-mod">Turbos Garrett Stage 2 Turbocharger</div>
+        <div class="hof-mod">Process West Transmission Cooler</div>
+        <div class="hof-mod">Bujías NGK Iridium</div>
+        <div class="hof-mod">K&N Cold Air Intake</div>
+        <div class="hof-mod">Vossen HF6 20x9.5</div>
+        <div class="hof-mod">Nitto Recon 295/60R20</div>
+        <div class="hof-mod">Frenos ROTORA forjados — 8 pistones adelante · 6 pistones atrás</div>
+        <div class="hof-mod">Upgrade Stage 3 10R60</div>
+        <div class="hof-mod">Tanque auxiliar ARB 120 litros</div>
+        <div class="hof-mod">Mishimoto Carbon Fiber Exhaust</div>
+        <div class="hof-mod">Reprogramación — multimapas, laguna, control rolling, antilag, hard cut</div>
+        <div class="hof-mod" style="color:rgba(200,0,0,0.75);font-style:italic;">Próximamente: sistema de combustible</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏎️</span>
+        <div><div class="hof-pilot-label">Piloto</div><div class="hof-pilot-val">Ricardo Pernia Chang — Blindados Aquilino &amp; RotoraBrakeVe</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 04: NISSAN GTR R35 ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">04</div>
+
+    <!-- PHOTO GRID -->
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781500990/7f16fbd1-23c5-4496-89d1-6e7c11ebe474.JPG_rghhrs.jpg" loading="lazy" alt="Nissan GTR R35" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501004/e4916dc1-486a-4f53-95d2-ddaf584fda17.JPG_qurcdz.jpg" loading="lazy" alt="Nissan GTR R35" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501017/e98806ed-3c1c-4b29-a21a-b04b9e710b9d.JPG_xtod9o.jpg" loading="lazy" alt="Nissan GTR R35" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501014/e2389e82-33da-44af-aeb4-525f8d7dbe4d.JPG_eyd64k.jpg" loading="lazy" alt="Nissan GTR R35" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div class="hof-video-thumb" style="background-image:url('https://res.cloudinary.com/dpiavcukm/video/upload/so_0,f_jpg,w_600/v1781501247/IMG_6726_ses2q1.jpg')" onclick="hofVideoLightbox('https://res.cloudinary.com/dpiavcukm/video/upload/f_mp4,vc_auto/v1781501247/IMG_6726_ses2q1.mp4')">
+        <div class="hof-video-thumb-overlay">
+          <div class="hof-video-play"><svg width="16" height="18" viewBox="0 0 16 18" fill="white"><polygon points="2,1 15,9 2,17"/></svg></div>
+          <div class="hof-video-label">GTR R35 — Aceleración</div>
+        </div>
+      </div>
+      <div class="hof-video-thumb" style="background-image:url('https://res.cloudinary.com/dpiavcukm/video/upload/so_0,f_jpg,w_600/v1781501283/IMG_9903_phvl2u.jpg')" onclick="hofVideoLightbox('https://res.cloudinary.com/dpiavcukm/video/upload/f_mp4,vc_auto/v1781501283/IMG_9903_phvl2u.mp4')">
+        <div class="hof-video-thumb-overlay">
+          <div class="hof-video-play"><svg width="16" height="18" viewBox="0 0 16 18" fill="white"><polygon points="2,1 15,9 2,17"/></svg></div>
+          <div class="hof-video-label">GTR en pista</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Nissan GTR R35</div>
+      <div class="hof-car-subtitle">El Nissan GTR más rápido de Venezuela</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">1000HP</div>
+        <div class="hof-hp-sub">A las ruedas (actualmente)<br>Objetivo: 2000 HP</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">🏆 GTR más rápido Venezuela</span>
+        <span class="hof-tag">1000 HP rueda</span>
+        <span class="hof-tag">1/4 mi: 9.30s</span>
+        <span class="hof-tag">Motor stock</span>
+        <span class="hof-tag">Proyecto en desarrollo</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Potencia rueda</div><div class="hof-spec-val">1000 HP</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Motor</div><div class="hof-spec-val">Stock</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Tiempo 1/4 milla</div><div class="hof-spec-val">9.30 s</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Objetivo</div><div class="hof-spec-val">2000 HP</div></div>
+      </div>
+
+      <div class="hof-mods-title">Estado actual</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Motor internos stock (actualmente)</div>
+        <div class="hof-mod">1000 HP a las ruedas verificados en dyno</div>
+        <div class="hof-mod">Tiempo 1/4 de milla: 9.30s — Autódromo Internacional de Turagua Pancho Pepe Croquer</div>
+        <div class="hof-mod" style="color:rgba(200,0,0,0.75);font-style:italic;">Próximamente: mejoras radicales — objetivo 2000 HP · el proyecto más ambicioso de la historia del taller</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏎️</span>
+        <div><div class="hof-pilot-label">Piloto</div><div class="hof-pilot-val">Tony Castro</div></div>
+      </div>
+      <div class="hof-venue">
+        <span class="hof-venue-icon">📍</span>
+        <div><div class="hof-pilot-label">Pista</div><div class="hof-pilot-val">Autódromo Internacional de Turagua — Pancho Pepe Croquer</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 05: FORD F-150 5.0 COYOTE ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">05</div>
+
+    <!-- PHOTO GRID -->
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501022/IMG_4728.jpg_fxcvtt.jpg" loading="lazy" alt="Ford F-150 Coyote" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501054/IMG_4729.jpg_e9tijn.jpg" loading="lazy" alt="Ford F-150 Coyote" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501051/IMG_1597_igindj.jpg" loading="lazy" alt="Ford F-150 Coyote" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501030/IMG_1598_bfslx8.jpg" loading="lazy" alt="Ford F-150 Coyote" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501050/IMG_1583_pjwxqm.jpg" loading="lazy" alt="Ford F-150 Coyote" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501042/IMG_1577_xxbql4.jpg" loading="lazy" alt="Ford F-150 Coyote" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501052/IMG_8545_urpbsl.jpg" loading="lazy" alt="Ford F-150 Coyote" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501020/IMG_1608_heq44g.jpg" loading="lazy" alt="Ford F-150 Coyote" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Ford F-150 5.0 Coyote</div>
+      <div class="hof-car-subtitle">Proyecto personal del taller · Con EsteemCustom (Miami)</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">+1500HP</div>
+        <div class="hof-hp-sub">Objetivo<br>Twin Turbo 5.0 Coyote</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">Proyecto WitcherTorque</span>
+        <span class="hof-tag">Twin Turbo 5.0</span>
+        <span class="hof-tag">+1500 HP objetivo</span>
+        <span class="hof-tag">EsteemCustom Miami</span>
+        <span class="hof-tag">En construcción</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Motor</div><div class="hof-spec-val">5.0 Coyote</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Config.</div><div class="hof-spec-val">Twin Turbo</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">HP objetivo</div><div class="hof-spec-val">+1500</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Estado</div><div class="hof-spec-val">En build</div></div>
+      </div>
+
+      <div class="hof-mods-title">Proyecto</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Motor 5.0 Coyote — preparación Twin Turbo</div>
+        <div class="hof-mod">Objetivo: +1500 HP</div>
+        <div class="hof-mod">Proyecto personal del taller WitcherTorque</div>
+        <div class="hof-mod">En colaboración con EsteemCustom (Miami, USA)</div>
+        <div class="hof-mod" style="color:rgba(200,0,0,0.75);font-style:italic;">Pronto empezamos el proyecto — prepárense</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 06: MITSUBISHI LANCER EVOLUTION 5RS ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">06</div>
+
+    <!-- PHOTO GRID -->
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501076/IMG_3081.jpg_i61men.jpg" loading="lazy" alt="Evo 5RS" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501082/IMG_5603_mbrbpx.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501086/F93D0105-C45D-4DEE-BD79-0278C5300218.JPG_ac07gk.jpg" loading="lazy" alt="Evo 5RS" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501065/IMG_2172_ynswqm.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501069/IMG_3054_rxmgqn.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501070/IMG_1949_nscm4d.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501058/IMG_0957_xu3e8n.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501066/IMG_2906_yuhere.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501075/IMG_5599_eax7ui.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501072/IMG_0739_qwbhdm.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501077/IMG_2281.jpg_qgv6fi.jpg" loading="lazy" alt="Evo 5RS" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501082/IMG_1481_zureyc.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501078/IMG_1950_oic9em.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501084/IMG_6273_tx6bgw.jpg" loading="lazy" alt="Evo 5RS" onerror="this.parentElement.style.display='none'" onclick="hofLightbox(this)"></div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Mitsubishi Lancer Evo 5RS</div>
+      <div class="hof-car-subtitle">El 4 cilindros más rápido de Venezuela · Drag &amp; Roll Race</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">1018HP</div>
+        <div class="hof-hp-sub">A las ruedas<br>Bloque billet · Motor forjado</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">🏆 4-cil más rápido Venezuela</span>
+        <span class="hof-tag">🏆 Evo más rápido Venezuela</span>
+        <span class="hof-tag">1018 HP</span>
+        <span class="hof-tag">Drag &amp; Roll Race</span>
+        <span class="hof-tag">1ª MaxxECU Gen2 Venezuela</span>
+        <span class="hof-tag">Proyecto en desarrollo</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Potencia</div><div class="hof-spec-val">1018 HP</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Bloque</div><div class="hof-spec-val">Billet</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Transmisión</div><div class="hof-spec-val">Billet</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">ECU</div><div class="hof-spec-val">MaxxECU Gen2</div></div>
+      </div>
+
+      <div class="hof-mods-title">Modificaciones destacadas</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Bloque billet</div>
+        <div class="hof-mod">Motor forjado</div>
+        <div class="hof-mod">Transmisión billet</div>
+        <div class="hof-mod">Primera MaxxECU Gen 2 instalada en Venezuela</div>
+        <div class="hof-mod">Paracaídas</div>
+        <div class="hof-mod" style="color:rgba(200,0,0,0.75);font-style:italic;">Es solo una pequeña parte de toda la farmacia que tiene este carro — proyecto en desarrollo</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏎️</span>
+        <div><div class="hof-pilot-label">Piloto</div><div class="hof-pilot-val">Gamar Márquez</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRÓXIMAMENTE -->
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 07: NISSAN GTR R35 COLOMBIANO ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">07</div>
+
+    <!-- PHOTO GRID -->
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501086/IMG_4751.jpg_b4tkk8.jpg" loading="lazy" alt="GTR R35 Colombia" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501087/IMG_4749.jpg_mavpvg.jpg" loading="lazy" alt="GTR R35 Colombia" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501084/IMG_4743.jpg_kgp3kt.jpg" loading="lazy" alt="GTR R35 Colombia" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501084/IMG_4752.jpg_imqoyi.jpg" loading="lazy" alt="GTR R35 Colombia" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501081/IMG_4753.jpg_ze0ocp.jpg" loading="lazy" alt="GTR R35 Colombia" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501079/IMG_4748.jpg_xjotmv.jpg" loading="lazy" alt="GTR R35 Colombia" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501087/IMG_4755.jpg_igikig.jpg" loading="lazy" alt="GTR R35 Colombia" onclick="hofLightbox(this)"></div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Nissan GTR R35</div>
+      <div class="hof-car-subtitle">Proyecto Colombiano · Bucaramanga → Venezuela → Bucaramanga</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">1000HP</div>
+        <div class="hof-hp-sub">A las ruedas<br>Motor y transmisión restaurados</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">🇨🇴 Cliente Bucaramanga</span>
+        <span class="hof-tag">Importación temporal</span>
+        <span class="hof-tag">1000 HP</span>
+        <span class="hof-tag">Motor + Transmisión</span>
+        <span class="hof-tag">@gtrmix</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Potencia</div><div class="hof-spec-val">1000 HP</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Origen</div><div class="hof-spec-val">Bucaramanga, COL</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Motor</div><div class="hof-spec-val">Restaurado + Upgrade</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Trans.</div><div class="hof-spec-val">Restaurada</div></div>
+      </div>
+
+      <div class="hof-mods-title">La Historia</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Cliente contactó desde Bucaramanga, Colombia con múltiples fallas en motor y transmisión</div>
+        <div class="hof-mod">Vehículo traído a Venezuela bajo permiso temporal de importación — tiempo limitado</div>
+        <div class="hof-mod">Diagnóstico completo, búsqueda y adquisición de piezas en tiempo récord</div>
+        <div class="hof-mod">Solución total de fallas de motor y transmisión</div>
+        <div class="hof-mod">Aumento de potencia a 1000 HP</div>
+        <div class="hof-mod" style="color:rgba(200,0,0,0.85);font-style:italic;">A pocas horas de expirar el permiso, el vehículo fue cargado en grúa y enviado de regreso a Colombia</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🇨🇴</span>
+        <div><div class="hof-pilot-label">Cliente</div><div class="hof-pilot-val">@gtrmix — Bucaramanga, Colombia</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 08: VOLKSWAGEN GOLF R MK7.5 ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">08</div>
+
+    <!-- PHOTO + VIDEO GRID -->
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501090/IMG_4674.jpg_sz4yek.jpg" loading="lazy" alt="Golf R MK7.5" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501090/IMG_4675.jpg_jkvyp6.jpg" loading="lazy" alt="Golf R MK7.5" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501087/IMG_4676.jpg_natnjq.jpg" loading="lazy" alt="Golf R MK7.5" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501089/IMG_4679.jpg_qaigl8.jpg" loading="lazy" alt="Golf R MK7.5" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501086/IMG_4678.jpg_lfoqj2.jpg" loading="lazy" alt="Golf R MK7.5" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501093/IMG_4677.jpg_s0xhub.jpg" loading="lazy" alt="Golf R MK7.5" onclick="hofLightbox(this)"></div>
+      <div class="hof-video-thumb" style="background-image:url('https://res.cloudinary.com/dpiavcukm/video/upload/so_0,f_jpg,w_600/v1781501232/IMG_9291_digelf.jpg')" onclick="hofVideoLightbox('https://res.cloudinary.com/dpiavcukm/video/upload/f_mp4,vc_auto/v1781501232/IMG_9291_digelf.mp4')">
+        <div class="hof-video-thumb-overlay">
+          <div class="hof-video-play"><svg width="16" height="18" viewBox="0 0 16 18" fill="white"><polygon points="2,1 15,9 2,17"/></svg></div>
+          <div class="hof-video-label">Golf R — En pista</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Volkswagen Golf R MK7.5</div>
+      <div class="hof-car-subtitle">El VAG más rápido de Venezuela · Proyecto personal del taller</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">???HP</div>
+        <div class="hof-hp-sub">Confidencial<br>Todos los juguetes</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">🏆 VAG más rápido Venezuela</span>
+        <span class="hof-tag">🏆 VW más rápido Venezuela</span>
+        <span class="hof-tag">Top Golf R mundial</span>
+        <span class="hof-tag">9.67s 1/4 milla</span>
+        <span class="hof-tag">Proyecto en desarrollo</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Tiempo 1/4 milla</div><div class="hof-spec-val">9.67 s</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">HP</div><div class="hof-spec-val">Confidencial</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Setup</div><div class="hof-spec-val">Todos los juguetes</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Estado</div><div class="hof-spec-val">En desarrollo</div></div>
+      </div>
+
+      <div class="hof-mods-title">El Proyecto</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Proyecto personal de WitcherTorque</div>
+        <div class="hof-mod">El VAG más rápido de Venezuela</div>
+        <div class="hof-mod">El Volkswagen más rápido del país</div>
+        <div class="hof-mod">Uno de los Golf R más rápidos del mundo</div>
+        <div class="hof-mod" style="color:rgba(200,0,0,0.85);font-style:italic;">HP confidencial — todos los juguetes — proyecto en desarrollo continuo</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏎️</span>
+        <div><div class="hof-pilot-label">Piloto</div><div class="hof-pilot-val">Robert Witcher — WitcherTorque</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 09: HONDA CIVIC #90 ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">09</div>
+
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501093/c6b73b58-8a4e-4f34-97c1-e270d6bf2dc1.JPG_tuf5ve.jpg" loading="lazy" alt="Honda Civic #90" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501092/ca0540be-22ff-40de-9c01-38dc4cfd939e.JPG_lrvsdf.jpg" loading="lazy" alt="Honda Civic #90" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501093/825b7024-82a1-4b00-876d-51da831a7fd8.JPG_bebg0f.jpg" loading="lazy" alt="Honda Civic #90" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501093/3419e5ff-1c3a-4b37-b875-525751dab890.JPG_mcyn4q.jpg" loading="lazy" alt="Honda Civic #90" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501092/a27ef4fe-a499-47af-a80e-efbce60c5aa8.JPG_bzj5qt.jpg" loading="lazy" alt="Honda Civic #90" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501091/deecd179-8aa1-4f64-adbf-51f6b8f059d1.JPG_troswe.jpg" loading="lazy" alt="Honda Civic #90" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501089/3419e5ff-1c3a-4b37-b875-525751dab890.JPG_1_okhypc.jpg" loading="lazy" alt="Honda Civic #90" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Honda Civic Si #90</div>
+      <div class="hof-car-subtitle">Campeón Nacional · Easy Civic Pro Temporada 2025</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge" style="font-size:22px;">🏆 CAM.</div>
+        <div class="hof-hp-sub">Categoría Easy Civic Pro<br>Temporada 2025</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">🏆 Campeón Nacional 2025</span>
+        <span class="hof-tag">Easy Civic Pro</span>
+        <span class="hof-tag">222 puntos</span>
+        <span class="hof-tag">Ardagna Racing Team</span>
+        <span class="hof-tag">Team Maella</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Categoría</div><div class="hof-spec-val">Easy Civic Pro</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Temporada</div><div class="hof-spec-val">2025</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Puntos</div><div class="hof-spec-val">222 pts</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Número</div><div class="hof-spec-val">#90</div></div>
+      </div>
+
+      <div class="hof-mods-title">El Campeonato</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Campeón del Campeonato Nacional de Automovilismo Easy Civic Si temporada 2025</div>
+        <div class="hof-mod">222 puntos acumulados en la categoría Easy Civic Pro</div>
+        <div class="hof-mod">Ardagna Racing Team — Team Maella</div>
+        <div class="hof-mod">WitcherTorque detrás de la preparación técnica del vehículo</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏎️</span>
+        <div><div class="hof-pilot-label">Piloto</div><div class="hof-pilot-val">Gaetano Ardagna (#90) — Ardagna Racing Team · Team Maella</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 10: TOYOTA SUPRA MK4 ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">10</div>
+
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501099/IMG_4732.jpg_wdgv7e.jpg" loading="lazy" alt="Toyota Supra Mk4" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501098/IMG_4739.jpg_xef7of.jpg" loading="lazy" alt="Toyota Supra Mk4" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501101/IMG_4730.jpg_uifcqh.jpg" loading="lazy" alt="Toyota Supra Mk4" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501098/IMG_4741.jpg_v1398l.jpg" loading="lazy" alt="Toyota Supra Mk4" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501098/IMG_4738.jpg_b8ekxg.jpg" loading="lazy" alt="Toyota Supra Mk4" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501099/IMG_4736.jpg_gr0q2z.jpg" loading="lazy" alt="Toyota Supra Mk4" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501100/IMG_4734.jpg_jvgnh8.jpg" loading="lazy" alt="Toyota Supra Mk4" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501101/IMG_4735.jpg_y6aa9o.jpg" loading="lazy" alt="Toyota Supra Mk4" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501101/IMG_4740.jpg_sukcrk.jpg" loading="lazy" alt="Toyota Supra Mk4" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Toyota Supra Mk4</div>
+      <div class="hof-car-subtitle">Premier Edition 1/1 Vossen Forbes Wheels · Venezuela → Miami</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">965HP</div>
+        <div class="hof-hp-sub">Motor 2JZ<br>Armado y afinado en WitcherTorque</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">Premier Edition 1/1</span>
+        <span class="hof-tag">Vossen Forbes Wheels</span>
+        <span class="hof-tag">965 HP</span>
+        <span class="hof-tag">Venezuela → Miami</span>
+        <span class="hof-tag">Esteem Custom</span>
+        <span class="hof-tag">Viral @Juca · @daniclos</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Motor</div><div class="hof-spec-val">2JZ</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Potencia</div><div class="hof-spec-val">965 HP</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Ruedas</div><div class="hof-spec-val">Vossen Forbes</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Edición</div><div class="hof-spec-val">1 de 1</div></div>
+      </div>
+
+      <div class="hof-mods-title">La Historia</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Proyecto personal de Robert Witcher — vendido a Esteban Jiménez (Esteem Custom &amp; Vossen Wheels)</div>
+        <div class="hof-mod">Armado y afinado completamente en WitcherTorque (Caracas, Venezuela)</div>
+        <div class="hof-mod">Exportado a Miami donde Esteban terminó de afinar los últimos detalles del icónico motor 2JZ</div>
+        <div class="hof-mod">De venezolanos para venezolanos rompiéndola en Miami</div>
+        <div class="hof-mod">Aparece en varios videos virales en Instagram y YouTube — @Juca · @daniclos</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏎️</span>
+        <div><div class="hof-pilot-label">Propietario</div><div class="hof-pilot-val">Esteban Jiménez — Esteem Custom &amp; Vossen Wheels</div></div>
+      </div>
+      <div class="hof-venue">
+        <span class="hof-venue-icon">📍</span>
+        <div><div class="hof-pilot-label">Ruta</div><div class="hof-pilot-val">Caracas, Venezuela → Miami, Florida, USA</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 11: FERRARI 458 CHALLENGE EVO ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">11</div>
+
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501104/IMG_4832.jpg_xrd2y6.jpg" loading="lazy" alt="Ferrari 458 Challenge Evo" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501103/IMG_4829.jpg_mu2mzb.jpg" loading="lazy" alt="Ferrari 458 Challenge Evo" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501104/IMG_4834.jpg_nm7k0t.jpg" loading="lazy" alt="Ferrari 458 Challenge Evo" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501102/IMG_4831.jpg_z4xlkw.jpg" loading="lazy" alt="Ferrari 458 Challenge Evo" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501105/IMG_4828.jpg_hus6xb.jpg" loading="lazy" alt="Ferrari 458 Challenge Evo" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501103/IMG_4827.jpg_vyres2.jpg" loading="lazy" alt="Ferrari 458 Challenge Evo" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501102/b7bad4ed-3aaa-4244-bfa0-201c42d00e0d.jpg_uezoi3.jpg" loading="lazy" alt="Ferrari 458 Challenge Evo" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div class="hof-video-thumb" style="background-image:url('https://res.cloudinary.com/dpiavcukm/video/upload/so_0,f_jpg,w_600/v1781501143/9f1371e0-17bc-4179-8275-9fbd06ff401b_rcaaot.jpg')" onclick="hofVideoLightbox('https://res.cloudinary.com/dpiavcukm/video/upload/f_mp4,vc_auto/v1781501143/9f1371e0-17bc-4179-8275-9fbd06ff401b_rcaaot.mp4')">
+        <div class="hof-video-thumb-overlay">
+          <div class="hof-video-play"><svg width="16" height="18" viewBox="0 0 16 18" fill="white"><polygon points="2,1 15,9 2,17"/></svg></div>
+          <div class="hof-video-label">Ferrari 458 — GT Challenge</div>
+        </div>
+      </div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501107/IMG_4830.jpg_v8ovjf.jpg" loading="lazy" alt="Ferrari 458 Challenge Evo" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">Ferrari 458 Challenge Evo</div>
+      <div class="hof-car-subtitle">GT Challenge de las Américas 2025 · Meval Racing Team</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge" style="font-size:20px;">+90HP</div>
+        <div class="hof-hp-sub">Ganancia con repro remota sobre Dyno<br>HP total: confidencial</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">🏆 Únicos en América Central</span>
+        <span class="hof-tag">GT Challenge Américas 2025</span>
+        <span class="hof-tag">Varios podios Cat. GT Lighting</span>
+        <span class="hof-tag">Meval Racing</span>
+        <span class="hof-tag">Repro remota sobre Dyno</span>
+        <span class="hof-tag">+90 HP ganados</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">HP total</div><div class="hof-spec-val">Confidencial</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Ganancia</div><div class="hof-spec-val">+90 HP</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Método</div><div class="hof-spec-val">Repro remota / Dyno</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Categoría</div><div class="hof-spec-val">GT Lighting</div></div>
+      </div>
+
+      <div class="hof-mods-title">La Historia</div>
+      <div class="hof-mods">
+        <div class="hof-mod">El único Ferrari 458 Challenge Evo de toda la región de América Central</div>
+        <div class="hof-mod">Corrió la temporada completa 2025 del GT Challenge de las Américas — competencia multietapa en varios países de América Central</div>
+        <div class="hof-mod">Logró varios podios en la categoría GT Lighting</div>
+        <div class="hof-mod">Cuando el carro llegó a Panamá, WitcherTorque realizó una reprogramación remota sobre Dyno logrando +90 HP de ganancia</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏎️</span>
+        <div><div class="hof-pilot-label">Piloto</div><div class="hof-pilot-val">Daniel Spisso — Meval Racing Team</div></div>
+      </div>
+      <div class="hof-venue">
+        <span class="hof-venue-icon">📍</span>
+        <div><div class="hof-pilot-label">Circuito</div><div class="hof-pilot-val">GT Challenge de las Américas — América Central</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+
+  <!-- ── PROYECTO 12: BMW M3 COMPETITION G80 ── -->
+  <div class="hof-project">
+    <div class="hof-rank-badge">12</div>
+
+    <div class="hof-photo-grid">
+      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501106/IMG_4757.jpg_yvm8go.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501108/IMG_4760.jpg_p9oax7.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501108/IMG_4758.jpg_zvpaiz.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501110/IMG_4765.jpg_ezmcy6.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501111/IMG_4762.jpg_qhbzmr.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501112/IMG_4767.jpg_cxcorc.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501113/IMG_4764.jpg_rzcqvq.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
+    </div>
+
+    <div class="hof-info">
+      <div class="hof-car-name">BMW M3 Competition G80</div>
+      <div class="hof-car-subtitle">Big Turbo · Setup 100% de calle · FL2K Semi-finalista</div>
+
+      <div class="hof-hp-row">
+        <div class="hof-hp-badge">+1300HP</div>
+        <div class="hof-hp-sub">Precisión Turbo · Full peso de calle<br>(incluye la silla del bebé)</div>
+      </div>
+
+      <div class="hof-record-tags">
+        <span class="hof-tag">+1300 HP</span>
+        <span class="hof-tag">🏁 8.5s 1/4 milla</span>
+        <span class="hof-tag">FL2K Semi-finalista</span>
+        <span class="hof-tag">Precisión Turbo</span>
+        <span class="hof-tag">Full peso de calle</span>
+        <span class="hof-tag">Repro remota WitcherTorque</span>
+        <span class="hof-tag">Esteem Custom Miami</span>
+      </div>
+
+      <div class="hof-specs">
+        <div class="hof-spec"><div class="hof-spec-label">Potencia</div><div class="hof-spec-val">+1300 HP</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Tiempo 1/4</div><div class="hof-spec-val">8.5 s</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Turbo</div><div class="hof-spec-val">Precisión</div></div>
+        <div class="hof-spec"><div class="hof-spec-label">Setup</div><div class="hof-spec-val">100% calle</div></div>
+      </div>
+
+      <div class="hof-mods-title">El Proyecto</div>
+      <div class="hof-mods">
+        <div class="hof-mod">Propiedad del venezolano Esteban Jiménez (Esteem Custom) — armado íntegramente por él en Miami</div>
+        <div class="hof-mod">Setup big turbo con Precisión Turbo — 100% de calle, con full peso real (incluyendo la silla del bebé)</div>
+        <div class="hof-mod">Uno de los M3 G80 más rápidos del mundo en su clase con peso de calle completo</div>
+        <div class="hof-mod">WitcherTorque realizó la reprogramación remota del vehículo</div>
+        <div class="hof-mod">Semi-finalista en el FL2K — la lluvia no dejó continuar la carrera</div>
+      </div>
+
+      <div class="hof-pilot">
+        <span class="hof-pilot-icon">🏎️</span>
+        <div><div class="hof-pilot-label">Piloto / Propietario</div><div class="hof-pilot-val">Esteban Jiménez — Esteem Custom, Miami</div></div>
+      </div>
+      <div class="hof-venue">
+        <span class="hof-venue-icon">📍</span>
+        <div><div class="hof-pilot-label">Evento</div><div class="hof-pilot-val">FL2K — Florida, USA</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hof-divider"></div>
+  <div class="hof-upcoming">
+    <div class="hof-upcoming-num">13</div>
+    <div class="hof-upcoming-name">Próximamente</div>
+    <div class="hof-upcoming-detail">Tu proyecto puede estar aquí — ???</div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="hof-cta">
+  <div class="hof-cta-title">¿QUERÉS ESTAR EN EL<br><span>HALL OF FAME?</span></div>
+  <p class="hof-cta-desc">Llevá tu proyecto al siguiente nivel con WitcherTorque. Contactanos y empezamos a escribir tu historia.</p>
+  <a class="btn-wa" href="https://wa.me/584125856541" target="_blank">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Hablar por WhatsApp
+  </a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="hof-lightbox" id="hofLightbox" onclick="closeHofLightbox()">
+  <button class="hof-lightbox-close" onclick="closeHofLightbox()">×</button>
+  <img class="hof-lightbox-media" id="hofLightboxImg" src="" alt="" style="display:none;">
+  <video id="hofLightboxVideo" src="" controls playsinline style="display:none;position:fixed;inset:0;width:100%;height:100%;object-fit:contain;background:#000;z-index:901;"></video>
+</div>
+
+<script>
+// ─── HOF LIGHTBOX ─────────────────────────────────────
+function hofLightbox(img) {
+  var lbImg = document.getElementById('hofLightboxImg');
+  var lbVid = document.getElementById('hofLightboxVideo');
+  lbImg.style.display = 'block'; lbVid.style.display = 'none'; lbVid.pause && lbVid.pause();
+  lbImg.src = img.src;
+  document.getElementById('hofLightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function hofVideoLightbox(src) {
+  var lb = document.getElementById('hofLightbox');
+  // Eliminar video anterior si existe
+  var old = document.getElementById('hofLightboxVideo');
+  if (old) old.remove();
+  // Crear video fresco cada vez (evita bug de renderizado en Chrome)
+  var v = document.createElement('video');
+  v.id = 'hofLightboxVideo';
+  v.src = src;
+  v.controls = true;
+  v.autoplay = true;
+  v.playsinline = true;
+  v.setAttribute('playsinline', '');
+  v.style.cssText = 'max-width:92vw;max-height:88vh;width:auto;height:auto;display:block;border:1px solid rgba(200,0,0,0.2);background:#000;';
+  lb.appendChild(v);
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Detener propagación del click en el video para no cerrar el lightbox
+  v.addEventListener('click', function(e){ e.stopPropagation(); });
+}
+function closeHofLightbox() {
+  var lbVid = document.getElementById('hofLightboxVideo');
+  if (lbVid) { lbVid.pause(); lbVid.remove(); }
+  document.getElementById('hofLightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeHofLightbox(); });
+<\/script>
+</body>
+</html>`;
   const blob = new Blob([html], {type: 'text/html'});
   const url = URL.createObjectURL(blob);
   window.open(url, '_blank');
