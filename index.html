@@ -880,11 +880,19 @@ nav {
   border-top: 1px solid rgba(200,0,0,0.12);
   position: relative; overflow: hidden;
 }
+.porque-section::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background: url('https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501050/IMG_1583_pjwxqm.heic') center center / cover no-repeat;
+  opacity: 0.09;
+  pointer-events: none;
+}
+.porque-section > * { position: relative; z-index: 1; }
 .porque-section::before {
   content: 'WT';
   position: absolute; right: -20px; top: -20px;
   font-family: var(--font-display); font-size: 200px;
-  color: rgba(200,0,0,0.025); line-height: 1; pointer-events: none;
+  color: rgba(200,0,0,0.025); line-height: 1; pointer-events: none; z-index: 2;
 }
 .porque-intro {
   font-size: 15px; font-weight: 400;
@@ -1296,7 +1304,7 @@ footer {
 .hof-section::after {
   content: '';
   position: absolute; inset: 0; z-index: 0;
-  background: url('https://res.cloudinary.com/dpiavcukm/image/upload/v1781501107/IMG_5862_utapwm.heic') center center / cover no-repeat;
+  background: url('https://res.cloudinary.com/dpiavcukm/image/upload/v1781500929/IMG_9320.jpg_mjmriz.jpg') center center / cover no-repeat;
   opacity: 0.09;
   pointer-events: none;
 }
@@ -1567,7 +1575,7 @@ footer {
       <div class="hero-divider-bar"></div>
       <div class="hero-divider-diamond"></div>
     </div>
-    <p class="hero-sub">ECU Tuning &nbsp;·&nbsp; High Performance &nbsp;·&nbsp; Custom Builds</p>
+    <p class="hero-sub">ECU Tuning &nbsp;·&nbsp; High Performance &nbsp;·&nbsp; Proyectos Custom</p>
     <p class="hero-desc">Ingeniería automotriz de precisión. Llevamos tu vehículo al límite absoluto de su potencial.</p>
     <div class="hero-btns">
       <a class="btn-primary" onclick="openRepro()">
@@ -1654,7 +1662,7 @@ footer {
     </a>
     <a href="https://www.youtube.com/@witchertorque" target="_blank" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);background:transparent;border:1px solid rgba(200,0,0,0.35);padding:13px 24px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));text-decoration:none;max-width:280px;">
       <svg width="14" height="10" viewBox="0 0 24 17" fill="none"><path d="M23.5 2.5s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.6 0 12 0 12 0S7.4 0 4.7.4c-.6.1-1.9.1-3 1.3C.8 2.5.5 4.5.5 4.5S.2 6.8.2 9.1v2.1c0 2.3.3 4.6.3 4.6s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7 20 12 20 12 20s4.6 0 7.3-.4c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.8 1.2-2.8s.3-2.3.3-4.6V9.1c0-2.3-.3-4.6-.3-4.6zM9.7 13V5.8l8 3.6-8 3.6z" fill="currentColor"/></svg>
-      Ver nuestros builds en YouTube
+      Ver nuestros proyectos en YouTube
     </a>
     <a href="https://www.facebook.com/share/17m4DP9CsJ/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);background:transparent;border:1px solid rgba(200,0,0,0.35);padding:13px 24px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));text-decoration:none;max-width:280px;">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -1745,7 +1753,7 @@ footer {
     </div>
     <div class="hof-stat-box">
       <div class="hof-stat-num">+50</div>
-      <div class="hof-stat-label">Builds de Alto Desempeño</div>
+      <div class="hof-stat-label">Proyectos de Alto Desempeño</div>
     </div>
     <div class="hof-stat-box">
       <div class="hof-stat-num">+3K</div>
@@ -2284,11 +2292,11 @@ document.querySelectorAll('.drawer-link[href^="#"]').forEach(link => {
 
 const REPRO_SCRIPT = `
 const WT_SYS_R = "Eres el asesor técnico virtual oficial de WitcherTorque. Tenés acceso completo a toda la información del taller. Nunca digas que sos una IA.\n\nWitcherTorque — Caracas, Venezuela. 16+ años. WhatsApp: +58 412-585-6541. Horario: Lun-Vie 8:00-17:00 por cita previa. Remote Tuning disponible a nivel mundial. Email: witchertorquevzla@gmail.com\n\nSERVICIOS: Reprogramación ECU (único Master Tuner Ecutek de Venezuela, distribuidor autorizado HPTuners, multimapas, Stage 1/2/3, E85, Pops & Bangs, Launch Control), Remote Tuning mundial, Dyno Sessions en el único Mainline ProHub de Venezuela, Mecánica High Performance, Stand Alone ECU (MaxxEcu Gen2, Haltech, FuelTech, Link ECU), Electricidad, Construcciones Custom Inox/Aluminio/Titanio, Impresión 3D, Mecánica General, Distribución oficial: Amsoil, vPracing, Fuel Factory, X-Shift Gearboxes, aFe Power, Mishimoto, Dodson Motorsport, Precision Turbo, Vibrant Performance, MaxxEcu.\n\nSTAGES: Stage 1 = solo software stock, +20-30% HP. Stage 2 = software + downpipe/intake/intercooler, +30-40% HP. Stage 2+ E85 = con etanol, +50-60% HP. Stage 3 = turbo grande + inyección alto flujo + calibración completa en dyno desde cero.\n\nDIFERENCIADORES: Reprogramación DIRECTA sobre ECU original, sin módulos externos, sin cables cortados, 100% reversible (se vuelve a stock antes de ir a garantía). Mapas calibrados para el combustible venezolano con protecciones térmicas activas. Único Mainline ProHub Dyno de Venezuela (se atornilla a los hubs, cero deslizamiento, vehículo anclado). Pioneros en MaxxEcu Gen 2 en Venezuela. Multimapas desde botones del volante original. Pops & Bangs 100% software. Launch Control integrado.\n\nPREGUNTAS FRECUENTES: ¿Rompe el motor? No, mantenemos activas todas las protecciones de la ECU. ¿Anula garantía? No, proceso 100% reversible sin huellas físicas. ¿Aumenta consumo? Generalmente igual o mejor. ¿Adaptan al combustible local? Sí, completamente, no usamos mapas genéricos importados.\n\nRÉCORDS: Evo 5 RS 1100HP rescatado, GSX-R 1000 moto más rápida de Venezuela (8.74s sin nitro), Top 1-2-3 Ranger Raptor más rápidas del país, GTR R35 internos stock más rápido del país (1000HP/9.30s), Campeón Nacional 2025 Honda Civic #90 (222 pts), Corvette C8 más rápido de Venezuela, Toyota 4Runner TRD Pro 2026 más rápida del mundo, Golf R MK7.5 VAG más rápido de Venezuela (9.67s), Ferrari 458 Challenge Evo +90HP remote GT Challenge Américas 2025, BMW M3 G80 +1300HP FL2K semi-finalista. 12+ récords nacionales, +50 builds, +3000HP desarrollados, 500+ motores intervenidos.\n\nTESTIMONIOS: Gamar Márquez (Evo 5 RS 1100HP): pasó 6 años en otro taller que no pudo pasar de 800HP y partió el motor. WitcherTorque lo rescató y en un solo intento hizo 1100HP. Autoclub Performance Miami: felicitó a WitcherTorque por educador al público sobre por qué la reprogramación es necesaria.\n\nFLUJO: Obtené nombre, vehículo (marca/modelo/año/motor), modificaciones actuales y servicio de interés. Natural, sin pedir todo de golpe. Nunca inventes datos ni garantices HP exactos. Nunca diagnostiques sin inspección física. Respuestas cortas, máximo un párrafo.\n\nCIERRE cuando tengas nombre + vehículo + servicio: Perfecto [NOMBRE], ya tengo todo lo que necesito. Voy a derivarte con nuestro equipo para coordinar tu [SERVICIO]. Un momento! — después no respondas más.";
-const rModels={volkswagen:["Golf GTI MK7 (230HP)","Golf GTI MK8 (245HP)","Golf R (320HP)","Tiguan R-Line (150HP)"],audi:["A3 S3 (310HP)","RS3 (400HP)","TT RS (400HP)","A4 B9 (190HP)"],bmw:["M240i (374HP)","M340i (374HP)","M2 (460HP)","320i (184HP)"],mercedes:["A45 AMG (421HP)","C43 AMG (390HP)","GLA 250 (224HP)"],ford:["Raptor (450HP)","Mustang GT (450HP)","Focus RS (350HP)"],chevrolet:["Camaro SS (455HP)","Corvette C7 (455HP)","Silverado (355HP)"],toyota:["Supra A90 (382HP)","GR Yaris (261HP)","Land Cruiser 300 (415HP)"],honda:["Civic Type R (315HP)","Civic Si (200HP)"],subaru:["WRX STI (310HP)","WRX (271HP)","BRZ (228HP)"],nissan:["GT-R (570HP)","Z (400HP)","Frontier (310HP)"]};
-const rHpData={"Golf GTI MK7 (230HP)":230,"Golf GTI MK8 (245HP)":245,"Golf R (320HP)":320,"Tiguan R-Line (150HP)":150,"A3 S3 (310HP)":310,"RS3 (400HP)":400,"TT RS (400HP)":400,"A4 B9 (190HP)":190,"M240i (374HP)":374,"M340i (374HP)":374,"M2 (460HP)":460,"320i (184HP)":184,"A45 AMG (421HP)":421,"C43 AMG (390HP)":390,"GLA 250 (224HP)":224,"Raptor (450HP)":450,"Mustang GT (450HP)":450,"Focus RS (350HP)":350,"Camaro SS (455HP)":455,"Corvette C7 (455HP)":455,"Silverado (355HP)":355,"Supra A90 (382HP)":382,"GR Yaris (261HP)":261,"Land Cruiser 300 (415HP)":415,"Civic Type R (315HP)":315,"Civic Si (200HP)":200,"WRX STI (310HP)":310,"WRX (271HP)":271,"BRZ (228HP)":228,"GT-R (570HP)":570,"Z (400HP)":400,"Frontier (310HP)":310};
+const rModels={volkswagen:["Golf GTI MK7 (230HP)","Golf GTI MK8 (245HP)","Golf R MK7 (300HP)","Golf R MK8 (320HP)","Golf GTI Clubsport (265HP)","Tiguan R (320HP)","Tiguan R-Line TSI (150HP)","Polo GTI (207HP)","Arteon R-Line (272HP)","T-Roc R (300HP)"],audi:["A3 S3 8V (310HP)","A3 S3 8Y (310HP)","RS3 8V (400HP)","RS3 8Y (400HP)","TT RS (400HP)","A4 B9 2.0T (190HP)","S4 B9 (354HP)","RS4 B9 (450HP)","A5 2.0T (245HP)","S5 B9 (354HP)","RS5 (450HP)","Q5 45 TFSI (265HP)","SQ5 (354HP)","RSQ8 (600HP)","R8 V10 (570HP)"],bmw:["M240i G42 (374HP)","M340i G20 (374HP)","M2 G87 (460HP)","M3 G80 (510HP)","M4 G82 (510HP)","320i G20 (184HP)","330i G20 (258HP)","M135i F40 (306HP)","M235i Gran Coupe (306HP)","X3 M40i (360HP)","X4 M40i (360HP)","M550i (530HP)","M5 F90 (600HP)","Z4 M40i (340HP)"],mercedes:["A45 AMG W177 (421HP)","A35 AMG (306HP)","CLA 45 AMG (421HP)","CLA 35 AMG (306HP)","C43 AMG W206 (390HP)","C63 AMG W205 (476HP)","C63 S AMG (510HP)","GLA 45 AMG (421HP)","GLC 43 AMG (390HP)","E53 AMG (435HP)","GLE 53 AMG (435HP)","GLA 250 (224HP)","C200 (204HP)"],ford:["Ranger Raptor (288HP)","Mustang GT 5.0 (450HP)","Mustang EcoBoost 2.3 (310HP)","Mustang Shelby GT500 (760HP)","Focus RS (350HP)","Focus ST MK3 (250HP)","Focus ST MK4 (280HP)","Bronco 2.3 EcoBoost (300HP)","F-150 3.5 EcoBoost (450HP)"],chevrolet:["Camaro SS 6.2 (455HP)","Camaro ZL1 (650HP)","Camaro 2.0T (275HP)","Corvette C7 (455HP)","Corvette C8 (490HP)","Colorado ZR2 (308HP)","Silverado 5.3 (355HP)","Silverado 6.2 (420HP)","Equinox RS 2.0T (252HP)"],toyota:["Supra A90 2.0 (258HP)","Supra A90 3.0 (382HP)","GR Yaris (261HP)","GR86 (228HP)","Land Cruiser 300 3.5T (415HP)","4Runner TRD Pro (270HP)","Hilux GR Sport (224HP)","Tacoma TRD Pro (278HP)","Tundra 3.5T (389HP)","RAV4 Prime (302HP)"],honda:["Civic Type R FL5 (315HP)","Civic Type R FK8 (316HP)","Civic Si 11gen (200HP)","Accord 2.0T (252HP)","CR-V Sport Hybrid (204HP)"],subaru:["WRX STI VA (310HP)","WRX VB (271HP)","WRX STI EJ257 (305HP)","BRZ (228HP)","Forester XT (177HP)","Outback 2.5 (182HP)"],nissan:["GT-R R35 (565HP)","GT-R R35 Track Ed. (600HP)","Z RZ34 (400HP)","Frontier Pro-4X (310HP)","Pathfinder 3.8 (284HP)","Kicks e-Power (136HP)"],mitsubishi:["Lancer Evo X (291HP)","Outlander PHEV (248HP)","Eclipse Cross 1.5T (150HP)"],mazda:["MX-5 RF 2.0 (181HP)","Mazda3 Turbo (250HP)","CX-5 2.5T (256HP)","CX-50 2.5T Turbo (256HP)"],hyundai:["Elantra N (276HP)","Veloster N (275HP)","i30 N (280HP)","Tucson N-Line 1.6T (180HP)","Kona N (276HP)","Ioniq 5 N (641HP)"],kia:["Stinger GT 3.3T (365HP)","K5 GT 2.5T (290HP)","Sportage 1.6T (180HP)"],porsche:["Cayman 718 T (300HP)","Cayman 718 GTS (394HP)","Boxster 718 (300HP)","Macan GTS (440HP)","Cayenne GTS (460HP)","Panamera 4S (440HP)","911 Carrera (385HP)","911 Carrera S (450HP)"],jeep:["Wrangler Rubicon 392 (470HP)","Gladiator Mojave (285HP)","Grand Cherokee Trackhawk (707HP)","Compass 1.3T (150HP)"],land_rover:["Defender 90 P400 (400HP)","Discovery Sport P290 (290HP)","Range Rover Sport SVR (575HP)"],volvo:["S60 T8 Polestar (415HP)","XC40 Recharge (408HP)","V60 Cross Country B5 (250HP)"]};
+const rHpData={"Golf GTI MK7 (230HP)":230,"Golf GTI MK8 (245HP)":245,"Golf R MK7 (300HP)":300,"Golf R MK8 (320HP)":320,"Golf GTI Clubsport (265HP)":265,"Tiguan R (320HP)":320,"Tiguan R-Line TSI (150HP)":150,"Polo GTI (207HP)":207,"Arteon R-Line (272HP)":272,"T-Roc R (300HP)":300,"A3 S3 8V (310HP)":310,"A3 S3 8Y (310HP)":310,"RS3 8V (400HP)":400,"RS3 8Y (400HP)":400,"TT RS (400HP)":400,"A4 B9 2.0T (190HP)":190,"S4 B9 (354HP)":354,"RS4 B9 (450HP)":450,"A5 2.0T (245HP)":245,"S5 B9 (354HP)":354,"RS5 (450HP)":450,"Q5 45 TFSI (265HP)":265,"SQ5 (354HP)":354,"RSQ8 (600HP)":600,"R8 V10 (570HP)":570,"M240i G42 (374HP)":374,"M340i G20 (374HP)":374,"M2 G87 (460HP)":460,"M3 G80 (510HP)":510,"M4 G82 (510HP)":510,"320i G20 (184HP)":184,"330i G20 (258HP)":258,"M135i F40 (306HP)":306,"M235i Gran Coupe (306HP)":306,"X3 M40i (360HP)":360,"X4 M40i (360HP)":360,"M550i (530HP)":530,"M5 F90 (600HP)":600,"Z4 M40i (340HP)":340,"A45 AMG W177 (421HP)":421,"A35 AMG (306HP)":306,"CLA 45 AMG (421HP)":421,"CLA 35 AMG (306HP)":306,"C43 AMG W206 (390HP)":390,"C63 AMG W205 (476HP)":476,"C63 S AMG (510HP)":510,"GLA 45 AMG (421HP)":421,"GLC 43 AMG (390HP)":390,"E53 AMG (435HP)":435,"GLE 53 AMG (435HP)":435,"GLA 250 (224HP)":224,"C200 (204HP)":204,"Ranger Raptor (288HP)":288,"Mustang GT 5.0 (450HP)":450,"Mustang EcoBoost 2.3 (310HP)":310,"Mustang Shelby GT500 (760HP)":760,"Focus RS (350HP)":350,"Focus ST MK3 (250HP)":250,"Focus ST MK4 (280HP)":280,"Bronco 2.3 EcoBoost (300HP)":300,"F-150 3.5 EcoBoost (450HP)":450,"Camaro SS 6.2 (455HP)":455,"Camaro ZL1 (650HP)":650,"Camaro 2.0T (275HP)":275,"Corvette C7 (455HP)":455,"Corvette C8 (490HP)":490,"Colorado ZR2 (308HP)":308,"Silverado 5.3 (355HP)":355,"Silverado 6.2 (420HP)":420,"Equinox RS 2.0T (252HP)":252,"Supra A90 2.0 (258HP)":258,"Supra A90 3.0 (382HP)":382,"GR Yaris (261HP)":261,"GR86 (228HP)":228,"Land Cruiser 300 3.5T (415HP)":415,"4Runner TRD Pro (270HP)":270,"Hilux GR Sport (224HP)":224,"Tacoma TRD Pro (278HP)":278,"Tundra 3.5T (389HP)":389,"RAV4 Prime (302HP)":302,"Civic Type R FL5 (315HP)":315,"Civic Type R FK8 (316HP)":316,"Civic Si 11gen (200HP)":200,"Accord 2.0T (252HP)":252,"CR-V Sport Hybrid (204HP)":204,"WRX STI VA (310HP)":310,"WRX VB (271HP)":271,"WRX STI EJ257 (305HP)":305,"BRZ (228HP)":228,"Forester XT (177HP)":177,"Outback 2.5 (182HP)":182,"GT-R R35 (565HP)":565,"GT-R R35 Track Ed. (600HP)":600,"Z RZ34 (400HP)":400,"Frontier Pro-4X (310HP)":310,"Pathfinder 3.8 (284HP)":284,"Kicks e-Power (136HP)":136,"Lancer Evo X (291HP)":291,"Outlander PHEV (248HP)":248,"Eclipse Cross 1.5T (150HP)":150,"MX-5 RF 2.0 (181HP)":181,"Mazda3 Turbo (250HP)":250,"CX-5 2.5T (256HP)":256,"CX-50 2.5T Turbo (256HP)":256,"Elantra N (276HP)":276,"Veloster N (275HP)":275,"i30 N (280HP)":280,"Tucson N-Line 1.6T (180HP)":180,"Kona N (276HP)":276,"Ioniq 5 N (641HP)":641,"Stinger GT 3.3T (365HP)":365,"K5 GT 2.5T (290HP)":290,"Sportage 1.6T (180HP)":180,"Cayman 718 T (300HP)":300,"Cayman 718 GTS (394HP)":394,"Boxster 718 (300HP)":300,"Macan GTS (440HP)":440,"Cayenne GTS (460HP)":460,"Panamera 4S (440HP)":440,"911 Carrera (385HP)":385,"911 Carrera S (450HP)":450,"Wrangler Rubicon 392 (470HP)":470,"Gladiator Mojave (285HP)":285,"Grand Cherokee Trackhawk (707HP)":707,"Compass 1.3T (150HP)":150,"Defender 90 P400 (400HP)":400,"Discovery Sport P290 (290HP)":290,"Range Rover Sport SVR (575HP)":575,"S60 T8 Polestar (415HP)":415,"XC40 Recharge (408HP)":408,"V60 Cross Country B5 (250HP)":250};
 function updateCalcRepro(){const m=document.getElementById("calcMarca").value;const ms=document.getElementById("calcModelo");ms.innerHTML="<option value=''>- Seleccionar modelo -</option>";if(m&&rModels[m])rModels[m].forEach(x=>{const o=document.createElement("option");o.value=x;o.textContent=x;ms.appendChild(o);});}
 function calcHPRepro(){const m=document.getElementById("calcModelo").value;if(m&&rHpData[m])showCalcReproResult(rHpData[m]);}
-function showCalcReproResult(hp){if(!hp||hp<50)return;document.getElementById("calcResultBox").style.display="block";document.getElementById("calcOrigNum").textContent=hp+" HP";document.getElementById("calcS1").textContent=Math.round(hp*1.25)+" HP";document.getElementById("calcS2").textContent=Math.round(hp*1.38)+" HP";document.getElementById("calcS3").textContent=Math.round(hp*1.55)+" HP";}
+function showCalcReproResult(hp){if(!hp||hp<50)return;document.getElementById("calcResultBox").style.display="block";document.getElementById("calcOrigNum").textContent=hp+" HP";document.getElementById("calcS1").textContent=Math.round(hp*1.20)+"–"+Math.round(hp*1.30)+" HP";document.getElementById("calcS2").textContent=Math.round(hp*1.30)+"–"+Math.round(hp*1.40)+" HP";document.getElementById("calcS3").textContent=Math.round(hp*1.50)+"–"+Math.round(hp*1.60)+" HP";document.getElementById("calcS1range").textContent="+20% a +30%";document.getElementById("calcS2range").textContent="+30% a +40%";document.getElementById("calcS3range").textContent="+50% a +60%";}
 let rHistory=[];
 async function sendRChat(){
   const inp=document.getElementById("rChatInput"),msg=inp.value.trim();
@@ -2320,8 +2328,8 @@ async function sendRChat(){
 function openRepro() {
   const REPRO_SCRIPT_INLINE = `
 const WT_SYS_R = "Eres el asesor técnico virtual oficial de WitcherTorque. Tenés acceso completo a toda la información del taller. Nunca digas que sos una IA.\\n\\nWitcherTorque — Caracas, Venezuela. 16+ años. WhatsApp: +58 412-585-6541. Horario: Lun-Vie 8:00-17:00 por cita previa. Remote Tuning disponible a nivel mundial. Email: witchertorquevzla@gmail.com\\n\\nSERVICIOS: Reprogramación ECU (único Master Tuner Ecutek de Venezuela, distribuidor autorizado HPTuners, multimapas, Stage 1/2/3, E85, Pops & Bangs, Launch Control), Remote Tuning mundial, Dyno Sessions en el único Mainline ProHub de Venezuela, Mecánica High Performance, Stand Alone ECU (MaxxEcu Gen2, Haltech, FuelTech, Link ECU), Electricidad, Construcciones Custom Inox/Aluminio/Titanio, Impresión 3D, Mecánica General.\\n\\nSTAGES: Stage 1 = solo software stock, +20-30% HP. Stage 2 = software + downpipe/intake/intercooler, +30-40% HP. Stage 2+ E85 = con etanol, +50-60% HP. Stage 3 = turbo grande + inyección alto flujo + calibración completa en dyno desde cero.\\n\\nDIFERENCIADORES: Reprogramación DIRECTA sobre ECU original, sin módulos externos, sin cables cortados, 100% reversible. Mapas calibrados para el combustible venezolano. Único Mainline ProHub Dyno de Venezuela.\\n\\nFLUJO: Obtené nombre, vehículo (marca/modelo/año/motor), modificaciones actuales y servicio de interés. Natural, sin pedir todo de golpe. Nunca inventes datos ni garantices HP exactos. Nunca diagnostiques sin inspección física. Respuestas cortas, máximo un párrafo.\\n\\nCIERRE cuando tengas nombre + vehículo + servicio: Perfecto [NOMBRE], ya tengo todo lo que necesito. Voy a derivarte con nuestro equipo para coordinar tu [SERVICIO]. Un momento! — después no respondas más.";
-const rModels={volkswagen:["Golf GTI MK7 (230HP)","Golf GTI MK8 (245HP)","Golf R (320HP)","Tiguan R-Line (150HP)"],audi:["A3 S3 (310HP)","RS3 (400HP)","TT RS (400HP)","A4 B9 (190HP)"],bmw:["M240i (374HP)","M340i (374HP)","M2 (460HP)","320i (184HP)"],mercedes:["A45 AMG (421HP)","C43 AMG (390HP)","GLA 250 (224HP)"],ford:["Raptor (450HP)","Mustang GT (450HP)","Focus RS (350HP)"],chevrolet:["Camaro SS (455HP)","Corvette C7 (455HP)","Silverado (355HP)"],toyota:["Supra A90 (382HP)","GR Yaris (261HP)","Land Cruiser 300 (415HP)"],honda:["Civic Type R (315HP)","Civic Si (200HP)"],subaru:["WRX STI (310HP)","WRX (271HP)","BRZ (228HP)"],nissan:["GT-R (570HP)","Z (400HP)","Frontier (310HP)"]};
-const rHpData={"Golf GTI MK7 (230HP)":230,"Golf GTI MK8 (245HP)":245,"Golf R (320HP)":320,"Tiguan R-Line (150HP)":150,"A3 S3 (310HP)":310,"RS3 (400HP)":400,"TT RS (400HP)":400,"A4 B9 (190HP)":190,"M240i (374HP)":374,"M340i (374HP)":374,"M2 (460HP)":460,"320i (184HP)":184,"A45 AMG (421HP)":421,"C43 AMG (390HP)":390,"GLA 250 (224HP)":224,"Raptor (450HP)":450,"Mustang GT (450HP)":450,"Focus RS (350HP)":350,"Camaro SS (455HP)":455,"Corvette C7 (455HP)":455,"Silverado (355HP)":355,"Supra A90 (382HP)":382,"GR Yaris (261HP)":261,"Land Cruiser 300 (415HP)":415,"Civic Type R (315HP)":315,"Civic Si (200HP)":200,"WRX STI (310HP)":310,"WRX (271HP)":271,"BRZ (228HP)":228,"GT-R (570HP)":570,"Z (400HP)":400,"Frontier (310HP)":310};
+const rModels={volkswagen:["Golf GTI MK7 (230HP)","Golf GTI MK8 (245HP)","Golf R MK7 (300HP)","Golf R MK8 (320HP)","Golf GTI Clubsport (265HP)","Tiguan R (320HP)","Tiguan R-Line TSI (150HP)","Polo GTI (207HP)","Arteon R-Line (272HP)","T-Roc R (300HP)"],audi:["A3 S3 8V (310HP)","A3 S3 8Y (310HP)","RS3 8V (400HP)","RS3 8Y (400HP)","TT RS (400HP)","A4 B9 2.0T (190HP)","S4 B9 (354HP)","RS4 B9 (450HP)","A5 2.0T (245HP)","S5 B9 (354HP)","RS5 (450HP)","Q5 45 TFSI (265HP)","SQ5 (354HP)","RSQ8 (600HP)","R8 V10 (570HP)"],bmw:["M240i G42 (374HP)","M340i G20 (374HP)","M2 G87 (460HP)","M3 G80 (510HP)","M4 G82 (510HP)","320i G20 (184HP)","330i G20 (258HP)","M135i F40 (306HP)","M235i Gran Coupe (306HP)","X3 M40i (360HP)","X4 M40i (360HP)","M550i (530HP)","M5 F90 (600HP)","Z4 M40i (340HP)"],mercedes:["A45 AMG W177 (421HP)","A35 AMG (306HP)","CLA 45 AMG (421HP)","CLA 35 AMG (306HP)","C43 AMG W206 (390HP)","C63 AMG W205 (476HP)","C63 S AMG (510HP)","GLA 45 AMG (421HP)","GLC 43 AMG (390HP)","E53 AMG (435HP)","GLE 53 AMG (435HP)","GLA 250 (224HP)","C200 (204HP)"],ford:["Ranger Raptor (288HP)","Mustang GT 5.0 (450HP)","Mustang EcoBoost 2.3 (310HP)","Mustang Shelby GT500 (760HP)","Focus RS (350HP)","Focus ST MK3 (250HP)","Focus ST MK4 (280HP)","Bronco 2.3 EcoBoost (300HP)","F-150 3.5 EcoBoost (450HP)"],chevrolet:["Camaro SS 6.2 (455HP)","Camaro ZL1 (650HP)","Camaro 2.0T (275HP)","Corvette C7 (455HP)","Corvette C8 (490HP)","Colorado ZR2 (308HP)","Silverado 5.3 (355HP)","Silverado 6.2 (420HP)","Equinox RS 2.0T (252HP)"],toyota:["Supra A90 2.0 (258HP)","Supra A90 3.0 (382HP)","GR Yaris (261HP)","GR86 (228HP)","Land Cruiser 300 3.5T (415HP)","4Runner TRD Pro (270HP)","Hilux GR Sport (224HP)","Tacoma TRD Pro (278HP)","Tundra 3.5T (389HP)","RAV4 Prime (302HP)"],honda:["Civic Type R FL5 (315HP)","Civic Type R FK8 (316HP)","Civic Si 11gen (200HP)","Accord 2.0T (252HP)","CR-V Sport Hybrid (204HP)"],subaru:["WRX STI VA (310HP)","WRX VB (271HP)","WRX STI EJ257 (305HP)","BRZ (228HP)","Forester XT (177HP)","Outback 2.5 (182HP)"],nissan:["GT-R R35 (565HP)","GT-R R35 Track Ed. (600HP)","Z RZ34 (400HP)","Frontier Pro-4X (310HP)","Pathfinder 3.8 (284HP)","Kicks e-Power (136HP)"],mitsubishi:["Lancer Evo X (291HP)","Outlander PHEV (248HP)","Eclipse Cross 1.5T (150HP)"],mazda:["MX-5 RF 2.0 (181HP)","Mazda3 Turbo (250HP)","CX-5 2.5T (256HP)","CX-50 2.5T Turbo (256HP)"],hyundai:["Elantra N (276HP)","Veloster N (275HP)","i30 N (280HP)","Tucson N-Line 1.6T (180HP)","Kona N (276HP)","Ioniq 5 N (641HP)"],kia:["Stinger GT 3.3T (365HP)","K5 GT 2.5T (290HP)","Sportage 1.6T (180HP)"],porsche:["Cayman 718 T (300HP)","Cayman 718 GTS (394HP)","Boxster 718 (300HP)","Macan GTS (440HP)","Cayenne GTS (460HP)","Panamera 4S (440HP)","911 Carrera (385HP)","911 Carrera S (450HP)"],jeep:["Wrangler Rubicon 392 (470HP)","Gladiator Mojave (285HP)","Grand Cherokee Trackhawk (707HP)","Compass 1.3T (150HP)"],land_rover:["Defender 90 P400 (400HP)","Discovery Sport P290 (290HP)","Range Rover Sport SVR (575HP)"],volvo:["S60 T8 Polestar (415HP)","XC40 Recharge (408HP)","V60 Cross Country B5 (250HP)"]};
+const rHpData={"Golf GTI MK7 (230HP)":230,"Golf GTI MK8 (245HP)":245,"Golf R MK7 (300HP)":300,"Golf R MK8 (320HP)":320,"Golf GTI Clubsport (265HP)":265,"Tiguan R (320HP)":320,"Tiguan R-Line TSI (150HP)":150,"Polo GTI (207HP)":207,"Arteon R-Line (272HP)":272,"T-Roc R (300HP)":300,"A3 S3 8V (310HP)":310,"A3 S3 8Y (310HP)":310,"RS3 8V (400HP)":400,"RS3 8Y (400HP)":400,"TT RS (400HP)":400,"A4 B9 2.0T (190HP)":190,"S4 B9 (354HP)":354,"RS4 B9 (450HP)":450,"A5 2.0T (245HP)":245,"S5 B9 (354HP)":354,"RS5 (450HP)":450,"Q5 45 TFSI (265HP)":265,"SQ5 (354HP)":354,"RSQ8 (600HP)":600,"R8 V10 (570HP)":570,"M240i G42 (374HP)":374,"M340i G20 (374HP)":374,"M2 G87 (460HP)":460,"M3 G80 (510HP)":510,"M4 G82 (510HP)":510,"320i G20 (184HP)":184,"330i G20 (258HP)":258,"M135i F40 (306HP)":306,"M235i Gran Coupe (306HP)":306,"X3 M40i (360HP)":360,"X4 M40i (360HP)":360,"M550i (530HP)":530,"M5 F90 (600HP)":600,"Z4 M40i (340HP)":340,"A45 AMG W177 (421HP)":421,"A35 AMG (306HP)":306,"CLA 45 AMG (421HP)":421,"CLA 35 AMG (306HP)":306,"C43 AMG W206 (390HP)":390,"C63 AMG W205 (476HP)":476,"C63 S AMG (510HP)":510,"GLA 45 AMG (421HP)":421,"GLC 43 AMG (390HP)":390,"E53 AMG (435HP)":435,"GLE 53 AMG (435HP)":435,"GLA 250 (224HP)":224,"C200 (204HP)":204,"Ranger Raptor (288HP)":288,"Mustang GT 5.0 (450HP)":450,"Mustang EcoBoost 2.3 (310HP)":310,"Mustang Shelby GT500 (760HP)":760,"Focus RS (350HP)":350,"Focus ST MK3 (250HP)":250,"Focus ST MK4 (280HP)":280,"Bronco 2.3 EcoBoost (300HP)":300,"F-150 3.5 EcoBoost (450HP)":450,"Camaro SS 6.2 (455HP)":455,"Camaro ZL1 (650HP)":650,"Camaro 2.0T (275HP)":275,"Corvette C7 (455HP)":455,"Corvette C8 (490HP)":490,"Colorado ZR2 (308HP)":308,"Silverado 5.3 (355HP)":355,"Silverado 6.2 (420HP)":420,"Equinox RS 2.0T (252HP)":252,"Supra A90 2.0 (258HP)":258,"Supra A90 3.0 (382HP)":382,"GR Yaris (261HP)":261,"GR86 (228HP)":228,"Land Cruiser 300 3.5T (415HP)":415,"4Runner TRD Pro (270HP)":270,"Hilux GR Sport (224HP)":224,"Tacoma TRD Pro (278HP)":278,"Tundra 3.5T (389HP)":389,"RAV4 Prime (302HP)":302,"Civic Type R FL5 (315HP)":315,"Civic Type R FK8 (316HP)":316,"Civic Si 11gen (200HP)":200,"Accord 2.0T (252HP)":252,"CR-V Sport Hybrid (204HP)":204,"WRX STI VA (310HP)":310,"WRX VB (271HP)":271,"WRX STI EJ257 (305HP)":305,"BRZ (228HP)":228,"Forester XT (177HP)":177,"Outback 2.5 (182HP)":182,"GT-R R35 (565HP)":565,"GT-R R35 Track Ed. (600HP)":600,"Z RZ34 (400HP)":400,"Frontier Pro-4X (310HP)":310,"Pathfinder 3.8 (284HP)":284,"Kicks e-Power (136HP)":136,"Lancer Evo X (291HP)":291,"Outlander PHEV (248HP)":248,"Eclipse Cross 1.5T (150HP)":150,"MX-5 RF 2.0 (181HP)":181,"Mazda3 Turbo (250HP)":250,"CX-5 2.5T (256HP)":256,"CX-50 2.5T Turbo (256HP)":256,"Elantra N (276HP)":276,"Veloster N (275HP)":275,"i30 N (280HP)":280,"Tucson N-Line 1.6T (180HP)":180,"Kona N (276HP)":276,"Ioniq 5 N (641HP)":641,"Stinger GT 3.3T (365HP)":365,"K5 GT 2.5T (290HP)":290,"Sportage 1.6T (180HP)":180,"Cayman 718 T (300HP)":300,"Cayman 718 GTS (394HP)":394,"Boxster 718 (300HP)":300,"Macan GTS (440HP)":440,"Cayenne GTS (460HP)":460,"Panamera 4S (440HP)":440,"911 Carrera (385HP)":385,"911 Carrera S (450HP)":450,"Wrangler Rubicon 392 (470HP)":470,"Gladiator Mojave (285HP)":285,"Grand Cherokee Trackhawk (707HP)":707,"Compass 1.3T (150HP)":150,"Defender 90 P400 (400HP)":400,"Discovery Sport P290 (290HP)":290,"Range Rover Sport SVR (575HP)":575,"S60 T8 Polestar (415HP)":415,"XC40 Recharge (408HP)":408,"V60 Cross Country B5 (250HP)":250};
 
 function updateCalcRepro(){
   const m=document.getElementById("calcMarca").value;
@@ -2346,13 +2354,13 @@ function showCalcReproResult(hp){
   const s1lo=Math.round(hp*1.20),s1hi=Math.round(hp*1.30);
   const s2lo=Math.round(hp*1.30),s2hi=Math.round(hp*1.40);
   const s3lo=Math.round(hp*1.50),s3hi=Math.round(hp*1.60);
-  document.getElementById("calcS1").textContent="+"+Math.round(hp*0.20)+"% a +"+Math.round(hp*0.30)+"% HP";
-  document.getElementById("calcS2").textContent="+"+Math.round(hp*0.30)+"% a +"+Math.round(hp*0.40)+"% HP";
-  document.getElementById("calcS3").textContent="+"+Math.round(hp*0.50)+"% a +"+Math.round(hp*0.60)+"% HP";
+  document.getElementById("calcS1").textContent=s1lo+"–"+s1hi+" HP";
+  document.getElementById("calcS2").textContent=s2lo+"–"+s2hi+" HP";
+  document.getElementById("calcS3").textContent=s3lo+"–"+s3hi+" HP";
   document.getElementById("calcOrigNum").textContent=hp+" HP";
-  document.getElementById("calcS1range").textContent=s1lo+"–"+s1hi+" HP";
-  document.getElementById("calcS2range").textContent=s2lo+"–"+s2hi+" HP";
-  document.getElementById("calcS3range").textContent=s3lo+"–"+s3hi+" HP";
+  document.getElementById("calcS1range").textContent="+20% a +30%";
+  document.getElementById("calcS2range").textContent="+30% a +40%";
+  document.getElementById("calcS3range").textContent="+50% a +60%";
 }
 
 function drawDynoChart(baseHP){
@@ -2573,7 +2581,7 @@ body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opa
 
 /* ─── HERO ─────────────────────────────────── */
 .hero{position:relative;min-height:92vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;z-index:0;background:url('https://res.cloudinary.com/dpiavcukm/image/upload/f_jpg,q_auto/v1781501107/IMG_5862_utapwm.heic') center center/cover no-repeat;}
+.hero-bg{position:absolute;inset:0;z-index:0;background:url('https://res.cloudinary.com/dpiavcukm/image/upload/v1781757134/IMG_7241_pcpwcd.jpg') center center/cover no-repeat;}
 .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,6,6,0.2) 0%,rgba(6,6,6,0.15) 30%,rgba(6,6,6,0.7) 65%,rgba(6,6,6,0.98) 100%);}
 .hero-bg::before{content:'';position:absolute;inset:0;z-index:1;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,0.035) 3px,rgba(0,0,0,0.035) 4px);pointer-events:none;}
 .hero-content{position:relative;z-index:2;padding:0 22px 52px;}
@@ -2673,7 +2681,8 @@ body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opa
 
 /* ─── METRICS DASHBOARD ─────────────────────── */
 .metrics-section{padding:60px 22px 52px;background:var(--black);position:relative;overflow:hidden;}
-.metrics-section::after{content:'';position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 100%,rgba(200,0,0,0.06) 0%,transparent 70%);pointer-events:none;}
+.metrics-section::after{content:'';position:absolute;inset:0;z-index:0;background:url('https://res.cloudinary.com/dpiavcukm/image/upload/v1781757133/IMG_7238_eebaqk.jpg') center center/cover no-repeat;opacity:0.09;pointer-events:none;}
+.metrics-section::before{content:'';position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse at 50% 100%,rgba(200,0,0,0.06) 0%,transparent 70%);pointer-events:none;}
 .metrics-section>*{position:relative;z-index:1;}
 .metrics-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .metric-card{background:var(--graphite-2);border:1px solid var(--graphite-3);padding:20px 16px;text-align:center;position:relative;overflow:hidden;}
@@ -2683,7 +2692,9 @@ body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opa
 .metric-tag{font-family:var(--font-mono);font-size:7px;letter-spacing:2px;color:var(--red);border:1px solid rgba(200,0,0,0.25);padding:2px 7px;text-transform:uppercase;display:inline-block;margin-top:8px;}
 
 /* ─── PROCESS TIMELINE ─────────────────────── */
-.process-section{padding:60px 22px 52px;background:var(--graphite-2);}
+.process-section{padding:60px 22px 52px;background:var(--graphite-2);position:relative;overflow:hidden;}
+.process-section::after{content:'';position:absolute;inset:0;z-index:0;background:url('https://res.cloudinary.com/dpiavcukm/image/upload/v1781757134/IMG_7237_bplnlb.jpg') center center/cover no-repeat;opacity:0.08;pointer-events:none;}
+.process-section>*{position:relative;z-index:1;}
 .process-steps{display:flex;flex-direction:column;gap:0;}
 .process-step{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid rgba(200,0,0,0.06);position:relative;}
 .process-step:last-child{border-bottom:none;}
@@ -2708,7 +2719,9 @@ body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opa
 .case-feel span{color:var(--red);}
 
 /* ─── MYTHS ─────────────────────────────────── */
-.myths-section{padding:60px 22px 52px;background:var(--graphite-2);}
+.myths-section{padding:60px 22px 52px;background:var(--graphite-2);position:relative;overflow:hidden;}
+.myths-section::after{content:'';position:absolute;inset:0;z-index:0;background:url('https://res.cloudinary.com/dpiavcukm/image/upload/v1781757134/IMG_7239_x2mp8m.jpg') center center/cover no-repeat;opacity:0.08;pointer-events:none;}
+.myths-section>*{position:relative;z-index:1;}
 .myth-item{background:var(--black);border:1px solid var(--graphite-3);padding:20px 18px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;transition:border-color 0.3s;}
 .myth-item:hover{border-color:rgba(200,0,0,0.3);}
 .myth-check{width:20px;height:20px;border:1px solid var(--red);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;}
@@ -2804,7 +2817,7 @@ body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opa
 <section class="calc-section" id="calculadora">
   <div class="section-eyebrow reveal">Calculadora de ingeniería</div>
   <h2 class="section-title reveal">POTENCIAL DE <span>TU MOTOR</span></h2>
-  <p class="section-desc reveal">Seleccioná tu vehículo y visualizá el rango de ganancia estimado según builds similares calibrados por WitcherTorque.</p>
+  <p class="section-desc reveal">Seleccioná tu vehículo y visualizá el rango de ganancia estimado según proyectos similares calibrados por WitcherTorque.</p>
 
   <div class="calc-selects reveal">
     <div class="calc-field">
@@ -2821,6 +2834,14 @@ body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opa
         <option value="honda">Honda</option>
         <option value="subaru">Subaru</option>
         <option value="nissan">Nissan</option>
+        <option value="mitsubishi">Mitsubishi</option>
+        <option value="mazda">Mazda</option>
+        <option value="hyundai">Hyundai</option>
+        <option value="kia">Kia</option>
+        <option value="porsche">Porsche</option>
+        <option value="jeep">Jeep</option>
+        <option value="land_rover">Land Rover</option>
+        <option value="volvo">Volvo</option>
       </select>
     </div>
     <div class="calc-field">
@@ -3226,34 +3247,6 @@ ${REPRO_SCRIPT_INLINE}
 }
 
 // ─── OPEN SERVICIOS PAGE ──────────────────────────
-const SVC_SCRIPT = `
-function submitForm(){
-  const nombre=document.getElementById("fNombre").value.trim();
-  const vehiculo=document.getElementById("fVehiculo").value.trim();
-  const motor=document.getElementById("fMotor")?document.getElementById("fMotor").value.trim():"";
-  const servicio=document.getElementById("fServicio").value;
-  const objetivo=document.getElementById("fObjetivo")?document.getElementById("fObjetivo").value:"";
-  const wa=document.getElementById("fWA").value.trim();
-  const desc=document.getElementById("fDesc")?document.getElementById("fDesc").value.trim():"";
-  if(!nombre||!vehiculo||!servicio||!wa){alert("Por favor completá todos los campos obligatorios.");return;}
-  const ok=document.getElementById("submitOk");
-  ok.style.display="block";
-  document.querySelector(".btn-submit span").textContent="Solicitud Enviada";
-  document.querySelector(".btn-submit").style.background="#1a6b1a";
-  setTimeout(()=>{
-    let msg="🔧 *Solicitud de Turno — WitcherTorque*\n\n";
-    msg+="👤 *Nombre:* "+nombre+"\n";
-    msg+="🚗 *Vehículo:* "+vehiculo+"\n";
-    if(motor) msg+="⚙️ *Motorización:* "+motor+"\n";
-    msg+="🛠️ *Servicio:* "+servicio+"\n";
-    if(objetivo) msg+="🏁 *Objetivo:* "+objetivo+"\n";
-    msg+="📱 *WhatsApp:* "+wa+"\n";
-    if(desc) msg+="📝 *Detalles:* "+desc+"\n";
-    msg+="\n_Solicitud generada desde WitcherTorque_";
-    window.open("https://wa.me/584125856541?text="+encodeURIComponent(msg),"_blank");
-  },800);
-}
-`;
 
 function openContacto() {
   const html = `<!DOCTYPE html>
@@ -3762,7 +3755,9 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   </a>
 </div>
 
-<script>` + SVC_SCRIPT + `<\/script>\n</body>\n</html>`;
+<\/script>
+</body>
+</html>`;
   openWtModal(html);
 }
 
@@ -3972,14 +3967,14 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   <div class="page-hero-content">
     <div class="page-label">Récords y Proyectos Destacados</div>
     <div class="page-title">HALL OF<br><span>FAME</span></div>
-    <p class="page-desc">Los builds más radicales que han pasado por WitcherTorque. Récords nacionales, potencias extremas, pilotos de élite.</p>
+    <p class="page-desc">Los proyectos más radicales que han pasado por WitcherTorque. Récords nacionales, potencias extremas, pilotos de élite.</p>
   </div>
 </div>
 
 <!-- STATS -->
 <div class="hof-stats">
   <div class="hof-stat-box"><div class="hof-stat-num">12</div><div class="hof-stat-label">Récords Nacionales</div></div>
-  <div class="hof-stat-box"><div class="hof-stat-num">+50</div><div class="hof-stat-label">Builds High Perf</div></div>
+  <div class="hof-stat-box"><div class="hof-stat-num">+50</div><div class="hof-stat-label">Proyectos High Perf</div></div>
   <div class="hof-stat-box"><div class="hof-stat-num">+3K</div><div class="hof-stat-label">HP Desarrollados</div></div>
 </div>
 
@@ -4932,7 +4927,7 @@ Funciones de competición que manejamos: Nitro, Launch Control avanzado, flat sh
 09 - Ferrari 458 Challenge Evo: GT Challenge Américas 2025 — +90HP remoto, varios podios categoría GT Lighting (Meval Racing)
 10 - BMW M3 Competition G80: +1300HP, big turbo, FL2K semi-finalista en 8.5s (Esteem Custom, Miami)
 11 - Mitsubishi Lancer Evo 5 RS: RESCATADO de otro taller que no pudo pasar de 800HP en 4 años y partió el motor. WitcherTorque lo hizo en UN intento: 1100HP. Propietario: Gamar Márquez.
-Estadísticas: 12+ récords nacionales, +50 builds de alto desempeño, +3000HP desarrollados, 500+ motores intervenidos.
+Estadísticas: 12+ récords nacionales, +50 proyectos de alto desempeño, +3000HP desarrollados, 500+ motores intervenidos.
 
 ━━━ TESTIMONIOS ━━━
 GAMAR MÁRQUEZ (Evo 5 RS — 1100HP): "Llegué a perder 6 años en manos inconscientes. Gastando dinero y apuntando en el lado errado del blanco. Me extendiste tu mano de corazón y en estos 2 años que llevo en las mejores manos sin duda en Venezuela, hemos logrado tantas cosas con mi proyecto del Evo 5 RS. Los demás con palabras. Ustedes siempre con hechos y resultados. Ya pronto me llevaré el Evo a disfrutarlo como nunca. Dios te bendiga hermano."
@@ -5113,6 +5108,29 @@ function toggleAiPopup() {
   floatBtn.style.display = isOpen ? 'none' : 'flex';
   if (isOpen) {
     setTimeout(() => document.getElementById('aiPopupInput').focus(), 300);
+  }
+}
+
+function submitForm(){
+  var modal=document.getElementById('wt-modal-inner');
+  var g=function(id){var el=modal?modal.querySelector('#'+id):document.getElementById(id);return el?el.value.trim():'';}
+  var nombre=g('fNombre'),vehiculo=g('fVehiculo'),motor=g('fMotor'),servicio=g('fServicio'),objetivo=g('fObjetivo'),wa=g('fWA'),desc=g('fDesc');
+  if(!nombre||!vehiculo||!servicio||!wa){alert('Por favor completá los campos obligatorios: Nombre, Vehículo, Servicio y WhatsApp.');return;}
+  var msg='🔧 *Solicitud de Turno — WitcherTorque*\n\n';
+  msg+='👤 *Nombre:* '+nombre+'\n';
+  msg+='🚗 *Vehículo:* '+vehiculo+'\n';
+  if(motor) msg+='⚙️ *Motorización:* '+motor+'\n';
+  msg+='🛠️ *Servicio:* '+servicio+'\n';
+  if(objetivo) msg+='🏁 *Objetivo:* '+objetivo+'\n';
+  msg+='📱 *WhatsApp:* '+wa+'\n';
+  if(desc) msg+='📝 *Detalles:* '+desc+'\n';
+  msg+='\n_Solicitud generada desde WitcherTorque_';
+  location.href='https://wa.me/584125856541?text='+encodeURIComponent(msg);
+  if(modal){
+    var ok=modal.querySelector('#submitOk');
+    if(ok) ok.style.display='block';
+    var btn=modal.querySelector('.btn-submit');
+    if(btn){var sp=btn.querySelector('span');if(sp)sp.textContent='Solicitud Enviada ✓';btn.style.background='#1a6b1a';}
   }
 }
 
