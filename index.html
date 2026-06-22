@@ -675,16 +675,23 @@ nav {
 .rcat {
   background: var(--graphite);
   border: 1px solid var(--graphite-3);
-  border-left: 2px solid rgba(200,0,0,0.35);
-  padding: 12px 14px;
-  display: flex; align-items: center; gap: 10px;
-  transition: border-left-color 0.2s;
+  border-bottom: 2px solid rgba(200,0,0,0.35);
+  padding: 16px 10px 12px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  transition: border-bottom-color 0.2s, background 0.2s;
+  text-align: center;
 }
-.rcat:hover { border-left-color: var(--red); }
-.rcat-icon { font-size: 18px; flex-shrink: 0; }
+.rcat:hover { border-bottom-color: var(--red); background: rgba(255,255,255,0.03); }
+.rcat-logo {
+  height: 34px; width: auto; max-width: 108px;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.rcat:hover .rcat-logo { opacity: 1; }
 .rcat-name {
-  font-family: var(--font-mono); font-size: 8px;
-  letter-spacing: 2px; color: var(--white-dim);
+  font-family: var(--font-mono); font-size: 7px;
+  letter-spacing: 1.5px; color: rgba(239,239,239,0.4);
   text-transform: uppercase; line-height: 1.3;
 }
 .repuestos-form-wrap {
@@ -2050,16 +2057,16 @@ footer {
   <p class="repuestos-intro">Distribuidores autorizados de <strong>Amsoil</strong>, <strong>vPracing</strong> y <strong>Fuel Factory</strong>. Representantes oficiales de marcas de élite mundial: <strong>X-Shift Gearboxes</strong>, <strong>aFe Power</strong>, <strong>MaxxEcu</strong>, <strong>Precision Turbo</strong>, <strong>Mishimoto</strong>, <strong>Dodson Motorsport</strong> y <strong>Vibrant Performance</strong>. Conseguimos cualquier pieza que necesités para tu proyecto.</p>
 
   <div class="repuestos-cats">
-    <div class="rcat"><div class="rcat-icon">🛢️</div><div class="rcat-name">Amsoil — Aceites & Lubricantes</div></div>
-    <div class="rcat"><div class="rcat-icon">🌬️</div><div class="rcat-name">aFe Power — Intakes & Filtros</div></div>
-    <div class="rcat"><div class="rcat-icon">💨</div><div class="rcat-name">Escapes Custom Inox / Titanio</div></div>
-    <div class="rcat"><div class="rcat-icon">🔩</div><div class="rcat-name">Suspensión & Frenos Elite</div></div>
-    <div class="rcat"><div class="rcat-icon">⚡</div><div class="rcat-name">MaxxEcu — Electrónica & ECU</div></div>
-    <div class="rcat"><div class="rcat-icon">🚀</div><div class="rcat-name">vPracing & Fuel Factory</div></div>
-    <div class="rcat"><div class="rcat-icon">🔄</div><div class="rcat-name">X-Shift — Transmisiones Secuenciales</div></div>
-    <div class="rcat"><div class="rcat-icon">🌡️</div><div class="rcat-name">Mishimoto — Intercoolers & Cooling</div></div>
-    <div class="rcat"><div class="rcat-icon">💪</div><div class="rcat-name">Dodson — Clutch & Drivetrain</div></div>
-    <div class="rcat"><div class="rcat-icon">🏎️</div><div class="rcat-name">Precision Turbo — Turbos</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/e_bgremoval/v1782160261/amsoil-logo_v0ucig.png" alt="Amsoil"><div class="rcat-name">Aceites & Lubricantes</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/v1782160261/logo_ilspns.svg" alt="aFe Power"><div class="rcat-name">Intakes & Filtros</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/e_bgremoval/v1782160261/MAxecu_ezgrna.png" alt="MaxxECU"><div class="rcat-name">Electrónica & ECU</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/v1782160261/logo_1_ucxl6m.svg" alt="Mishimoto"><div class="rcat-name">Intercoolers & Cooling</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/v1782160261/dodson_m2ekvn.png" alt="Dodson Motorsport"><div class="rcat-name">Clutch & Drivetrain</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/e_bgremoval/v1782160262/precisionturbo_yniwie.png" alt="Precision Turbo"><div class="rcat-name">Turbos</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/v1782160262/vp_racing_zlabl0.svg" alt="VP Racing"><div class="rcat-name">Combustibles Racing</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/v1782160265/vibrant_ufhbvw.webp" alt="Vibrant Performance"><div class="rcat-name">Exhausts & Fabrication</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/e_bgremoval/v1782160262/shift_kk7tmd.png" alt="X-Shift"><div class="rcat-name">Transmisiones Secuenciales</div></div>
+    <div class="rcat"><img class="rcat-logo" src="https://res.cloudinary.com/dpiavcukm/image/upload/e_bgremoval/v1782160262/fuelfactory_im1yoi.png" alt="Fuel Factory"><div class="rcat-name">Combustibles & Aditivos</div></div>
   </div>
 
   <div class="repuestos-form-wrap">
@@ -3871,7 +3878,7 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 .hof-mods-title{font-family:var(--font-mono);font-size:9px;letter-spacing:4px;color:var(--red);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
 .hof-mods-title::before{content:'';width:16px;height:1px;background:var(--red);}
 .hof-mods{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
-.hof-mod{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;color:rgba(239,239,239,0.8);line-height:1.4;}
+.hof-mod{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:rgba(239,239,239,0.8);line-height:1.4;}
 .hof-mod::before{content:'◈';color:var(--red);font-size:9px;flex-shrink:0;margin-top:2px;}
 /* PILOT */
 .hof-pilot{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--graphite);border:1px solid var(--graphite-3);border-left:3px solid var(--red);margin-bottom:6px;}
@@ -3951,7 +3958,7 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   /* MODS */
   .hof-mods-title{font-size:8px;letter-spacing:2px;margin-bottom:6px;}
   .hof-mods{gap:5px;margin-bottom:8px;}
-  .hof-mod{font-size:13px;line-height:1.5;gap:6px;}
+  .hof-mod{font-size:12px;line-height:1.5;gap:6px;}
   /* PILOT / VENUE */
   .hof-pilot,.hof-venue{padding:8px 10px;gap:8px;}
   .hof-pilot-icon,.hof-venue-icon{font-size:14px;}
