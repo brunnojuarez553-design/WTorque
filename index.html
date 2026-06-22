@@ -1590,10 +1590,8 @@ footer {
       id="heroVideo"
       autoplay muted loop playsinline
       preload="auto"
-      poster="https://res.cloudinary.com/dvvuwigmy/video/upload/so_0,q_80,f_jpg/v1780432463/insta_video_11278_pd0nla.jpg"
     >
-      <source src="https://res.cloudinary.com/dvvuwigmy/video/upload/q_70,f_webm,vc_vp9/v1780432463/insta_video_11278_pd0nla.webm" type="video/webm">
-      <source src="https://res.cloudinary.com/dvvuwigmy/video/upload/q_70,f_mp4,vc_h264/v1780432463/insta_video_11278_pd0nla.mp4" type="video/mp4">
+      <source src="https://res.cloudinary.com/dvvuwigmy/video/upload/q_auto,f_auto,vc_auto/v1780432463/insta_video_11278_pd0nla.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -2166,22 +2164,15 @@ footer {
 // ─── VIDEO IMMEDIATE PLAY ─────────────────────────
 (function(){
   const v = document.getElementById('heroVideo');
-  if(!v) return;
-  v.muted = true;
-  v.load();
-  // Intento inmediato
-  v.play().catch(()=>{});
-  // Fallback: apenas el DOM esté listo
-  if(document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => v.play().catch(()=>{}));
+  if(v){
+    v.load();
+    const tryPlay = () => v.play().catch(()=>{});
+    if(document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', tryPlay);
+    } else {
+      tryPlay();
+    }
   }
-  // Fallback: al primer dato disponible del video
-  v.addEventListener('loadedmetadata', () => v.play().catch(()=>{}), { once: true });
-  v.addEventListener('canplay', () => v.play().catch(()=>{}), { once: true });
-  // Fallback iOS/Safari: primer interacción del usuario si todo falla
-  const unlockOnTouch = () => { v.play().catch(()=>{}); document.removeEventListener('touchstart', unlockOnTouch); document.removeEventListener('click', unlockOnTouch); };
-  document.addEventListener('touchstart', unlockOnTouch, { passive: true });
-  document.addEventListener('click', unlockOnTouch, { once: true });
 })();
 
 // ─── GALERÍA CAROUSELS ────────────────────────────
