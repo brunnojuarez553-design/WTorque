@@ -276,7 +276,6 @@ nav {
   display: flex; flex-direction: column;
   gap: 5px; background: none; border: none;
   padding: 6px; cursor: pointer;
-  justify-self: end;
 }
 .nav-hamburger span {
   display: block; width: 24px; height: 2px;
@@ -307,6 +306,25 @@ nav {
   margin: 10px 20px 4px; padding: 12px 20px !important;
 }
 
+/* ─── NAV RIGHT (social + hamburger) ────────────── */
+.nav-right {
+  display: flex; align-items: center; gap: 4px;
+  justify-content: flex-end;
+}
+.nav-social {
+  display: none; align-items: center; gap: 2px;
+}
+.nav-social-link {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 6px;
+  color: var(--white-dim); text-decoration: none;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-social-link:hover {
+  color: var(--white);
+  background: rgba(200,0,0,0.15);
+}
+
 /* ─── NAV LINKS DESKTOP ─────────────────────────── */
 .nav-links { display: none; list-style: none; }
 @media (min-width: 768px) {
@@ -314,6 +332,7 @@ nav {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
   }
+  .nav-social { display: flex; }
   .nav-links {
     display: flex; align-items: center; gap: 2px;
   }
@@ -1346,8 +1365,8 @@ footer {
   text-shadow: 0 0 18px var(--red-glow);
 }
 .hof-stat-label {
-  font-family: var(--font-mono); font-size: 7px;
-  letter-spacing: 2px; color: var(--white-dim);
+  font-family: var(--font-mono); font-size: 9px;
+  letter-spacing: 2px; color: rgba(239,239,239,0.75);
   text-transform: uppercase; margin-top: 4px;
   line-height: 1.3;
 }
@@ -1377,7 +1396,7 @@ footer {
   text-transform: uppercase; line-height: 1;
 }
 .hof-project-detail {
-  font-family: var(--font-mono); font-size: 8px;
+  font-family: var(--font-mono); font-size: 10px;
   letter-spacing: 2px; color: var(--red);
   text-transform: uppercase; margin-top: 3px;
 }
@@ -1445,7 +1464,7 @@ footer {
   .nosotros-stats { gap: 2px; margin-bottom: 24px; }
   .nosotros-stat { padding: 14px 12px; }
   .nosotros-stat-num { font-size: 32px; }
-  .nosotros-stat-label { font-size: 7px; letter-spacing: 2px; }
+  .nosotros-stat-label { font-size: 9px; letter-spacing: 2px; }
   .nosotros-skills { gap: 12px; }
   .skill-name { font-size: 8px; }
 
@@ -1507,13 +1526,13 @@ footer {
   .hof-stats-row { gap: 2px; margin-bottom: 22px; }
   .hof-stat-box { padding: 12px 8px; }
   .hof-stat-num { font-size: 26px; }
-  .hof-stat-label { font-size: 6px; letter-spacing: 1.5px; }
+  .hof-stat-label { font-size: 8px; letter-spacing: 1.5px; }
   .hof-projects { gap: 2px; margin-bottom: 22px; }
   .hof-project-card { padding: 12px 12px; gap: 8px; flex-wrap: nowrap; }
   .hof-project-left { gap: 10px; min-width: 0; flex: 1; }
   .hof-project-rank { font-size: 22px; min-width: 22px; }
   .hof-project-name { font-size: 14px; letter-spacing: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .hof-project-detail { font-size: 7px; letter-spacing: 1px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+  .hof-project-detail { font-size: 9px; letter-spacing: 1px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
   .hof-project-hp { font-size: 18px; flex-shrink: 0; }
   .hof-cta-btn { padding: 14px 18px; font-size: 9px; letter-spacing: 2px; min-height: 48px; }
 }
@@ -1532,9 +1551,23 @@ footer {
     <li><a href="javascript:openServicios()">Servicios</a></li>
     <li><a href="javascript:openHallOfFame()" class="nav-link-hof">Hall of Fame</a></li>
   </ul>
-  <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
-    <span></span><span></span><span></span>
-  </button>
+  <div class="nav-right">
+    <div class="nav-social">
+      <a href="https://www.instagram.com/witchertorque" target="_blank" rel="noopener" aria-label="Instagram WitcherTorque" class="nav-social-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="https://www.youtube.com/@witchertorque" target="_blank" rel="noopener" aria-label="YouTube WitcherTorque" class="nav-social-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+        </svg>
+      </a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
 </nav>
 <ul class="nav-drawer" id="navDrawer">
   <li><a href="javascript:openRepro()" class="drawer-link">Reprogramación</a></li>
@@ -1668,7 +1701,7 @@ footer {
       <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
       Seguinos en Facebook
     </a>
-    <p style="font-family:var(--font-mono);font-size:9px;letter-spacing:3px;color:rgba(239,239,239,0.3);text-transform:uppercase;margin-top:4px;">📍 Caracas, Venezuela</p>
+    <p style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;color:rgba(239,239,239,0.6);text-transform:uppercase;margin-top:4px;">📍 Caracas, Venezuela</p>
   </div>
 </section>
 
@@ -1852,19 +1885,9 @@ footer {
       </div>
       <div class="hof-project-hp" style="font-size:13px;letter-spacing:1px;">CONF.</div>
     </div>
-    <div class="hof-project-card">
-      <div class="hof-project-left">
-        <div class="hof-project-rank">10</div>
-        <div>
-          <div class="hof-project-name">BMW M3 Competition G80</div>
-          <div class="hof-project-detail">Big Turbo · FL2K Semi-finalista · 8.5s · Esteem Custom</div>
-        </div>
-      </div>
-      <div class="hof-project-hp">+1300HP</div>
-    </div>
     <div class="hof-project-card" style="opacity:0.45;border-left-color:rgba(200,0,0,0.15);">
       <div class="hof-project-left">
-        <div class="hof-project-rank" style="color:rgba(200,0,0,0.08);">11</div>
+        <div class="hof-project-rank" style="color:rgba(200,0,0,0.08);">10</div>
         <div>
           <div class="hof-project-name" style="color:rgba(239,239,239,0.3);">Próximamente</div>
           <div class="hof-project-detail">Tu proyecto puede estar aquí</div>
@@ -2291,7 +2314,7 @@ document.querySelectorAll('.drawer-link[href^="#"]').forEach(link => {
 });
 
 const REPRO_SCRIPT = `
-const WT_SYS_R = "Eres el asesor técnico virtual oficial de WitcherTorque. Tenés acceso completo a toda la información del taller. Nunca digas que sos una IA.\n\nWitcherTorque — Caracas, Venezuela. 16+ años. WhatsApp: +58 412-585-6541. Horario: Lun-Vie 8:00-17:00 por cita previa. Remote Tuning disponible a nivel mundial. Email: witchertorquevzla@gmail.com\n\nSERVICIOS: Reprogramación ECU (único Master Tuner Ecutek de Venezuela, distribuidor autorizado HPTuners, multimapas, Stage 1/2/3, E85, Pops & Bangs, Launch Control), Remote Tuning mundial, Dyno Sessions en el único Mainline ProHub de Venezuela, Mecánica High Performance, Stand Alone ECU (MaxxEcu Gen2, Haltech, FuelTech, Link ECU), Electricidad, Construcciones Custom Inox/Aluminio/Titanio, Impresión 3D, Mecánica General, Distribución oficial: Amsoil, vPracing, Fuel Factory, X-Shift Gearboxes, aFe Power, Mishimoto, Dodson Motorsport, Precision Turbo, Vibrant Performance, MaxxEcu.\n\nSTAGES: Stage 1 = solo software stock, +20-30% HP. Stage 2 = software + downpipe/intake/intercooler, +30-40% HP. Stage 2+ E85 = con etanol, +50-60% HP. Stage 3 = turbo grande + inyección alto flujo + calibración completa en dyno desde cero.\n\nDIFERENCIADORES: Reprogramación DIRECTA sobre ECU original, sin módulos externos, sin cables cortados, 100% reversible (se vuelve a stock antes de ir a garantía). Mapas calibrados para el combustible venezolano con protecciones térmicas activas. Único Mainline ProHub Dyno de Venezuela (se atornilla a los hubs, cero deslizamiento, vehículo anclado). Pioneros en MaxxEcu Gen 2 en Venezuela. Multimapas desde botones del volante original. Pops & Bangs 100% software. Launch Control integrado.\n\nPREGUNTAS FRECUENTES: ¿Rompe el motor? No, mantenemos activas todas las protecciones de la ECU. ¿Anula garantía? No, proceso 100% reversible sin huellas físicas. ¿Aumenta consumo? Generalmente igual o mejor. ¿Adaptan al combustible local? Sí, completamente, no usamos mapas genéricos importados.\n\nRÉCORDS: Evo 5 RS 1100HP rescatado, GSX-R 1000 moto más rápida de Venezuela (8.74s sin nitro), Top 1-2-3 Ranger Raptor más rápidas del país, GTR R35 internos stock más rápido del país (1000HP/9.30s), Campeón Nacional 2025 Honda Civic #90 (222 pts), Corvette C8 más rápido de Venezuela, Toyota 4Runner TRD Pro 2026 más rápida del mundo, Golf R MK7.5 VAG más rápido de Venezuela (9.67s), Ferrari 458 Challenge Evo +90HP remote GT Challenge Américas 2025, BMW M3 G80 +1300HP FL2K semi-finalista. 12+ récords nacionales, +50 builds, +3000HP desarrollados, 500+ motores intervenidos.\n\nTESTIMONIOS: Gamar Márquez (Evo 5 RS 1100HP): pasó 6 años en otro taller que no pudo pasar de 800HP y partió el motor. WitcherTorque lo rescató y en un solo intento hizo 1100HP. Autoclub Performance Miami: felicitó a WitcherTorque por educador al público sobre por qué la reprogramación es necesaria.\n\nFLUJO: Obtené nombre, vehículo (marca/modelo/año/motor), modificaciones actuales y servicio de interés. Natural, sin pedir todo de golpe. Nunca inventes datos ni garantices HP exactos. Nunca diagnostiques sin inspección física. Respuestas cortas, máximo un párrafo.\n\nCIERRE cuando tengas nombre + vehículo + servicio: Perfecto [NOMBRE], ya tengo todo lo que necesito. Voy a derivarte con nuestro equipo para coordinar tu [SERVICIO]. Un momento! — después no respondas más.";
+const WT_SYS_R = "Eres el asesor técnico virtual oficial de WitcherTorque. Tenés acceso completo a toda la información del taller. Nunca digas que sos una IA.\n\nWitcherTorque — Caracas, Venezuela. 16+ años. WhatsApp: +58 412-585-6541. Horario: Lun-Vie 8:00-17:00 por cita previa. Remote Tuning disponible a nivel mundial. Email: witchertorquevzla@gmail.com\n\nSERVICIOS: Reprogramación ECU (único Master Tuner Ecutek de Venezuela, distribuidor autorizado HPTuners, multimapas, Stage 1/2/3, E85, Pops & Bangs, Launch Control), Remote Tuning mundial, Dyno Sessions en el único Mainline ProHub de Venezuela, Mecánica High Performance, Stand Alone ECU (MaxxEcu Gen2, Haltech, FuelTech, Link ECU), Electricidad, Construcciones Custom Inox/Aluminio/Titanio, Impresión 3D, Mecánica General, Distribución oficial: Amsoil, vPracing, Fuel Factory, X-Shift Gearboxes, aFe Power, Mishimoto, Dodson Motorsport, Precision Turbo, Vibrant Performance, MaxxEcu.\n\nSTAGES: Stage 1 = solo software stock, +20-30% HP. Stage 2 = software + downpipe/intake/intercooler, +30-40% HP. Stage 2+ E85 = con etanol, +50-60% HP. Stage 3 = turbo grande + inyección alto flujo + calibración completa en dyno desde cero.\n\nDIFERENCIADORES: Reprogramación DIRECTA sobre ECU original, sin módulos externos, sin cables cortados, 100% reversible (se vuelve a stock antes de ir a garantía). Mapas calibrados para el combustible venezolano con protecciones térmicas activas. Único Mainline ProHub Dyno de Venezuela (se atornilla a los hubs, cero deslizamiento, vehículo anclado). Pioneros en MaxxEcu Gen 2 en Venezuela. Multimapas desde botones del volante original. Pops & Bangs 100% software. Launch Control integrado.\n\nPREGUNTAS FRECUENTES: ¿Rompe el motor? No, mantenemos activas todas las protecciones de la ECU. ¿Anula garantía? No, proceso 100% reversible sin huellas físicas. ¿Aumenta consumo? Generalmente igual o mejor. ¿Adaptan al combustible local? Sí, completamente, no usamos mapas genéricos importados.\n\nRÉCORDS: Evo 5 RS 1100HP rescatado, GSX-R 1000 moto más rápida de Venezuela (8.74s sin nitro), Top 1-2-3 Ranger Raptor más rápidas del país, GTR R35 internos stock más rápido del país (1000HP/9.30s), Campeón Nacional 2025 Honda Civic #90 (222 pts), Corvette C8 más rápido de Venezuela, Toyota 4Runner TRD Pro 2026 más rápida del mundo, Golf R MK7.5 VAG más rápido de Venezuela (9.67s), Ferrari 458 Challenge Evo +90HP remote GT Challenge Américas 2025. 11+ récords nacionales, +50 builds, +3000HP desarrollados, 500+ motores intervenidos.\n\nTESTIMONIOS: Gamar Márquez (Evo 5 RS 1100HP): pasó 6 años en otro taller que no pudo pasar de 800HP y partió el motor. WitcherTorque lo rescató y en un solo intento hizo 1100HP. Autoclub Performance Miami: felicitó a WitcherTorque por educador al público sobre por qué la reprogramación es necesaria.\n\nFLUJO: Obtené nombre, vehículo (marca/modelo/año/motor), modificaciones actuales y servicio de interés. Natural, sin pedir todo de golpe. Nunca inventes datos ni garantices HP exactos. Nunca diagnostiques sin inspección física. Respuestas cortas, máximo un párrafo.\n\nCIERRE cuando tengas nombre + vehículo + servicio: Perfecto [NOMBRE], ya tengo todo lo que necesito. Voy a derivarte con nuestro equipo para coordinar tu [SERVICIO]. Un momento! — después no respondas más.";
 const rModels={volkswagen:["Golf GTI MK7 (230HP)","Golf GTI MK8 (245HP)","Golf R MK7 (300HP)","Golf R MK8 (320HP)","Golf GTI Clubsport (265HP)","Tiguan R (320HP)","Tiguan R-Line TSI (150HP)","Polo GTI (207HP)","Arteon R-Line (272HP)","T-Roc R (300HP)"],audi:["A3 S3 8V (310HP)","A3 S3 8Y (310HP)","RS3 8V (400HP)","RS3 8Y (400HP)","TT RS (400HP)","A4 B9 2.0T (190HP)","S4 B9 (354HP)","RS4 B9 (450HP)","A5 2.0T (245HP)","S5 B9 (354HP)","RS5 (450HP)","Q5 45 TFSI (265HP)","SQ5 (354HP)","RSQ8 (600HP)","R8 V10 (570HP)"],bmw:["M240i G42 (374HP)","M340i G20 (374HP)","M2 G87 (460HP)","M3 G80 (510HP)","M4 G82 (510HP)","320i G20 (184HP)","330i G20 (258HP)","M135i F40 (306HP)","M235i Gran Coupe (306HP)","X3 M40i (360HP)","X4 M40i (360HP)","M550i (530HP)","M5 F90 (600HP)","Z4 M40i (340HP)"],mercedes:["A45 AMG W177 (421HP)","A35 AMG (306HP)","CLA 45 AMG (421HP)","CLA 35 AMG (306HP)","C43 AMG W206 (390HP)","C63 AMG W205 (476HP)","C63 S AMG (510HP)","GLA 45 AMG (421HP)","GLC 43 AMG (390HP)","E53 AMG (435HP)","GLE 53 AMG (435HP)","GLA 250 (224HP)","C200 (204HP)"],ford:["Ranger Raptor (288HP)","Mustang GT 5.0 (450HP)","Mustang EcoBoost 2.3 (310HP)","Mustang Shelby GT500 (760HP)","Focus RS (350HP)","Focus ST MK3 (250HP)","Focus ST MK4 (280HP)","Bronco 2.3 EcoBoost (300HP)","F-150 3.5 EcoBoost (450HP)"],chevrolet:["Camaro SS 6.2 (455HP)","Camaro ZL1 (650HP)","Camaro 2.0T (275HP)","Corvette C7 (455HP)","Corvette C8 (490HP)","Colorado ZR2 (308HP)","Silverado 5.3 (355HP)","Silverado 6.2 (420HP)","Equinox RS 2.0T (252HP)"],toyota:["Supra A90 2.0 (258HP)","Supra A90 3.0 (382HP)","GR Yaris (261HP)","GR86 (228HP)","Land Cruiser 300 3.5T (415HP)","4Runner TRD Pro (270HP)","Hilux GR Sport (224HP)","Tacoma TRD Pro (278HP)","Tundra 3.5T (389HP)","RAV4 Prime (302HP)"],honda:["Civic Type R FL5 (315HP)","Civic Type R FK8 (316HP)","Civic Si 11gen (200HP)","Accord 2.0T (252HP)","CR-V Sport Hybrid (204HP)"],subaru:["WRX STI VA (310HP)","WRX VB (271HP)","WRX STI EJ257 (305HP)","BRZ (228HP)","Forester XT (177HP)","Outback 2.5 (182HP)"],nissan:["GT-R R35 (565HP)","GT-R R35 Track Ed. (600HP)","Z RZ34 (400HP)","Frontier Pro-4X (310HP)","Pathfinder 3.8 (284HP)","Kicks e-Power (136HP)"],mitsubishi:["Lancer Evo X (291HP)","Outlander PHEV (248HP)","Eclipse Cross 1.5T (150HP)"],mazda:["MX-5 RF 2.0 (181HP)","Mazda3 Turbo (250HP)","CX-5 2.5T (256HP)","CX-50 2.5T Turbo (256HP)"],hyundai:["Elantra N (276HP)","Veloster N (275HP)","i30 N (280HP)","Tucson N-Line 1.6T (180HP)","Kona N (276HP)","Ioniq 5 N (641HP)"],kia:["Stinger GT 3.3T (365HP)","K5 GT 2.5T (290HP)","Sportage 1.6T (180HP)"],porsche:["Cayman 718 T (300HP)","Cayman 718 GTS (394HP)","Boxster 718 (300HP)","Macan GTS (440HP)","Cayenne GTS (460HP)","Panamera 4S (440HP)","911 Carrera (385HP)","911 Carrera S (450HP)"],jeep:["Wrangler Rubicon 392 (470HP)","Gladiator Mojave (285HP)","Grand Cherokee Trackhawk (707HP)","Compass 1.3T (150HP)"],land_rover:["Defender 90 P400 (400HP)","Discovery Sport P290 (290HP)","Range Rover Sport SVR (575HP)"],volvo:["S60 T8 Polestar (415HP)","XC40 Recharge (408HP)","V60 Cross Country B5 (250HP)"]};
 const rHpData={"Golf GTI MK7 (230HP)":230,"Golf GTI MK8 (245HP)":245,"Golf R MK7 (300HP)":300,"Golf R MK8 (320HP)":320,"Golf GTI Clubsport (265HP)":265,"Tiguan R (320HP)":320,"Tiguan R-Line TSI (150HP)":150,"Polo GTI (207HP)":207,"Arteon R-Line (272HP)":272,"T-Roc R (300HP)":300,"A3 S3 8V (310HP)":310,"A3 S3 8Y (310HP)":310,"RS3 8V (400HP)":400,"RS3 8Y (400HP)":400,"TT RS (400HP)":400,"A4 B9 2.0T (190HP)":190,"S4 B9 (354HP)":354,"RS4 B9 (450HP)":450,"A5 2.0T (245HP)":245,"S5 B9 (354HP)":354,"RS5 (450HP)":450,"Q5 45 TFSI (265HP)":265,"SQ5 (354HP)":354,"RSQ8 (600HP)":600,"R8 V10 (570HP)":570,"M240i G42 (374HP)":374,"M340i G20 (374HP)":374,"M2 G87 (460HP)":460,"M3 G80 (510HP)":510,"M4 G82 (510HP)":510,"320i G20 (184HP)":184,"330i G20 (258HP)":258,"M135i F40 (306HP)":306,"M235i Gran Coupe (306HP)":306,"X3 M40i (360HP)":360,"X4 M40i (360HP)":360,"M550i (530HP)":530,"M5 F90 (600HP)":600,"Z4 M40i (340HP)":340,"A45 AMG W177 (421HP)":421,"A35 AMG (306HP)":306,"CLA 45 AMG (421HP)":421,"CLA 35 AMG (306HP)":306,"C43 AMG W206 (390HP)":390,"C63 AMG W205 (476HP)":476,"C63 S AMG (510HP)":510,"GLA 45 AMG (421HP)":421,"GLC 43 AMG (390HP)":390,"E53 AMG (435HP)":435,"GLE 53 AMG (435HP)":435,"GLA 250 (224HP)":224,"C200 (204HP)":204,"Ranger Raptor (288HP)":288,"Mustang GT 5.0 (450HP)":450,"Mustang EcoBoost 2.3 (310HP)":310,"Mustang Shelby GT500 (760HP)":760,"Focus RS (350HP)":350,"Focus ST MK3 (250HP)":250,"Focus ST MK4 (280HP)":280,"Bronco 2.3 EcoBoost (300HP)":300,"F-150 3.5 EcoBoost (450HP)":450,"Camaro SS 6.2 (455HP)":455,"Camaro ZL1 (650HP)":650,"Camaro 2.0T (275HP)":275,"Corvette C7 (455HP)":455,"Corvette C8 (490HP)":490,"Colorado ZR2 (308HP)":308,"Silverado 5.3 (355HP)":355,"Silverado 6.2 (420HP)":420,"Equinox RS 2.0T (252HP)":252,"Supra A90 2.0 (258HP)":258,"Supra A90 3.0 (382HP)":382,"GR Yaris (261HP)":261,"GR86 (228HP)":228,"Land Cruiser 300 3.5T (415HP)":415,"4Runner TRD Pro (270HP)":270,"Hilux GR Sport (224HP)":224,"Tacoma TRD Pro (278HP)":278,"Tundra 3.5T (389HP)":389,"RAV4 Prime (302HP)":302,"Civic Type R FL5 (315HP)":315,"Civic Type R FK8 (316HP)":316,"Civic Si 11gen (200HP)":200,"Accord 2.0T (252HP)":252,"CR-V Sport Hybrid (204HP)":204,"WRX STI VA (310HP)":310,"WRX VB (271HP)":271,"WRX STI EJ257 (305HP)":305,"BRZ (228HP)":228,"Forester XT (177HP)":177,"Outback 2.5 (182HP)":182,"GT-R R35 (565HP)":565,"GT-R R35 Track Ed. (600HP)":600,"Z RZ34 (400HP)":400,"Frontier Pro-4X (310HP)":310,"Pathfinder 3.8 (284HP)":284,"Kicks e-Power (136HP)":136,"Lancer Evo X (291HP)":291,"Outlander PHEV (248HP)":248,"Eclipse Cross 1.5T (150HP)":150,"MX-5 RF 2.0 (181HP)":181,"Mazda3 Turbo (250HP)":250,"CX-5 2.5T (256HP)":256,"CX-50 2.5T Turbo (256HP)":256,"Elantra N (276HP)":276,"Veloster N (275HP)":275,"i30 N (280HP)":280,"Tucson N-Line 1.6T (180HP)":180,"Kona N (276HP)":276,"Ioniq 5 N (641HP)":641,"Stinger GT 3.3T (365HP)":365,"K5 GT 2.5T (290HP)":290,"Sportage 1.6T (180HP)":180,"Cayman 718 T (300HP)":300,"Cayman 718 GTS (394HP)":394,"Boxster 718 (300HP)":300,"Macan GTS (440HP)":440,"Cayenne GTS (460HP)":460,"Panamera 4S (440HP)":440,"911 Carrera (385HP)":385,"911 Carrera S (450HP)":450,"Wrangler Rubicon 392 (470HP)":470,"Gladiator Mojave (285HP)":285,"Grand Cherokee Trackhawk (707HP)":707,"Compass 1.3T (150HP)":150,"Defender 90 P400 (400HP)":400,"Discovery Sport P290 (290HP)":290,"Range Rover Sport SVR (575HP)":575,"S60 T8 Polestar (415HP)":415,"XC40 Recharge (408HP)":408,"V60 Cross Country B5 (250HP)":250};
 function updateCalcRepro(){const m=document.getElementById("calcMarca").value;const ms=document.getElementById("calcModelo");ms.innerHTML="<option value=''>- Seleccionar modelo -</option>";if(m&&rModels[m])rModels[m].forEach(x=>{const o=document.createElement("option");o.value=x;o.textContent=x;ms.appendChild(o);});}
@@ -2631,7 +2654,7 @@ body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opa
 .dyno-label-y{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg);position:absolute;left:4px;top:50%;transform:translateX(0) translateY(-50%) rotate(180deg);pointer-events:none;}
 #dynoCanvas{width:100%;height:200px;display:block;}
 .dyno-footer{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding-top:10px;border-top:1px solid var(--graphite-3);}
-.dyno-note{font-family:var(--font-mono);font-size:8px;letter-spacing:1px;color:rgba(239,239,239,0.3);line-height:1.6;}
+.dyno-note{font-family:var(--font-mono);font-size:9px;letter-spacing:1px;color:rgba(239,239,239,0.5);line-height:1.6;}
 .dyno-badge{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--red);border:1px solid rgba(200,0,0,0.3);padding:4px 10px;text-transform:uppercase;}
 
 /* CALC RESULT */
@@ -2645,7 +2668,7 @@ body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opa
 .csr-name{font-family:var(--font-display);font-size:20px;letter-spacing:2px;text-transform:uppercase;color:var(--white);}
 .csr-gain{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--red);margin-top:4px;}
 .csr-range{font-family:var(--font-display);font-size:22px;color:var(--red);text-align:right;text-shadow:0 0 15px rgba(200,0,0,0.3);}
-.calc-disclaimer{font-family:var(--font-mono);font-size:8px;letter-spacing:1px;color:rgba(239,239,239,0.25);line-height:1.7;margin-top:14px;padding:12px 14px;border:1px solid var(--graphite-3);border-left:2px solid rgba(200,0,0,0.2);}
+.calc-disclaimer{font-family:var(--font-mono);font-size:9px;letter-spacing:1px;color:rgba(239,239,239,0.45);line-height:1.7;margin-top:14px;padding:12px 14px;border:1px solid var(--graphite-3);border-left:2px solid rgba(200,0,0,0.2);}
 
 /* ─── STAGES TABS ─────────────────────────── */
 .stages-section{padding:60px 22px 52px;background:var(--black);position:relative;overflow:hidden;}
@@ -2689,7 +2712,7 @@ body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;opa
 .metric-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--red),transparent);}
 .metric-num{font-family:var(--font-display);font-size:clamp(36px,9vw,52px);color:var(--red);line-height:1;text-shadow:0 0 20px rgba(200,0,0,0.3);margin-bottom:6px;}
 .metric-label{font-family:var(--font-mono);font-size:8px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;line-height:1.5;}
-.metric-tag{font-family:var(--font-mono);font-size:7px;letter-spacing:2px;color:var(--red);border:1px solid rgba(200,0,0,0.25);padding:2px 7px;text-transform:uppercase;display:inline-block;margin-top:8px;}
+.metric-tag{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:var(--red);border:1px solid rgba(200,0,0,0.25);padding:2px 7px;text-transform:uppercase;display:inline-block;margin-top:8px;}
 
 /* ─── PROCESS TIMELINE ─────────────────────── */
 .process-section{padding:60px 22px 52px;background:var(--graphite-2);position:relative;overflow:hidden;}
@@ -3802,7 +3825,7 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 .hof-stat-box{background:var(--graphite-2);border:1px solid var(--graphite-3);padding:10px 8px;position:relative;overflow:hidden;text-align:center;}
 .hof-stat-box::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(to right,transparent,var(--red),transparent);}
 .hof-stat-num{font-family:var(--font-display);font-size:24px;color:var(--red);line-height:1;text-shadow:0 0 14px var(--red-glow);}
-.hof-stat-label{font-family:var(--font-mono);font-size:6px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-top:3px;line-height:1.3;}
+.hof-stat-label{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:rgba(239,239,239,0.7);text-transform:uppercase;margin-top:3px;line-height:1.3;}
 /* PROJECT CARDS */
 .hof-projects-wrap{padding:16px 20px 32px;display:flex;flex-direction:column;gap:0;}
 .hof-section-label{font-family:var(--font-mono);font-size:9px;letter-spacing:5px;color:var(--red);text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
@@ -3828,31 +3851,31 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 .hof-video-play{width:48px;height:48px;border-radius:50%;background:rgba(200,0,0,0.9);border:2px solid rgba(255,255,255,0.35);display:flex;align-items:center;justify-content:center;transition:transform 0.2s,background 0.2s;box-shadow:0 0 24px rgba(200,0,0,0.6);}
 .hof-video-thumb:hover .hof-video-play{transform:scale(1.12);background:var(--red);}
 .hof-video-play svg{margin-left:4px;}
-.hof-video-label{font-family:var(--font-mono);font-size:7px;letter-spacing:1.5px;color:rgba(239,239,239,0.8);text-transform:uppercase;text-align:center;padding:0 8px;}
+.hof-video-label{font-family:var(--font-mono);font-size:9px;letter-spacing:1.5px;color:rgba(239,239,239,0.9);text-transform:uppercase;text-align:center;padding:0 8px;}
 /* INFO */
 .hof-info{padding:10px 14px 10px;border-top:1px solid var(--graphite-3);}
 .hof-car-name{font-family:var(--font-display);font-size:clamp(20px,6vw,28px);letter-spacing:2px;color:var(--white);text-transform:uppercase;line-height:1;margin-bottom:2px;}
-.hof-car-subtitle{font-family:var(--font-mono);font-size:8px;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px;line-height:1.4;}
+.hof-car-subtitle{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:rgba(239,239,239,0.65);text-transform:uppercase;margin-bottom:8px;line-height:1.4;}
 .hof-hp-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap;}
 .hof-hp-badge{font-family:var(--font-display);font-size:30px;color:var(--red);text-shadow:0 0 16px var(--red-glow);line-height:1;}
-.hof-hp-sub{font-family:var(--font-mono);font-size:7px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;line-height:1.5;}
+.hof-hp-sub{font-family:var(--font-mono);font-size:10px;letter-spacing:1.5px;color:rgba(239,239,239,0.75);text-transform:uppercase;line-height:1.5;}
 .hof-record-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px;}
-.hof-tag{font-family:var(--font-mono);font-size:7px;letter-spacing:1px;color:rgba(200,0,0,0.85);border:1px solid rgba(200,0,0,0.2);padding:2px 7px;text-transform:uppercase;background:rgba(200,0,0,0.04);}
+.hof-tag{font-family:var(--font-mono);font-size:9px;letter-spacing:1px;color:rgba(239,239,239,0.85);border:1px solid rgba(200,0,0,0.35);padding:3px 8px;text-transform:uppercase;background:rgba(200,0,0,0.08);}
 /* SPEC TABLE */
 .hof-specs{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:10px;}
 .hof-spec{background:var(--graphite);border:1px solid var(--graphite-3);padding:7px 10px;border-left:2px solid rgba(200,0,0,0.3);}
-.hof-spec-label{font-family:var(--font-mono);font-size:7px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:2px;}
+.hof-spec-label{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:rgba(239,239,239,0.7);text-transform:uppercase;margin-bottom:2px;}
 .hof-spec-val{font-family:var(--font-display);font-size:13px;color:var(--white);letter-spacing:1px;}
 /* MODS LIST */
-.hof-mods-title{font-family:var(--font-mono);font-size:8px;letter-spacing:4px;color:var(--red);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.hof-mods-title{font-family:var(--font-mono);font-size:9px;letter-spacing:4px;color:var(--red);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
 .hof-mods-title::before{content:'';width:16px;height:1px;background:var(--red);}
 .hof-mods{display:flex;flex-direction:column;gap:4px;margin-bottom:10px;}
-.hof-mod{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:rgba(239,239,239,0.6);line-height:1.4;}
+.hof-mod{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:rgba(239,239,239,0.8);line-height:1.4;}
 .hof-mod::before{content:'◈';color:var(--red);font-size:9px;flex-shrink:0;margin-top:2px;}
 /* PILOT */
 .hof-pilot{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--graphite);border:1px solid var(--graphite-3);border-left:3px solid var(--red);margin-bottom:6px;}
 .hof-pilot-icon{font-size:16px;flex-shrink:0;}
-.hof-pilot-label{font-family:var(--font-mono);font-size:7px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:1px;}
+.hof-pilot-label{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;color:rgba(239,239,239,0.7);text-transform:uppercase;margin-bottom:1px;}
 .hof-pilot-val{font-size:12px;font-weight:600;color:var(--white);}
 /* VENUE */
 .hof-venue{display:flex;align-items:center;gap:10px;padding:8px 12px;background:var(--graphite);border:1px solid var(--graphite-3);border-left:3px solid rgba(200,0,0,0.25);}
@@ -3860,10 +3883,10 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
 /* DIVIDER */
 .hof-divider{width:100%;height:1px;background:linear-gradient(to right,var(--red),transparent);margin:14px 0;}
 /* UPCOMING */
-.hof-upcoming{background:var(--graphite-2);border:1px solid var(--graphite-3);border-left:3px solid rgba(200,0,0,0.12);padding:20px 18px;opacity:0.45;}
+.hof-upcoming{background:var(--graphite-2);border:1px solid var(--graphite-3);border-left:3px solid rgba(200,0,0,0.12);padding:20px 18px;opacity:0.75;}
 .hof-upcoming-num{font-family:var(--font-display);font-size:28px;color:rgba(200,0,0,0.15);line-height:1;margin-bottom:6px;}
 .hof-upcoming-name{font-family:var(--font-display);font-size:22px;color:rgba(239,239,239,0.25);text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
-.hof-upcoming-detail{font-family:var(--font-mono);font-size:8px;letter-spacing:2px;color:rgba(200,0,0,0.3);text-transform:uppercase;}
+.hof-upcoming-detail{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:rgba(200,0,0,0.5);text-transform:uppercase;}
 /* CTA BOTTOM */
 .hof-cta{padding:32px 20px 48px;text-align:center;border-top:1px solid rgba(200,0,0,0.1);}
 .hof-cta-title{font-family:var(--font-display);font-size:clamp(30px,9vw,48px);letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:10px;}
@@ -3891,10 +3914,10 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   .hof-stats{padding:10px 14px 0;gap:2px;}
   .hof-stat-box{padding:10px 6px;}
   .hof-stat-num{font-size:22px;}
-  .hof-stat-label{font-size:6px;letter-spacing:1px;}
+  .hof-stat-label{font-size:8px;letter-spacing:1px;}
   /* PROJECTS WRAP */
   .hof-projects-wrap{padding:14px 14px 28px;}
-  .hof-section-label{font-size:8px;letter-spacing:3px;margin-bottom:12px;}
+  .hof-section-label{font-size:9px;letter-spacing:3px;margin-bottom:12px;}
   /* PROJECT CARD */
   .hof-project{margin-bottom:14px;}
   .hof-rank-badge{font-size:36px;top:10px;right:10px;}
@@ -3907,31 +3930,31 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   .hof-video-thumb{aspect-ratio:4/3;}
   .hof-photo-grid .hof-video-thumb{aspect-ratio:4/3;}
   .hof-video-play{width:40px;height:40px;}
-  .hof-video-label{font-size:6px;}
+  .hof-video-label{font-size:8px;}
   /* INFO BLOCK */
   .hof-info{padding:10px 12px 12px;}
   .hof-car-name{font-size:clamp(18px,6vw,24px);letter-spacing:1px;}
-  .hof-car-subtitle{font-size:7px;letter-spacing:1.5px;margin-bottom:8px;}
+  .hof-car-subtitle{font-size:9px;letter-spacing:1.5px;margin-bottom:8px;}
   /* HP ROW */
   .hof-hp-row{gap:10px;margin-bottom:8px;}
   .hof-hp-badge{font-size:26px;}
-  .hof-hp-sub{font-size:7px;letter-spacing:1px;}
+  .hof-hp-sub{font-size:9px;letter-spacing:1px;}
   /* TAGS */
   .hof-record-tags{gap:4px;margin-bottom:8px;}
-  .hof-tag{font-size:7px;letter-spacing:0.5px;padding:3px 6px;}
+  .hof-tag{font-size:8px;letter-spacing:0.5px;padding:3px 7px;}
   /* SPECS */
   .hof-specs{gap:2px;margin-bottom:8px;}
   .hof-spec{padding:7px 8px;}
-  .hof-spec-label{font-size:6px;letter-spacing:1px;}
+  .hof-spec-label{font-size:8px;letter-spacing:1px;}
   .hof-spec-val{font-size:13px;}
   /* MODS */
-  .hof-mods-title{font-size:7px;letter-spacing:2px;margin-bottom:6px;}
+  .hof-mods-title{font-size:8px;letter-spacing:2px;margin-bottom:6px;}
   .hof-mods{gap:5px;margin-bottom:8px;}
   .hof-mod{font-size:12px;line-height:1.5;gap:6px;}
   /* PILOT / VENUE */
   .hof-pilot,.hof-venue{padding:8px 10px;gap:8px;}
   .hof-pilot-icon,.hof-venue-icon{font-size:14px;}
-  .hof-pilot-label{font-size:6px;letter-spacing:1px;}
+  .hof-pilot-label{font-size:8px;letter-spacing:1px;}
   .hof-pilot-val{font-size:12px;}
   /* DIVIDER */
   .hof-divider{margin:12px 0;}
@@ -3939,7 +3962,7 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   .hof-upcoming{padding:16px 14px;}
   .hof-upcoming-num{font-size:24px;}
   .hof-upcoming-name{font-size:18px;}
-  .hof-upcoming-detail{font-size:7px;}
+  .hof-upcoming-detail{font-size:9px;}
   /* CTA BOTTOM */
   .hof-cta{padding:24px 16px 40px;}
   .hof-cta-title{font-size:clamp(26px,9vw,40px);letter-spacing:2px;margin-bottom:8px;}
@@ -4700,70 +4723,8 @@ body{background:var(--black);color:var(--white);font-family:var(--font-body);fon
   </div>
 
   <div class="hof-divider"></div>
-
-  <!-- ── PROYECTO 12: BMW M3 COMPETITION G80 ── -->
-  <div class="hof-project">
-    <div class="hof-rank-badge">12</div>
-
-    <div class="hof-photo-grid">
-      <div class="hof-photo-hero"><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501106/IMG_4757.jpg_yvm8go.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)"></div>
-      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501108/IMG_4760.jpg_p9oax7.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
-      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501108/IMG_4758.jpg_zvpaiz.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
-      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501110/IMG_4765.jpg_ezmcy6.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
-      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501111/IMG_4762.jpg_qhbzmr.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
-      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501112/IMG_4767.jpg_cxcorc.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
-      <div><img src="https://res.cloudinary.com/dpiavcukm/image/upload/v1781501113/IMG_4764.jpg_rzcqvq.jpg" loading="lazy" alt="BMW M3 Competition G80" onclick="hofLightbox(this)" onerror="this.parentElement.style.display='none'"></div>
-    </div>
-
-    <div class="hof-info">
-      <div class="hof-car-name">BMW M3 Competition G80</div>
-      <div class="hof-car-subtitle">Big Turbo · Setup 100% de calle · FL2K Semi-finalista</div>
-
-      <div class="hof-hp-row">
-        <div class="hof-hp-badge">+1300HP</div>
-        <div class="hof-hp-sub">Precisión Turbo · Full peso de calle<br>(incluye la silla del bebé)</div>
-      </div>
-
-      <div class="hof-record-tags">
-        <span class="hof-tag">+1300 HP</span>
-        <span class="hof-tag">🏁 8.5s 1/4 milla</span>
-        <span class="hof-tag">FL2K Semi-finalista</span>
-        <span class="hof-tag">Precisión Turbo</span>
-        <span class="hof-tag">Full peso de calle</span>
-        <span class="hof-tag">Repro remota WitcherTorque</span>
-        <span class="hof-tag">Esteem Custom Miami</span>
-      </div>
-
-      <div class="hof-specs">
-        <div class="hof-spec"><div class="hof-spec-label">Potencia</div><div class="hof-spec-val">+1300 HP</div></div>
-        <div class="hof-spec"><div class="hof-spec-label">Tiempo 1/4</div><div class="hof-spec-val">8.5 s</div></div>
-        <div class="hof-spec"><div class="hof-spec-label">Turbo</div><div class="hof-spec-val">Precisión</div></div>
-        <div class="hof-spec"><div class="hof-spec-label">Setup</div><div class="hof-spec-val">100% calle</div></div>
-      </div>
-
-      <div class="hof-mods-title">El Proyecto</div>
-      <div class="hof-mods">
-        <div class="hof-mod">Propiedad del venezolano Esteban Jiménez (Esteem Custom) — armado íntegramente por él en Miami</div>
-        <div class="hof-mod">Setup big turbo con Precisión Turbo — 100% de calle, con full peso real (incluyendo la silla del bebé)</div>
-        <div class="hof-mod">Uno de los M3 G80 más rápidos del mundo en su clase con peso de calle completo</div>
-        <div class="hof-mod">WitcherTorque realizó la reprogramación remota del vehículo</div>
-        <div class="hof-mod">Semi-finalista en el FL2K — la lluvia no dejó continuar la carrera</div>
-      </div>
-
-      <div class="hof-pilot">
-        <span class="hof-pilot-icon">🏎️</span>
-        <div><div class="hof-pilot-label">Piloto / Propietario</div><div class="hof-pilot-val">Esteban Jiménez — Esteem Custom, Miami</div></div>
-      </div>
-      <div class="hof-venue">
-        <span class="hof-venue-icon">📍</span>
-        <div><div class="hof-pilot-label">Evento</div><div class="hof-pilot-val">FL2K — Florida, USA</div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hof-divider"></div>
   <div class="hof-upcoming">
-    <div class="hof-upcoming-num">13</div>
+    <div class="hof-upcoming-num">12</div>
     <div class="hof-upcoming-name">Próximamente</div>
     <div class="hof-upcoming-detail">Tu proyecto puede estar aquí — ???</div>
   </div>
@@ -4929,9 +4890,8 @@ Funciones de competición que manejamos: Nitro, Launch Control avanzado, flat sh
 07 - Toyota Supra Mk4: 965HP motor 2JZ, Premier Edition 1/1 Vossen Forbes. Exportada a Miami (viral @Juca / @daniclos)
 08 - Volkswagen Golf R MK7.5: El VAG más rápido de Venezuela — 9.67s 1/4 milla (proyecto personal del taller, HP confidencial)
 09 - Ferrari 458 Challenge Evo: GT Challenge Américas 2025 — +90HP remoto, varios podios categoría GT Lighting (Meval Racing)
-10 - BMW M3 Competition G80: +1300HP, big turbo, FL2K semi-finalista en 8.5s (Esteem Custom, Miami)
-11 - Mitsubishi Lancer Evo 5 RS: RESCATADO de otro taller que no pudo pasar de 800HP en 4 años y partió el motor. WitcherTorque lo hizo en UN intento: 1100HP. Propietario: Gamar Márquez.
-Estadísticas: 12+ récords nacionales, +50 proyectos de alto desempeño, +3000HP desarrollados, 500+ motores intervenidos.
+10 - Mitsubishi Lancer Evo 5 RS: RESCATADO de otro taller que no pudo pasar de 800HP en 4 años y partió el motor. WitcherTorque lo hizo en UN intento: 1100HP. Propietario: Gamar Márquez.
+Estadísticas: 11+ récords nacionales, +50 proyectos de alto desempeño, +3000HP desarrollados, 500+ motores intervenidos.
 
 ━━━ TESTIMONIOS ━━━
 GAMAR MÁRQUEZ (Evo 5 RS — 1100HP): "Llegué a perder 6 años en manos inconscientes. Gastando dinero y apuntando en el lado errado del blanco. Me extendiste tu mano de corazón y en estos 2 años que llevo en las mejores manos sin duda en Venezuela, hemos logrado tantas cosas con mi proyecto del Evo 5 RS. Los demás con palabras. Ustedes siempre con hechos y resultados. Ya pronto me llevaré el Evo a disfrutarlo como nunca. Dios te bendiga hermano."
