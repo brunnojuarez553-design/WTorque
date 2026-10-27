@@ -1,0 +1,54 @@
+
+:root{--black:#060606;--graphite:#0f0f0f;--graphite-2:#171717;--graphite-3:#222;--graphite-4:#2e2e2e;--red:#c80000;--red-bright:#ff1500;--red-glow:rgba(200,0,0,0.35);--white:#efefef;--white-dim:rgba(239,239,239,0.5);--font-display:'Bebas Neue',sans-serif;--font-body:'Rajdhani',sans-serif;--font-mono:'Share Tech Mono',monospace;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--black);color:var(--white);font-family:var(--font-body);font-size:16px;overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-thumb{background:var(--red);}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(6,6,6,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(200,0,0,0.15);padding:0 18px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.topbar-logo{text-decoration:none;display:flex;align-items:center;}
+.topbar-logo img{height:46px;width:auto;display:block;}
+.back-btn{display:flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);background:none;border:1px solid rgba(239,239,239,0.1);padding:7px 14px;cursor:pointer;text-transform:uppercase;transition:color 0.2s,border-color 0.2s;}
+.back-btn:hover{color:var(--red);border-color:rgba(200,0,0,0.3);}
+.page-hero{padding:48px 20px 36px;border-bottom:1px solid rgba(200,0,0,0.1);position:relative;overflow:hidden;}
+.page-hero::before{content:'SVC';position:absolute;right:-10px;top:-20px;font-family:var(--font-display);font-size:200px;color:rgba(200,0,0,0.03);line-height:1;pointer-events:none;}
+.page-label{font-family:var(--font-mono);font-size:10px;letter-spacing:5px;color:var(--red);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.page-label::before{content:'';width:24px;height:1px;background:var(--red);}
+.page-title{font-family:var(--font-display);font-size:clamp(50px,14vw,80px);line-height:0.88;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:16px;}
+.page-title span{color:var(--red);}
+.page-desc{font-size:15px;font-weight:400;color:var(--white-dim);line-height:1.7;border-left:2px solid var(--red);padding-left:14px;max-width:360px;}
+/* FORM */
+.form-section{padding:36px 20px;background:var(--graphite);}
+.form-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.form-section h2 span{color:var(--red);}
+.form-intro{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:24px;}
+.form-field{margin-bottom:16px;}
+.form-field label{font-family:var(--font-mono);font-size:9px;letter-spacing:4px;color:var(--white-dim);text-transform:uppercase;display:block;margin-bottom:7px;}
+.form-field input,.form-field select,.form-field textarea{width:100%;background:var(--black);border:1px solid var(--graphite-4);color:var(--white);padding:12px 14px;font-family:var(--font-body);font-size:15px;outline:none;appearance:none;-webkit-appearance:none;transition:border-color 0.25s;}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:var(--red);}
+.form-field select option{background:#0f0f0f;}
+.form-field textarea{resize:vertical;min-height:90px;font-family:var(--font-body);}
+.btn-submit{background:var(--red);color:var(--white);border:none;padding:18px 32px;font-family:var(--font-mono);font-size:11px;letter-spacing:4px;text-transform:uppercase;cursor:pointer;width:100%;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:box-shadow 0.3s, filter 0.2s;display:flex;align-items:center;justify-content:center;gap:12px;margin-top:8px;box-shadow:0 4px 24px rgba(200,0,0,0.25);}
+.btn-submit:hover{box-shadow:0 6px 32px rgba(200,0,0,0.45);filter:brightness(1.12);}
+.btn-submit:active{filter:brightness(0.95);transform:scale(0.98);}
+.submit-ok{display:none;background:rgba(0,180,0,0.1);border:1px solid rgba(0,200,0,0.3);border-left:3px solid #00c853;padding:14px 16px;font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:#00c853;text-transform:uppercase;margin-top:14px;}
+/* SERVICES */
+.services-section{padding:36px 20px;}
+.services-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:6px;}
+.services-section h2 span{color:var(--red);}
+.services-intro{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;color:var(--white-dim);text-transform:uppercase;margin-bottom:24px;}
+.svc-card{background:var(--graphite-2);border:1px solid var(--graphite-3);border-left:3px solid rgba(200,0,0,0.3);padding:20px 18px;margin-bottom:12px;position:relative;overflow:hidden;transition:border-color 0.3s;}
+.svc-card:hover{border-left-color:var(--red);}
+.svc-icon{font-size:22px;margin-bottom:10px;}
+.svc-name{font-family:var(--font-display);font-size:22px;letter-spacing:2px;color:var(--white);text-transform:uppercase;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.svc-desc{font-size:14px;color:var(--white-dim);line-height:1.65;margin-bottom:12px;}
+.svc-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-family:var(--font-mono);font-size:8px;letter-spacing:2px;color:rgba(200,0,0,0.8);border:1px solid rgba(200,0,0,0.2);padding:2px 7px;text-transform:uppercase;background:rgba(200,0,0,0.04);}
+.svc-num{font-family:var(--font-display);font-size:64px;color:rgba(200,0,0,0.04);position:absolute;right:10px;bottom:-8px;line-height:1;pointer-events:none;}
+/* CONTACT INFO */
+.contact-section{padding:36px 20px;background:var(--graphite-2);}
+.contact-section h2{font-family:var(--font-display);font-size:28px;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:24px;}
+.contact-section h2 span{color:var(--red);}
+.contact-item{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--graphite);border:1px solid var(--graphite-3);margin-bottom:10px;}
+.contact-icon{font-size:20px;flex-shrink:0;}
+.contact-label{font-family:var(--font-mono);font-size:8px;letter-spacing:3px;color:var(--white-dim);text-transform:uppercase;margin-bottom:3px;}
+.contact-val{font-size:15px;font-weight:600;color:var(--white);}
+.btn-wa-full{display:flex;align-items:center;justify-content:center;gap:10px;background:#25D366;color:white;border:none;padding:16px 28px;font-family:var(--font-mono);font-size:10px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;text-decoration:none;margin-top:20px;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));}
