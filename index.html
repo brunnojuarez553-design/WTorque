@@ -34,8 +34,6 @@
 <!-- ═══ GEO / LOCAL SEO ════════════════════════════════════════════ -->
 <meta name="geo.region" content="VE-A">
 <meta name="geo.placename" content="Caracas, Venezuela">
-<meta name="geo.position" content="10.4806;-66.9036">
-<meta name="ICBM" content="10.4806, -66.9036">
 
 <!-- ═══ STRUCTURED DATA — LocalBusiness ═══════════════════════════ -->
 <script type="application/ld+json">
@@ -43,7 +41,6 @@
   "@context": "https://schema.org",
   "@type": "AutoRepair",
   "name": "WitcherTorque",
-  "alternateName": ["WitcherTorque High Performance Engineering", "Mejor Taller Automotriz Venezuela", "Taller Alta Performance Caracas"],
   "url": "https://www.witchertorque.com",
   "logo": "https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png",
   "image": "https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png",
@@ -55,15 +52,16 @@
     "addressCountry": "VE",
     "addressRegion": "Distrito Capital"
   },
-  "geo": {
-    "@type": "GeoCoordinates",
-    "latitude": 10.4806,
-    "longitude": -66.9036
-  },
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
       "opens": "08:00",
       "closes": "17:00"
     }
@@ -72,12 +70,15 @@
     "https://www.instagram.com/witchertorque",
     "https://www.youtube.com/@witchertorque"
   ],
-  "priceRange": "$$",
-  "currenciesAccepted": "USD, VES",
-  "paymentAccepted": "Cash, Bank Transfer",
   "areaServed": [
-    {"@type": "Country", "name": "Venezuela"},
-    {"@type": "City", "name": "Caracas"}
+    {
+      "@type": "Country",
+      "name": "Venezuela"
+    },
+    {
+      "@type": "City",
+      "name": "Caracas"
+    }
   ],
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
@@ -124,7 +125,8 @@
         }
       }
     ]
-  }
+  },
+  "@id": "https://www.witchertorque.com/#business"
 }
 </script>
 
@@ -212,9 +214,9 @@
 <nav>
   <a class="nav-logo" href="#" aria-label="WitcherTorque — Reprogramación ECU Caracas"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque logo — Tuning ECU Caracas Venezuela"></a>
   <ul class="nav-links">
-    <li><a href="javascript:openRepro()">Reprogramación</a></li>
-    <li><a href="javascript:openServicios()">Servicios</a></li>
-    <li><a href="javascript:openHallOfFame()" class="nav-link-hof">Hall of Fame</a></li>
+    <li><a href="/#reprogramacion" onclick="openRepro();return false;">Reprogramación</a></li>
+    <li><a href="/#servicios" onclick="openServicios();return false;">Servicios</a></li>
+    <li><a href="/#proyectos" onclick="openHallOfFame();return false;" class="nav-link-hof">Hall of Fame</a></li>
   </ul>
   <div class="nav-right">
     <div class="nav-social">
@@ -235,19 +237,20 @@
   </div>
 </nav>
 <ul class="nav-drawer" id="navDrawer">
-  <li><a href="javascript:openRepro()" class="drawer-link">Reprogramación</a></li>
-  <li><a href="javascript:openServicios()" class="drawer-link">Servicios</a></li>
+  <li><a href="/#reprogramacion" onclick="openRepro();return false;" class="drawer-link">Reprogramación</a></li>
+  <li><a href="/#servicios" onclick="openServicios();return false;" class="drawer-link">Servicios</a></li>
   <li><a href="#hall-of-fame" class="drawer-link" onclick="drawer.classList.remove('open')">Hall of Fame</a></li>
   <li><a href="#nosotros" class="drawer-link" onclick="drawer.classList.remove('open')">Nosotros</a></li>
   <li><a href="#galeria" class="drawer-link" onclick="drawer.classList.remove('open')">Galería</a></li>
   <li><a href="#repuestos" class="drawer-link" onclick="drawer.classList.remove('open')">Repuestos</a></li>
   <li><a href="#testimonios" class="drawer-link" onclick="drawer.classList.remove('open')">Testimonios</a></li>
-  <li><a href="javascript:openFaq()" class="drawer-link" onclick="drawer.classList.remove('open')">Preguntas Frecuentes</a></li>
-  <li><a href="javascript:openContacto()" class="drawer-link" onclick="drawer.classList.remove('open')">Contacto</a></li>
+  <li><a href="/#preguntas-frecuentes" onclick="openFaq();return false;" class="drawer-link" onclick="drawer.classList.remove('open')">Preguntas Frecuentes</a></li>
+  <li><a href="/#contacto" onclick="openContacto();return false;" class="drawer-link" onclick="drawer.classList.remove('open')">Contacto</a></li>
   <li><a href="https://wa.me/584125856541" target="_blank" class="drawer-link drawer-cta">WhatsApp</a></li>
 </ul>
 
 <!-- HERO -->
+<main id="main-content">
 <section class="hero" id="inicio">
   <div class="hero-video">
     <video
@@ -276,12 +279,12 @@
     <p class="hero-sub">ECU Tuning &nbsp;·&nbsp; High Performance &nbsp;·&nbsp; Proyectos Custom</p>
     <p class="hero-desc">Ingeniería automotriz de precisión. Llevamos tu vehículo al límite absoluto de su potencial.</p>
     <div class="hero-btns">
-      <a class="btn-primary" onclick="openRepro()">
+      <a class="btn-primary" href="/#reprogramacion" onclick="openRepro();return false;">
         <span>Agendar Reprogramación</span>
         <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
       </a>
       <span class="hero-btn-hint">Ver más →</span>
-      <a class="btn-outline" href="javascript:openHallOfFame()">
+      <a class="btn-outline" href="/#proyectos" onclick="openHallOfFame();return false;">
         <span>Ver Hall of Fame</span>
         <svg width="13" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="#ff7a6a" stroke-width="1.5" stroke-linecap="round"/></svg>
       </a>
@@ -562,7 +565,7 @@
     </div>
   </div>
 
-  <a class="hof-cta-btn" href="javascript:openHallOfFame()">
+  <a class="hof-cta-btn" href="/#proyectos" onclick="openHallOfFame();return false;">
     <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5H13M9 1L13 5L9 9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
     VER HALL OF FAME →
   </a>
@@ -770,14 +773,16 @@
   </div>
 </section>
 
+</main>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo"><img src="https://res.cloudinary.com/dvvuwigmy/image/upload/v1780437802/IMG_7191_sljwim_livrxj.png" alt="WitcherTorque" style="height:52px;width:auto;display:block;"></div>
   <div class="footer-sub">Performance Engineering · Caracas, Venezuela · Est. 2014</div>
   <div class="footer-links">
-    <a href="javascript:openRepro()">Reprogramación</a>
-    <a href="javascript:openServicios()">Servicios</a>
-    <a href="javascript:openHallOfFame()">Hall of Fame</a>
+    <a href="/#reprogramacion" onclick="openRepro();return false;">Reprogramación</a>
+    <a href="/#servicios" onclick="openServicios();return false;">Servicios</a>
+    <a href="/#proyectos" onclick="openHallOfFame();return false;">Hall of Fame</a>
     <a href="https://www.instagram.com/witchertorque" target="_blank">Instagram</a>
     <a href="https://youtube.com/@witchertorque" target="_blank">YouTube</a>
     <a href="https://www.tiktok.com/@witchertorque" target="_blank">TikTok</a>
@@ -835,7 +840,11 @@
 <!-- SEO keywords -->
 <p style="font-size:10px;color:#060606;background:#060606;font-family:monospace;letter-spacing:1px;line-height:2;margin:0;padding:0 22px 8px;user-select:none;" aria-hidden="true">Taller automotriz Venezuela · Taller alta performance Caracas · Potenciación automotriz Venezuela · Mejor taller Venezuela · Autos más rápidos Venezuela · Tuning Caracas · Reprogramación ECU · Chip tuning Venezuela · Stage 1 Stage 2 Stage 3 · Dinamómetro ProHub · Remote tuning Venezuela · Modificación autos Venezuela · Aumento de potencia Venezuela</p>
 
+<script src="/assets/js/modal-pages/reprogramacion.js"></script>
+<script src="/assets/js/modal-pages/faq.js"></script>
+<script src="/assets/js/modal-pages/hall-of-fame.js"></script>
 <script src="/assets/js/modal.js"></script>
+<script src="/assets/js/navigation.js"></script>
 
 </body>
 </html>

@@ -1,20 +1,21 @@
 
 // ═══ MODAL UNIVERSAL — reemplaza blob window.open ═══════════════════
-function openWtModal(html) {
+var wtModalCleanup = null;
+function openWtModal(html, page) {
+  if (wtModalCleanup) { wtModalCleanup(); wtModalCleanup = null; }
   var inner = document.getElementById('wt-modal-inner');
   var overlay = document.getElementById('wt-modal-overlay');
   inner.innerHTML = html;
   overlay.style.display = 'block';
   overlay.scrollTop = 0;
   document.body.style.overflow = 'hidden';
-  // Ejecutar scripts inyectados dentro del modal
-  Array.from(inner.querySelectorAll('script')).forEach(function(oldScript) {
-    var newScript = document.createElement('script');
-    newScript.textContent = oldScript.textContent;
-    oldScript.parentNode.replaceChild(newScript, oldScript);
-  });
+  // Initializers are loaded once; each opening gets its own local state.
+  if (page && window.WTModalPages && window.WTModalPages[page]) {
+    wtModalCleanup = window.WTModalPages[page]();
+  }
 }
 function closeWtModal() {
+  if (wtModalCleanup) { wtModalCleanup(); wtModalCleanup = null; }
   var overlay = document.getElementById('wt-modal-overlay');
   overlay.style.display = 'none';
   document.getElementById('wt-modal-inner').innerHTML = '';
